@@ -1,0 +1,108 @@
+@extends("home.layouts.main")
+
+
+@section("contain")
+<!-- Carousel Tentang -->
+<section id="section-1" class="section-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-white">
+                <h1 class="font-times text-shadow fw-bold">TENTANG PKHKI</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Carousel Tentang -->
+
+<!-- Sejarah -->
+<section id="section-2" class="section-2 bg-lg-gray text-white">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-10 col-lg-5 me-lg-auto ms-lg-auto">
+                <h1 class="text-center text-lg-start font-times text-shadow fw-bold">SEJARAH</h1>
+                <p class="font-poppins text-justify">PKHKI merupakan perhimpunan yang didirikan sebagai wadah untuk meningkatkan kredibilitas konsultan hukum keimigrasian melalui pengembangan profesionalisme, standarisasi praktik serta meningkatkan kerja sama dengan otoritas terkait.</p>
+            </div>
+            <div class="col-10 col-lg-5 order-first order-lg-last wrapper d-none d-lg-block">
+                <img src="{{ asset('assets/images/sejarah.png') }}" alt="Sejarah Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- End Sejarah -->
+
+<!-- Visi & Misi Judul -->
+<section id="section-3" class="section-3">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12">
+                <h1 class="text-blue font-times text-shadow text-center fw-bolder">VISI & MISI</h1>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- End Visi & Misi Judul -->
+
+<!-- Visi -->
+<section id="section-4" class="section-4 bg-blue text-white">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-10 col-lg-5 me-lg-auto ms-lg-auto">
+                <h1 class="text-center text-lg-end font-times text-shadow fw-bolder">VISI</h1>
+                <p class="font-poppins text-justify">PKHKI bertujuan untuk menjadi himpunan pelaksana pelatihan jasa keimigrasian yang memiliki kompetensi dalam menyelenggarakan dan memberikan sertifikasi berupa keahlian konsultan hukum dalam memberikan konsultasi hukum keimigrasian serta menjembatani disparitas kebijakan pemerintah melalui solusi praktis untuk meningkatkan efisiensi serta kepatuhan hukum dalam proses keimigrasian dengan memastikan perlindungan terhadap kepentingan umum dan publik.</p>
+            </div>
+            <div class="col-12 col-lg-5 order-first wrapper d-none d-lg-block p-0">
+                <img src="{{ asset('assets/images/visi.png') }}" alt="Sejarah Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- End Visi -->
+
+<!-- BG-Image -->
+<section id="section-5" class="section-5">
+</section>
+
+<!-- Visi -->
+<section id="section-6" class="section-6 bg-blue text-white">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-10 col-lg-5 me-lg-auto ms-lg-auto">
+                <h1 class="text-center text-lg-start font-times text-shadow fw-bolder">MISI</h1>
+                <ol class="font-poppins text-justify">
+                    <li>Memfasilitasi kebijakan lembaga pemerintah dalam menyederhanakan dan meningkatkan kebijakan keimigrasian;</li>
+                    <li>Mengakomodir perkembangan dan penyempurnaan terhadap regulasi keimigrasian terhadap terhadap kebutuhan hukum pada masa yang akan datang; dan</li>
+                    <li>Melaksanakan kolaborasi dengan Kementerian Imigrasi dan Pemasyarakatan dengan menyediakan sarana dan prasarana berupa pelatihan kemahiran hukum keimigrasian dan sertifikasi kepada calon konsultan hukum keimigrasian dengan memastikan standar praktik yang terintegrasi.</li>
+                </ol>
+            </div>
+            <div class="col-12 col-lg-5 wrapper d-none d-lg-block p-0">
+                <img src="{{ asset('assets/images/misi.png') }}" alt="Sejarah Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- End Visi -->
+
+<!-- Newsletter -->
+<section id="newsletter" class="newsletter">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center text-center py-5 my-5">
+            <div class="col-12 top-frame mb-4 mb-lg-5">
+                <p class="text-blue mb-0"><b>Newsletter</b></p>
+                <p class="text-dark-blue font-times fw-bold fs-1">Subscribe PKHKI’s Latest Update</p>
+            </div>
+            <div class="col-12 col-lg-8">
+                <form class="subscribe-form" action="/subscribe" method="POST">
+                    <input type="email" placeholder="Enter your email address" name="email" autocomplete="off" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Newsletter -->
+
+@endsection 
