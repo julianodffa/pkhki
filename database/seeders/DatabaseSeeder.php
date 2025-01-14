@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Publication;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             "slug" => "customer-support",
         ]);
 
+
         Category::create([
             "name" => "Berita",
             "slug" => "berita",
@@ -38,5 +40,21 @@ class DatabaseSeeder extends Seeder
         //     $categories = Category::inRandomOrder()->take(rand(1, 2))->pluck('id');
         //     $publication->categories()->attach($categories);
         // });
+
+        // Stucture Organization
+        Role::create([
+            "name" => "Dewan Kehormatan",
+            "slug" => "dewan-kehormatan",
+        ]);
+
+        Role::create([
+            "name" => "Pengurus",
+            "slug" => "pengurus",
+        ]);
+
+        Role::create([
+            "name" => "Dewan Standar",
+            "slug" => "dewan-standar",
+        ]);
     }
 }

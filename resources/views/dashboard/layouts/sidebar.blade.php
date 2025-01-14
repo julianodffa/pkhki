@@ -37,7 +37,7 @@
 
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == "Strutures" ? "active" : "" }}" href="/dashboard/structures">
                         <i class="bi bi-shield"></i>
                         Structure
                     </a>

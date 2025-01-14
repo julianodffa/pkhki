@@ -4,44 +4,43 @@
         <div class="col-md-8">
             <h4>Publications</h4>
             <a href="/dashboard/publications/create">Create a Publication</a>
-            <div class="table-responsive border rounded mt-4">
-                <table class="table text-center">
-                    <thead>
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered text-center">
+                    <thead class="table-dark">
                         <tr>
-                            <th class="p-3 ps-md-5" scope="col">#</th>
-                            <th class="p-3" scope="col">Title</th>
-                            <th class="p-3" scope="col">Author</th>
-                            <th class="p-3 pe-md-4" scope="col">Category</th>
-                            <th class="p-3 pe-md-5" scope="col" colspan="3">Action</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Category</th>
+                            <th scope="col" colspan="3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (count($publications) == 0)
                             <tr>
-                                <td class="p-3" colspan="5" class="text-end">No Publications</td>
+                                <td colspan="5" class="text-center">No Publications</td>
                             </tr>
                         @else
                             @foreach ($publications as $publication)
                                 <tr>
-                                    <th class="p-3 ps-md-5" scope="row">{{ $loop->iteration }}</th>
-                                    <td class="p-3">{{ $publication->title }}</td>
-                                    <td class="p-3">{{ $publication->author->name }}</td>
-                                    <td class="p-3 pe-md-4">
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{ $publication->title }}</td>
+                                    <td>{{ $publication->author->name }}</td>
+                                    <td>
                                         @foreach ($publication->categories as $category)
                                             <span class="badge rounded-pill text-bg-secondary">{{ $category->name }}</span>
                                         @endforeach
                                     </td>
-                                    <td class="py-3 px-1">
+                                    <td>
                                         <a href="/dashboard/publications/{{ $publication->id }}"
                                             class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a>
                                     </td>
-                                    <td class="py-3 px-1">
+                                    <td>
                                         <a href="/dashboard/publications/{{ $publication->id }}/edit"
                                             class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
                                     </td>
-                                    <td class="py-3 ps-1 pe-md-4">
-                                        <form class="d-inline" action="/dashboard/publications/{{ $publication->id }}"
-                                            method="post">
+                                    <td>
+                                        <form action="/dashboard/publications/{{ $publication->id }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger"
@@ -62,32 +61,32 @@
 
                 <h4>Categories</h4>
                 <a href="/dashboard/publications/categories/create">Create a Category</a>
-                <div class="table-responsive border rounded mt-4">
-                    <table class="table text-center">
-                        <thead>
+                <div class="table-responsive mt-4">
+                    <table class="table table-bordered text-center">
+                        <thead class="table-dark">
                             <tr>
-                                <th class="p-3 ps-md-5" scope="col">#</th>
-                                <th class="p-3" scope="col">Name</th>
-                                <th class="p-3 pe-md-5" scope="col">Action</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col" colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (count($categories) == 0)
                                 <tr>
-                                    <td class="p-3" colspan="5" class="text-end">No Categories</td>
+                                    <td colspan="5" class="text-center">No Categories</td>
                                 </tr>
                             @else
                                 @foreach ($categories as $category)
                                     <tr>
-                                        <th class="p-3 ps-md-5" scope="row">{{ $loop->iteration }}</th>
-                                        <td class="p-3">{{ $category->name }}</td>
-                                        <td class="py-3 ps-1 pe-md-4">
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $category->name }}</td>
+                                        <td>
                                             <a href="/dashboard/publications/categories/{{ $category->id }}/edit"
                                                 class="btn btn-sm btn-outline-warning me-1"><i
                                                     class="bi bi-pencil-square"></i></a>
-
-                                            <form class="d-inline"
-                                                action="/dashboard/publications/categories/{{ $category->id }}"
+                                        </td>
+                                        <td>
+                                            <form action="/dashboard/publications/categories/{{ $category->id }}"
                                                 method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -107,31 +106,32 @@
                 <h4 class="mt-3">Authors</h4>
                 <a href="/dashboard/publications/authors/create">Create an
                     Author</a>
-                <div class="table-responsive border rounded mt-4">
-                    <table class="table text-center">
-                        <thead>
+                <div class="table-responsive mt-4">
+                    <table class="table table-bordered text-center">
+                        <thead class="table-dark">
                             <tr>
-                                <th class="p-3 ps-md-5" scope="col">#</th>
-                                <th class="p-3" scope="col">Name</th>
-                                <th class="p-3 pe-md-5" scope="col">Action</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col" colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (count($authors) == 0)
                                 <tr>
-                                    <td class="p-3" colspan="5" class="text-end">No Authors</td>
+                                    <td colspan="5" class="text-center">No Authors</td>
                                 </tr>
                             @else
                                 @foreach ($authors as $author)
                                     <tr>
-                                        <th class="p-3 ps-md-5" scope="row">{{ $loop->iteration }}</th>
-                                        <td class="p-3">{{ $author->name }}</td>
-                                        <td class="py-3 ps-1 pe-md-4">
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $author->name }}</td>
+                                        <td>
                                             <a href="/dashboard/publications/authors/{{ $author->id }}/edit"
                                                 class="btn btn-sm btn-outline-warning me-1"><i
                                                     class="bi bi-pencil-square"></i></a>
-                                            <form class="d-inline"
-                                                action="/dashboard/publications/authors/{{ $author->id }}"
+                                        </td>
+                                        <td>
+                                            <form action="/dashboard/publications/authors/{{ $author->id }}"
                                                 method="post">
                                                 @csrf
                                                 @method('DELETE')
