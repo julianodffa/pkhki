@@ -15,13 +15,11 @@
 
     <style>
     </style>
-
-
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/dashboard/dashboard.css') }}" rel="stylesheet">
-    
+
     {{-- Jquery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -30,6 +28,10 @@
     <link href="{{ asset('assets/css/summernote-bs5.min.css') }}" rel="stylesheet">
     <script src="{{ asset('assets/js/summernote-bs5.min.js') }}"></script>
 
+    {{-- Multiple Select --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 </head>
 
 <body>
@@ -40,7 +42,7 @@
         <div class="row">
             @include('dashboard.layouts.sidebar')
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-4">
                 @yield('container')
             </main>
         </div>
@@ -48,6 +50,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 </body>
 

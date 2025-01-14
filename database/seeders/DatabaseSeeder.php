@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Publication;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,16 +18,24 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // Membuat 3 Author menggunakan factory
-        Author::factory(3)->create();
+        Author::create([
+            "name" => "Customer Support",
+            "slug" => "customer-support",
+        ]);
 
-        // Membuat 5 Category menggunakan factory
-        Category::factory(3)->create();
+        Category::create([
+            "name" => "Berita",
+            "slug" => "berita",
+        ]);
 
-        // Membuat 20 Publication menggunakan factory
-        // Publication::factory(2)->create()->each(function ($publication) {
+        Category::create([
+            "name" => "Kegiatan",
+            "slug" => "kegiatan",
+        ]);
+
+        // Publication::factory(20)->create()->each(function ($publication) {
         //     // Mengaitkan kategori acak ke publication
-        //     $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id');
+        //     $categories = Category::inRandomOrder()->take(rand(1, 2))->pluck('id');
         //     $publication->categories()->attach($categories);
         // });
     }

@@ -7,7 +7,7 @@
         <div class="offcanvas-body d-md-flex flex-column p-0 mt-md-5 pt-md-3 overflow-y-auto">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
+                    <a class='nav-link d-flex align-items-center gap-2 {{ $title == "PKHKI" ? "active" : "" }}' aria-current="page" href="/dashboard">
                         <i class="bi bi-house"></i>
                         Dashboard
                     </a>
@@ -15,34 +15,22 @@
             </ul>
             <h6
                 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                <span>Publikasi</span>
+                <span>Publications</span>
                 <a class="link-secondary" href="#" aria-label="Add a new report">
                 </a>
             </h6>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="/dashboard/publications">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == "Publications" ? "active" : "" }}" href="/dashboard/publications">
                         <i class="bi bi-file-earmark-richtext-fill"></i>
-                        Publikasi
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                        <i class="bi bi-people"></i>
-                        Penulis
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
-                        <i class="bi bi-list-ul"></i>
-                        Kategori
+                        Publications
                     </a>
                 </li>
             </ul>
 
             <h6
                 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                <span>Struktur</span>
+                <span>Structure</span>
                 <a class="link-secondary" href="#" aria-label="Add a new report">
                 </a>
             </h6>
@@ -51,14 +39,14 @@
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="#">
                         <i class="bi bi-shield"></i>
-                        Struktur
+                        Structure
                     </a>
                 </li>
             </ul>
 
             <h6
                 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-                <span>Keanggotaan</span>
+                <span>Members</span>
                 <a class="link-secondary" href="#" aria-label="Add a new report">
                 </a>
             </h6>
@@ -67,13 +55,13 @@
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="#">
                         <i class="bi bi-person-exclamation"></i>
-                        Pendaftar
+                        Registered
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="#">
                         <i class="bi bi-person-badge"></i>
-                        Anggota
+                        Members
                     </a>
                 </li>
             </ul>
@@ -85,7 +73,7 @@
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="#">
                         <i class="bi bi-gear"></i>
-                        Ganti Password
+                        Change Password
                     </a>
                 </li>
             </ul>
