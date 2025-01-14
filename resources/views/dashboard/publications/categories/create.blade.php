@@ -2,6 +2,9 @@
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h4>Create Category</h4>
+        <a href="/dashboard/publications">
+            Back
+        </a>
     </div>
     <div class="row">
         <div class="col-12 col-md-4">

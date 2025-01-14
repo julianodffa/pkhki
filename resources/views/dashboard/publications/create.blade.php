@@ -2,6 +2,9 @@
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h4>Create Publication</h4>
+        <a href="/dashboard/publications">
+            Back
+        </a>
     </div>
     <div class="row">
         <div class="col-12 col-md-4">
@@ -43,7 +46,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-                <a href="/dashboard/publications/categories">Add new Category</a>
+                <a href="/dashboard/publications/categories/create">Add new Category</a>
 
             </div>
         </div>
@@ -60,7 +63,7 @@
                         @endif
                     @endforeach
                 </select>
-                <a href="">Add new Author</a>
+                <a href="/dashboard/publications/authors/create">Add new Author</a>
             </div>
         </div>
 

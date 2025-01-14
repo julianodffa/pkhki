@@ -3,20 +3,9 @@
     <div class="container">
         <div class="row justify-content-start my-3">
             <div class="col-md-10">
-                <a onclick="history.back()" class="btn btn-success">
-                    <span><i class="bi bi-arrow-left-circle-fill"></i></span>
+                <a href="/dashboard/publications">
+                    Back
                 </a>
-                <a href="/dashboard/publications/{{ $publication->id }}/edit" class="btn btn-warning">
-                    <span><i class="bi bi-pencil-square"></i></span>
-                </a>
-                <form action="/dashboard/publications/{{ $publication->id }}" class="d-inline" method="post">
-                    @method('delete')
-                    @csrf
-                    <button class="btn btn-danger" onclick="return confirm('Are You Sure?')">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </form>
-
                 <div class="my-3">
                     <img src="{{ asset($publication->cover) }}" alt="image-of-{{ $publication->slug }}" class="img-fluid">
                 </div>
