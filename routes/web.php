@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StructureOrganizationController;
@@ -83,4 +84,12 @@ Route::controller(StructureOrganizationController::class)->group(function () {
     Route::get('/dashboard/structures/{structureOrganization}/edit', 'edit');
     Route::put('/dashboard/structures/{structureOrganization}', 'update');
     Route::delete('/dashboard/structures/{structureOrganization}', 'destroy');
+});
+
+// Members
+Route::controller(MemberController::class)->group(function () {
+    Route::get('/dashboard/registrants', 'registrants');
+    Route::get('/dashboard/registrants/{member}', 'show');
+    Route::delete('/dashboard/members/{member}', 'destroy');
+    Route::post('/memberRegister', 'store');
 });

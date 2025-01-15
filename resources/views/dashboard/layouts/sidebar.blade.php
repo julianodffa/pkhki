@@ -53,15 +53,15 @@
 
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == "Registrants" ? "active" : "" }}" href="/dashboard/registrants">
                         <i class="bi bi-person-exclamation"></i>
-                        Registered
+                        Registrants
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="#">
                         <i class="bi bi-person-badge"></i>
-                        Members
+                        Registered
                     </a>
                 </li>
             </ul>

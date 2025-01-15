@@ -29,15 +29,15 @@
                                     <td>{{ $structure->position }}</td>
                                     <td>{{ $structure->lawfirm }}</td>
                                     <td>{{ $structure->role->name }}</td>
-                                    <td class="py-3 px-1">
+                                    <td>
                                         <a href="/dashboard/structures/{{ $structure->id }}"
                                             class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a>
                                     </td>
-                                    <td class="py-3 px-1">
+                                    <td>
                                         <a href="/dashboard/structures/{{ $structure->id }}/edit"
                                             class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
                                     </td>
-                                    <td class="py-3 ps-1">
+                                    <td>
                                         <form action="/dashboard/structures/{{ $structure->id }}" method="post">
                                             @csrf
                                             @method('DELETE')
