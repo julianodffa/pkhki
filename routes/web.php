@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StructureOrganizationController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,8 @@ Route::get('/dashboard', function () {
     return view("dashboard.index", ["title" => "PKHKI"]);
 });
 
+
+// Publications
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/dashboard/publications/categories/create', 'create');
     Route::post('/dashboard/publications/categories', 'store');
@@ -58,4 +63,24 @@ Route::controller(PublicationController::class)->group(function () {
     Route::get('/dashboard/publications/{publication}/edit', 'edit');
     Route::put('/dashboard/publications/{publication}', 'update');
     Route::delete('/dashboard/publications/{publication}', 'destroy');
+});
+
+
+// Structure Organizations
+Route::controller(RoleController::class)->group(function () {
+    Route::get('/dashboard/structures/roles/create', 'create');
+    Route::post('/dashboard/structures/roles', 'store');
+    Route::get('/dashboard/structures/roles/{role}/edit', 'edit');
+    Route::put('/dashboard/structures/roles/{role}', 'update');
+    Route::delete('/dashboard/structures/roles/{role}', 'destroy');
+});
+
+Route::controller(StructureOrganizationController::class)->group(function () {
+    Route::get('/dashboard/structures', 'index');
+    Route::get('/dashboard/structures/create', 'create');
+    Route::post('/dashboard/structures', 'store');
+    Route::get('/dashboard/structures/{structureOrganization}', 'show');
+    Route::get('/dashboard/structures/{structureOrganization}/edit', 'edit');
+    Route::put('/dashboard/structures/{structureOrganization}', 'update');
+    Route::delete('/dashboard/structures/{structureOrganization}', 'destroy');
 });
