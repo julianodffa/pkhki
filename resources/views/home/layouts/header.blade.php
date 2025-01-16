@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="color-scheme" content="light only">
     <meta name="description" content="Author: Murzal Pathway">
-    <title>PKHKI | {{ $title }}</title>
+    <title>{{ $title }}</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/icons/sinnar-favicon.png') }}">

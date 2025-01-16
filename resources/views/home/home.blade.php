@@ -38,8 +38,7 @@
                     @foreach ($news as $n)
                         <div class="col-12 col-lg-3 mb-3 mb-lg-5">
                             <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
-                                <img src="{{ asset($n->cover) }}" class="card-img-top"
-                                    alt="{{ $n->slug }}">
+                                <img src="{{ asset($n->cover) }}" class="card-img-top" alt="{{ $n->slug }}">
                                 <div class="card-body mx-3">
                                     <p class="card-text">{!! $n->excerpt !!}</p>
                                     <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
@@ -82,10 +81,8 @@
                     </div>
                 @endif
                 <div class="col-12">
-                    <a href="">
-                        <div class="circle-arrow mx-auto">
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
+                    <a href="" class="text-white fs-1 text-center">
+                        <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>
             </div>
@@ -94,18 +91,16 @@
     <!-- End Berita -->
 
     <!-- Kegiatan -->
-    <section id="section-3" class="section-3 py-lg-5 pt-3 pb-5">
+    <section id="section-3" class="section-3 py-lg-5 pt-3 pb-4">
         <div class="container">
             <h1 class="text-blue text-start mt-3 mt-lg-5 mb-3 mb-lg-0 pb-lg-5 font-times text-shadow fw-bold">KEGIATAN</h1>
             <div class="row d-flex justify-content-center align-items-center fade-in">
                 <div class="col-12 col-lg-11">
                     <img src="{{ asset('assets/images/kegiatan.png') }}" class="card-img-top" alt="...">
                 </div>
-                <div class="col-12 col-lg-1">
-                    <a href="home/Kegiatan">
-                        <div class="circle-arrow mx-auto">
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
+                <div class="col-12 col-lg-1 text-center mt-3">
+                    <a href="" class="fs-1 text-blue">
+                        <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>
             </div>
@@ -117,16 +112,14 @@
     <section id="section-4" class="section-4 bg-blue">
         <div class="container-fluid">
             <div class="row d-flex justify-content-center align-items-center">
-                <div class="p-0 col-7 col-lg-8">
+                <div class="p-0 col-6 col-lg-8">
                     <img src="{{ asset('assets/images/publikasi.png') }}" class="card-img-top" alt="...">
                 </div>
-                <div class="p-0 col-5 col-lg-4">
-                    <h1 class="text-white text-center mt-3 mt-lg-5 mb-3 mb-lg-0  font-times text-shadow  fw-bold">PUBLIKASI
+                <div class="p-0 col-6 col-lg-4 text-center">
+                    <h1 class="text-white mt-3 mt-lg-5 mb-lg-0 pb-md-3 pb-lg-5 font-times text-shadow fw-bold">PUBLIKASI
                     </h1>
-                    <a href="home/Publikasi">
-                        <div class="circle-arrow mx-auto">
-                            <i class="bi bi-chevron-right"></i>
-                        </div>
+                    <a href="" class="text-white fs-1">
+                        <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>
             </div>

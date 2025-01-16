@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function pageStruktur()
     {
         return view("home.struktur", [
-            "title" => "Dewan Kehormatan",
+            "title" => "Struktur Organisasi",
             "css" => "struktur",
             "roles" => Role::all(),
             "structures" => StructureOrganization::all()->groupBy('role_id')

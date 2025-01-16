@@ -15,11 +15,11 @@
                 </div>
                 <div class="border-bottom mt-4 mb-3"></div>
                 <div class="col-12 col-lg-6 menu">
-                    <a href="/home/tentang">TENTANG</a>
-                    <a href="/home/anggota">ANGGOTA</a>
-                    <a href="/home/kodeEtik">KODE ETIK</a>
-                    <a href="/home/publikasi">PUBLIKASI</a>
-                    <a href="/home/kontak">KONTAK</a>
+                    <a href="/tentang-kami">TENTANG</a>
+                    <a href="/anggota">ANGGOTA</a>
+                    <a href="/kode-etik">KODE ETIK</a>
+                    <a href="/publikasi">PUBLIKASI</a>
+                    <a href="/kontak">KONTAK</a>
                 </div>
                 <div class="col-12 col-lg-6 copyright mt-3 mt-lg-0">
                     <p class="text-center mb-0">Copyright © 2024 • Perhimpunan Konsultasi Hukum Keimigrasian</p>

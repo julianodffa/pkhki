@@ -28,10 +28,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get("/", "pageHome");
-    Route::get("/home/tentang", "pageTentang");
-    Route::get("/home/struktur", "pageStruktur");
-    Route::get("/home/kontak", "pageKontak");
-    Route::get("/home/daftar", "pageDaftar");
+    Route::get("/tentang-kami", "pageTentang");
+    Route::get("/struktur", "pageStruktur");
+    // Route::get("/kode-etik", "pageKodeEtik");
+    // Route::get("/anggota", "pageAnggota");
+    // Route::get("/publikasi", "pagePublikasi");
+    // Route::get("/kegiatan", "pageKegiatan");
+    Route::get("/kontak", "pageKontak");
+    Route::get("/daftar-anggota", "pageDaftar");
 });
 
 Route::get('/dashboard', function () {
