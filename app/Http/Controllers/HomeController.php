@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publication;
+use App\Models\Role;
+use App\Models\StructureOrganization;
 use Illuminate\Http\Request;
+use Nette\Schema\Elements\Structure;
 
 class HomeController extends Controller
 {
     public function pageHome()
     {
+        $news = Publication::whereHas('categories', function ($query) {
+            $query->where('slug', 'berita');
+        })->get();
         return view("home.home", [
-            "title" => "Home",
-            "css" => "home"
+            "title" => "Perhimpunan Konsultan Hukum Keimigrasian",
+            "css" => "home",
+            "news" => $news
         ]);
     }
 
@@ -26,7 +34,9 @@ class HomeController extends Controller
     {
         return view("home.struktur", [
             "title" => "Dewan Kehormatan",
-            "css" => "struktur"
+            "css" => "struktur",
+            "roles" => Role::all(),
+            "structures" => StructureOrganization::all()->groupBy('role_id')
         ]);
     }
 

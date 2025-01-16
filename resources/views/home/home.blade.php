@@ -1,12 +1,13 @@
-@extends("home.layouts.main")
+@extends('home.layouts.main')
 
-@section("contain")
+@section('contain')
     <!-- Section 1 -->
     <section id="section-1" class="section-1 py-5">
         <div class="container">
             <div class="row d-flex justify-content-center text-center align-items-center text-white">
                 <div class="col-10 ">
-                    <h1 class="font-times text-shadow fw-bold mt-5 mb-5 pb-5">PERHIMPUNAN KONSULTAN <br> HUKUM KEIMIGRASIAN</h1>
+                    <h1 class="font-times text-shadow fw-bold mt-5 mb-5 pb-5">PERHIMPUNAN KONSULTAN <br> HUKUM KEIMIGRASIAN
+                    </h1>
                 </div>
                 <div class="col-4 mb-5 text-center">
                     <div class="custom-box font-poppins fw-bold">
@@ -33,37 +34,53 @@
         <div class="container">
             <h1 class="text-white text-center mt-5 mb-5 pb-4 pb-lg-5 mb-lg-0 font-times text-shadow  fw-bold">BERITA</h1>
             <div class="row d-flex justify-content-evenly text-center align-items-center fade-in">
-                <div class="col-12 col-lg-3 mb-3 mb-lg-5">
-                    <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
-                        <img src="{{ asset('assets/images/berita-card-1.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body mx-3">
-                            <p class="card-text">Live Animal Air Freight According to WLive Animal Air Freight According to Warsaw Convention</p>
-                            <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                @if ($news->isNotEmpty())
+                    @foreach ($news as $n)
+                        <div class="col-12 col-lg-3 mb-3 mb-lg-5">
+                            <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
+                                <img src="{{ asset($n->cover) }}" class="card-img-top"
+                                    alt="{{ $n->slug }}">
+                                <div class="card-body mx-3">
+                                    <p class="card-text">{!! $n->excerpt !!}</p>
+                                    <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="col-12 col-lg-3 mb-3 mb-lg-5">
+                        <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/berita-card-1.png') }}" class="card-img-top" alt="...">
+                            <div class="card-body mx-3">
+                                <p class="card-text">Live Animal Air Freight According to WLive Animal Air Freight According
+                                    to Warsaw Convention</p>
+                                <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-lg-3 mb-3 mb-lg-5">
-                    <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
-                        <img src="{{ asset('assets/images/berita-card-2.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body mx-3">
-                            <p class="card-text">Law No. 1 Year 2050
-                                Concerning Super Train
-                                Regulation Matrix</p>
-                            <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                    <div class="col-12 col-lg-3 mb-3 mb-lg-5">
+                        <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/berita-card-2.png') }}" class="card-img-top" alt="...">
+                            <div class="card-body mx-3">
+                                <p class="card-text">Law No. 1 Year 2050
+                                    Concerning Super Train
+                                    Regulation Matrix</p>
+                                <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-lg-3 mb-3 mb-lg-5">
-                    <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
-                        <img src="{{ asset('assets/images/berita-card-3.png') }}" class="card-img-top" alt="...">
-                        <div class="card-body mx-3">
-                            <p class="card-text">PT Laut Abadi Meneer was
-                                Reported of e-Bill of
-                                Lading Fraud</p>
-                            <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                    <div class="col-12 col-lg-3 mb-3 mb-lg-5">
+                        <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/berita-card-3.png') }}" class="card-img-top" alt="...">
+                            <div class="card-body mx-3">
+                                <p class="card-text">PT Laut Abadi Meneer was
+                                    Reported of e-Bill of
+                                    Lading Fraud</p>
+                                <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
                 <div class="col-12">
                     <a href="">
                         <div class="circle-arrow mx-auto">
@@ -104,7 +121,8 @@
                     <img src="{{ asset('assets/images/publikasi.png') }}" class="card-img-top" alt="...">
                 </div>
                 <div class="p-0 col-5 col-lg-4">
-                    <h1 class="text-white text-center mt-3 mt-lg-5 mb-3 mb-lg-0  font-times text-shadow  fw-bold">PUBLIKASI</h1>
+                    <h1 class="text-white text-center mt-3 mt-lg-5 mb-3 mb-lg-0  font-times text-shadow  fw-bold">PUBLIKASI
+                    </h1>
                     <a href="home/Publikasi">
                         <div class="circle-arrow mx-auto">
                             <i class="bi bi-chevron-right"></i>
@@ -122,7 +140,8 @@
             <div class="row d-flex justify-content-center align-items-center text-center py-5 my-5">
                 <div class="col-12 top-frame mb-5 mb-lg-5">
                     <h1 class="text-blue mb-lg-0 pb-3  font-times fw-bold">Our Association in Numbers</h1>
-                    <p class="text-blue font-poppins sub-title">Our Associates track record is backed by measurable success in immigration law.</p>
+                    <p class="text-blue font-poppins sub-title">Our Associates track record is backed by measurable success
+                        in immigration law.</p>
                 </div>
                 <div class="number col-12 col-md-6 col-lg-2 mb-4 mb-md-5 mb-lg-0 px-0">
                     <h1 class="font-poppins-bold text-gray" data-number="120">120</h1>
@@ -148,26 +167,39 @@
     <!-- Partnership -->
     <section id="section-6" class="section-6 py-5 bg-gray">
         <div class="container">
-            <h1 class="text-white mt-5 mb-5 mb-lg-0 pb-4 pb-lg-5 text-center font-times text-shadow  fw-bold">PARTNERSHIP</h1>
+            <h1 class="text-white mt-5 mb-5 mb-lg-0 pb-4 pb-lg-5 text-center font-times text-shadow  fw-bold">PARTNERSHIP
+            </h1>
             <div class="row d-flex justify-content-evenly text-start align-items-center fade-in">
                 <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-5">
                     <img src="{{ asset('assets/images/partnership.png') }}" class="img-fluid" alt="...">
-                    <p class="text-white mt-4">World Law Alliance (WLA) is a global law practice and service platform with member firms in 70+ jurisdictions. As part of the world's largest Law Alliance, Murzal & Partners ("MNP") offers global expertise, helping businesses navigate complex regulatory landscapes worldwide.</p>
+                    <p class="text-white mt-4">World Law Alliance (WLA) is a global law practice and service platform with
+                        member firms in 70+ jurisdictions. As part of the world's largest Law Alliance, Murzal & Partners
+                        ("MNP") offers global expertise, helping businesses navigate complex regulatory landscapes
+                        worldwide.</p>
                     <a class="font-poppins" href="#">Go to link <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-5">
                     <img src="{{ asset('assets/images/partnership.png') }}" class="img-fluid" alt="...">
-                    <p class="text-white mt-4">Xpath.Global, a global mobility service provider since 2007, addresses industry challenges through a tech suite developed since 2018. Launched in 2019, Xpath's Beta version responds to the evolving needs of the Global Mobility sector. As a member, Murzal & Partners recognizes.</p>
+                    <p class="text-white mt-4">Xpath.Global, a global mobility service provider since 2007, addresses
+                        industry challenges through a tech suite developed since 2018. Launched in 2019, Xpath's Beta
+                        version responds to the evolving needs of the Global Mobility sector. As a member, Murzal & Partners
+                        recognizes.</p>
                     <a class="font-poppins" href="#">Go to link <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-5">
                     <img src="{{ asset('assets/images/partnership.png') }}" class="img-fluid" alt="...">
-                    <p class="text-white mt-4">Xpath.Global, a global mobility service provider since 2007, addresses industry challenges through a tech suite developed since 2018. Launched in 2019, Xpath's Beta version responds to the evolving needs of the Global Mobility sector. As a member, Murzal & Partners recognizes.</p>
+                    <p class="text-white mt-4">Xpath.Global, a global mobility service provider since 2007, addresses
+                        industry challenges through a tech suite developed since 2018. Launched in 2019, Xpath's Beta
+                        version responds to the evolving needs of the Global Mobility sector. As a member, Murzal & Partners
+                        recognizes.</p>
                     <a class="font-poppins" href="#">Go to link <i class="bi bi-arrow-right"></i></a>
                 </div>
                 <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-5">
                     <img src="{{ asset('assets/images/partnership.png') }}" class="img-fluid" alt="...">
-                    <p class="text-white mt-4">Xpath.Global, a global mobility service provider since 2007, addresses industry challenges through a tech suite developed since 2018. Launched in 2019, Xpath's Beta version responds to the evolving needs of the Global Mobility sector. As a member, Murzal & Partners recognizes.</p>
+                    <p class="text-white mt-4">Xpath.Global, a global mobility service provider since 2007, addresses
+                        industry challenges through a tech suite developed since 2018. Launched in 2019, Xpath's Beta
+                        version responds to the evolving needs of the Global Mobility sector. As a member, Murzal & Partners
+                        recognizes.</p>
                     <a class="font-poppins" href="#">Go to link <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
@@ -186,7 +218,8 @@
                 </div>
                 <div class="col-12 col-lg-8">
                     <form class="subscribe-form" action="/subscribe" method="POST">
-                        <input type="email" placeholder="Enter your email address" name="email" autocomplete="off" required>
+                        <input type="email" placeholder="Enter your email address" name="email" autocomplete="off"
+                            required>
                         <button type="submit">Subscribe</button>
                     </form>
                 </div>

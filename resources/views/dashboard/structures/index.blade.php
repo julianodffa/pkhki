@@ -74,17 +74,17 @@
                                     <td colspan="5" class="text-center">No roles</td>
                                 </tr>
                             @else
-                                @foreach ($roles as $roles)
+                                @foreach ($roles as $role)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $roles->name }}</td>
+                                        <td>{{ $role->name }}</td>
                                         <td>
-                                            <a href="/dashboard/structures/roles/{{ $roles->id }}/edit"
+                                            <a href="/dashboard/structures/roles/{{ $role->id }}/edit"
                                                 class="btn btn-sm btn-outline-warning me-1"><i
                                                     class="bi bi-pencil-square"></i></a>
                                         </td>
                                         <td>
-                                            <form action="/dashboard/structures/roles/{{ $roles->id }}" method="post">
+                                            <form action="/dashboard/structures/roles/{{ $role->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-outline-danger"

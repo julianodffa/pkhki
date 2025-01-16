@@ -164,10 +164,10 @@
                 </div>
                 <div class="col-10 col-lg-6 mt-4">
                     <b>Pernyataan Persetujuan</b>
-                    <p><i>Dengan ini saya menyatakan bahwa data yang diberikan ini adalah benar dan bersedia mematuhi kode
-                            etik PKHKI.</i></p>
+                    <p><i>Dengan ini saya menyatakan bahwa data yang diberikan ini adalah benar dan bersedia mematuhi <a href="/home/kodeEtik" target="_blank">kode
+                        etik</a> PKHKI.</i></p>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
                     </div>
                     <button type="submit" class="btn btn-blue rounded-pill w-100">Submit</button>
                     </form>

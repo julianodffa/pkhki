@@ -78,7 +78,7 @@ class StructureOrganizationController extends Controller
             'position' => 'required|max:255',
             'lawfirm' => 'required|max:255',
             'email' => 'required|email:dns|unique:structure_organizations,email,' . $structureOrganization->id,
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
             'role_id' => 'required',
         ]);
 

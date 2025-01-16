@@ -61,7 +61,7 @@
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="#">
                         <i class="bi bi-person-badge"></i>
-                        Registered
+                        Members
                     </a>
                 </li>
             </ul>
