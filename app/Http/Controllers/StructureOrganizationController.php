@@ -47,8 +47,9 @@ class StructureOrganizationController extends Controller
         ]);
 
         $structureOrganization = $this->structurOrganizationService->createStructure($validated);
+        $name = $validated['name'];
 
-        return redirect("/dashboard/structures")->with("success", "New Team has been added!");
+        return redirect("/dashboard/structures")->with("success", "$name has been added to structure!");
     }
 
     public function show(StructureOrganization $structureOrganization)
@@ -90,7 +91,8 @@ class StructureOrganizationController extends Controller
     public function destroy(StructureOrganization $structureOrganization)
     {
         $this->structurOrganizationService->deleteStructure($structureOrganization);
+        $name = $structureOrganization['name'];
 
-        return redirect('/dashboard/structures');
+        return redirect('/dashboard/structures')->with("error", "$name has been deleted from structure!");
     }
 }

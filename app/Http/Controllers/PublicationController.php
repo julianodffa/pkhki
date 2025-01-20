@@ -103,6 +103,6 @@ class PublicationController extends Controller
     {
         $this->publicationService->deletePublication($publication);
 
-        return redirect('/dashboard/publications');
+        return redirect('/dashboard/publications')->with("success", "Publication has been deleted!");
     }
 }

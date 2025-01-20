@@ -4,6 +4,17 @@
         <div class="col-md-8">
             <h4>Structures</h4>
             <a href="/dashboard/structures/create">Create a Stucture</a>
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                    <strong>{{ session('success') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @elseif (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                    <strong>{{ session('error') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="table-responsive mt-4">
                 <table class="table table-bordered text-center">
                     <thead class="table-dark">
@@ -56,9 +67,19 @@
         </div>
         <div class="col-md-4 mt-4 mt-md-0">
             <div class="position-sticky" style="top: 4rem">
-
                 <h4>Roles</h4>
                 <a href="/dashboard/structures/roles/create">Create a Role</a>
+                @if (session('success-role'))
+                    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                        <strong>{{ session('success-role') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session('error-role'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                        <strong>{{ session('error-role') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="table-responsive mt-4">
                     <table class="table table-bordered text-center">
                         <thead class="table-dark">

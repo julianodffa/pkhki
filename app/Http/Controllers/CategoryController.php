@@ -30,7 +30,7 @@ class CategoryController extends Controller
 
         $this->categoryService->createCategory($validated['name']);
 
-        return redirect("/dashboard/publications")->with("success", "New Category has been added!");
+        return redirect("/dashboard/publications")->with("success-category", "New Category has been added!");
     }
 
     public function edit(Category $category)
@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
         $this->categoryService->updateCategory($category, $validated['name']);
 
-        return redirect("/dashboard/publications")->with("success", "Category has been updated!");
+        return redirect("/dashboard/publications")->with("success-category", "Category has been updated!");
     }
 
     public function destroy(Category $category)
@@ -58,12 +58,12 @@ class CategoryController extends Controller
 
         if (!$canDelete) {
             return redirect('/dashboard/publications')
-                ->with('error', 'Cannot delete this category because it is associated with one or more publications.');
+                ->with('error-category', 'Cannot delete this category because it is associated with one or more publications.');
         }
 
         $this->categoryService->deleteCategory($category);
 
         return redirect('/dashboard/publications')
-            ->with('success', 'Category has been deleted!');
+            ->with('success-category', 'Category has been deleted!');
     }
 }

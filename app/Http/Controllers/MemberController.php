@@ -51,7 +51,7 @@ class MemberController extends Controller
 
         // Buat Registrants
         $this->memberService->createMember($validatedData);
-        return redirect("/home/daftar")->with('success', 'Terimakasih telah mendaftar!');
+        return redirect("/daftar-anggota")->with('success', 'Terimakasih telah mendaftar!');
     }
 
     public function show(Member $member)

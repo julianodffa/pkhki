@@ -29,8 +29,9 @@ class RoleController extends Controller
         ]);
 
         $this->roleService->createRole($validated['name']);
+        $name = $validated["name"];
 
-        return redirect("/dashboard/structures")->with("success", "New Role has been added!");
+        return redirect("/dashboard/structures")->with("success-role", "$name has been added!");
     }
 
     public function edit(Role $role)
@@ -49,21 +50,23 @@ class RoleController extends Controller
 
         $this->roleService->updateRole($role, $validated['name']);
 
-        return redirect("/dashboard/structures")->with("success", "Role has been updated!");
+        return redirect("/dashboard/structures")->with("success-role", "Role has been updated!");
     }
 
     public function destroy(Role $role)
     {
         $canDelete = $this->roleService->canDeleteRole($role);
 
+        $name = $role['name'];
+
         if (!$canDelete) {
             return redirect('/dashboard/structures/')
-                ->with('error', 'Cannot delete this role because it is associated with one or more structures.');
+                ->with('error-role', "Cannot delete $name because it is associated with one or more structures.");
         }
 
         $this->roleService->deleteRole($role);
 
         return redirect('/dashboard/structures/')
-            ->with('success', 'Role has been deleted!');
+            ->with('success-role', "$name has been deleted!");
     }
 }

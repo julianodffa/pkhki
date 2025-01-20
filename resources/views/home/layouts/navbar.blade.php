@@ -17,22 +17,22 @@
             </div>
             <div class="offcanvas-body font-opensans">
                 <ul class="navbar-nav justify-content-center flex-grow-1">
-                    <li class="nav-item {{ $title == "Tentang Kami" ? "active" : "" }} mx-lg-3 my-1 my-lg-0">
+                    <li class="nav-item {{ $title == 'Tentang Kami' ? 'active' : '' }} mx-lg-3 my-1 my-lg-0">
                         <a class="nav-link" aria-current="page" href="/tentang-kami">Tentang</a>
                     </li>
-                    <li class="nav-item {{ $title == "Struktur Organisasi" ? "active" : "" }} mx-lg-3 my-1 my-lg-0">
+                    <li class="nav-item {{ $title == 'Struktur Organisasi' ? 'active' : '' }} mx-lg-3 my-1 my-lg-0">
                         <a class="nav-link" aria-current="page" href="/struktur">Struktur</a>
                     </li>
-                    <li class="nav-item {{ $title == "Kode Etik" ? "active" : "" }} mx-lg-3 my-1 my-lg-0">
+                    <li class="nav-item {{ $title == 'Kode Etik' ? 'active' : '' }} mx-lg-3 my-1 my-lg-0">
                         <a class="nav-link" aria-current="page" href="/kode-etik">Kode Etik</a>
                     </li>
-                    <li class="nav-item {{ $title == "Anggota" ? "active" : "" }} mx-lg-3 my-1 my-lg-0">
+                    <li class="nav-item {{ $title == 'Anggota' ? 'active' : '' }} mx-lg-3 my-1 my-lg-0">
                         <a class="nav-link" aria-current="page" href="/anggota">Anggota</a>
                     </li>
-                    <li class="nav-item {{ $title == "Publikasi" ? "active" : "" }} mx-lg-3 my-1 my-lg-0">
+                    <li class="nav-item {{ $title == 'Publikasi' ? 'active' : '' }} mx-lg-3 my-1 my-lg-0">
                         <a class="nav-link" aria-current="page" href="/publikasi">Publikasi</a>
                     </li>
-                    <li class="nav-item {{ $title == "Kegiatan" ? "active" : "" }} mx-lg-3 my-1 my-lg-0">
+                    <li class="nav-item {{ $title == 'Kegiatan' ? 'active' : '' }} mx-lg-3 my-1 my-lg-0">
                         <a class="nav-link" aria-current="page" href="/kegiatan">Kegiatan</a>
                     </li>
                     <!-- <li class="nav-item dropdown">

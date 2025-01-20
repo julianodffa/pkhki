@@ -17,6 +17,14 @@
     <section id="section-2" class="section-2">
         <div class="container">
             <div class="row my-5 justify-content-lg-start justify-content-center">
+                @if (session('success'))
+                    <div class="col-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
                 <div class="col-10 col-lg-6 ms-lg-auto me-lg-auto">
                     <form action="/memberRegister" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -106,7 +114,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="CompanyEmail" class="form-label">Email Perusahaan</label>
-                        <input type="email" class="form-control rounded-pill @error('company_email') is-invalid @enderror"
+                        <input type="email"
+                            class="form-control rounded-pill @error('company_email') is-invalid @enderror"
                             id="CompanyEmail" name="company_email" placeholder="Type here"
                             value="{{ old('company_email') }}">
                         @error('company_email')
@@ -148,8 +157,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="sertifikasiLain" class="form-label">Sertifikasi Lain yang Relevan</label>
-                        <input class="form-control @error('other_certificates') is-invalid @enderror @error('other_certificates.*') is-invalid @enderror" type="file"
-                            id="sertifikasiLain" name="other_certificates[]" value="{{ old('other_certificates') }}" multiple>
+                        <input
+                            class="form-control @error('other_certificates') is-invalid @enderror @error('other_certificates.*') is-invalid @enderror"
+                            type="file" id="sertifikasiLain" name="other_certificates[]"
+                            value="{{ old('other_certificates') }}" multiple>
                         @error('other_certificates')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -164,8 +175,9 @@
                 </div>
                 <div class="col-10 col-lg-6 mt-4">
                     <b>Pernyataan Persetujuan</b>
-                    <p><i>Dengan ini saya menyatakan bahwa data yang diberikan ini adalah benar dan bersedia mematuhi <a href="/home/kodeEtik" target="_blank">kode
-                        etik</a> PKHKI.</i></p>
+                    <p><i>Dengan ini saya menyatakan bahwa data yang diberikan ini adalah benar dan bersedia mematuhi <a
+                                href="/home/kodeEtik" target="_blank">kode
+                                etik</a> PKHKI.</i></p>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
                     </div>

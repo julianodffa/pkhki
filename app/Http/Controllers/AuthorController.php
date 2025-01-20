@@ -30,7 +30,7 @@ class AuthorController extends Controller
 
         $this->authorService->createAuthor($validated['name']);
 
-        return redirect("/dashboard/publications")->with("success", "New Author has been added!");
+        return redirect("/dashboard/publications")->with("success-author", "New Author has been added!");
     }
 
     public function edit(Author $author)
@@ -49,7 +49,7 @@ class AuthorController extends Controller
 
         $this->authorService->updateAuthor($author, $validated['name']);
 
-        return redirect("/dashboard/publications")->with("success", "Author has been updated!");
+        return redirect("/dashboard/publications")->with("success-author", "Author has been updated!");
     }
 
     public function destroy(Author $author)
@@ -58,12 +58,12 @@ class AuthorController extends Controller
 
         if (!$canDelete) {
             return redirect('/dashboard/publications/')
-                ->with('error', 'Cannot delete this author because it is associated with one or more publications.');
+                ->with('error-author', 'Cannot delete this author because it is associated with one or more publications.');
         }
 
         $this->authorService->deleteAuthor($author);
 
         return redirect('/dashboard/publications/')
-            ->with('success', 'Author has been deleted!');
+            ->with('success-author', 'Author has been deleted!');
     }
 }

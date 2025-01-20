@@ -4,6 +4,17 @@
         <div class="col-md-8">
             <h4>Publications</h4>
             <a href="/dashboard/publications/create">Create a Publication</a>
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                    <strong>{{ session('success') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @elseif (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                    <strong>{{ session('error') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="table-responsive mt-4">
                 <table class="table table-bordered text-center">
                     <thead class="table-dark">
@@ -58,9 +69,19 @@
         </div>
         <div class="col-md-4 mt-4 mt-md-0">
             <div class="position-sticky" style="top: 4rem">
-
                 <h4>Categories</h4>
                 <a href="/dashboard/publications/categories/create">Create a Category</a>
+                @if (session('success-category'))
+                    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                        <strong>{{ session('success-category') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session('error-category'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                        <strong>{{ session('error-category') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="table-responsive mt-4">
                     <table class="table table-bordered text-center">
                         <thead class="table-dark">
@@ -106,6 +127,17 @@
                 <h4 class="mt-3">Authors</h4>
                 <a href="/dashboard/publications/authors/create">Create an
                     Author</a>
+                @if (session('success-author'))
+                    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+                        <strong>{{ session('success-author') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session('error-author'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                        <strong>{{ session('error-author') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="table-responsive mt-4">
                     <table class="table table-bordered text-center">
                         <thead class="table-dark">
