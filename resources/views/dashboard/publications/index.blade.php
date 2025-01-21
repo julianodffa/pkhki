@@ -55,7 +55,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                onclick="return confirm('Yakin hapus?')">
+                                                onclick="return confirm('you will delete this publication, continue?')">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>

@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Constants untuk role
+    const ROLE_ADMIN = 'admin';
+    const ROLE_SUPERADMIN = 'superadmin';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +23,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -41,4 +47,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Jika ingin memudahkan pengecekan role, bisa membuat method seperti ini
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->role === self::ROLE_SUPERADMIN;
+    }
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
 }

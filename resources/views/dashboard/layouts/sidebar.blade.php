@@ -7,7 +7,8 @@
         <div class="offcanvas-body d-md-flex flex-column p-0 mt-md-5 pt-md-3 overflow-y-auto">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class='nav-link d-flex align-items-center gap-2 {{ $title == "PKHKI" ? "active" : "" }}' aria-current="page" href="/dashboard">
+                    <a class='nav-link d-flex align-items-center gap-2 {{ $title == 'PKHKI' ? 'active' : '' }}'
+                        aria-current="page" href="/dashboard">
                         <i class="bi bi-house"></i>
                         Dashboard
                     </a>
@@ -21,7 +22,8 @@
             </h6>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == "Publications" ? "active" : "" }}" href="/dashboard/publications">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Publications' ? 'active' : '' }}"
+                        href="/dashboard/publications">
                         <i class="bi bi-file-earmark-richtext-fill"></i>
                         Publications
                     </a>
@@ -37,7 +39,8 @@
 
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == "Structures" ? "active" : "" }}" href="/dashboard/structures">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Structures' ? 'active' : '' }}"
+                        href="/dashboard/structures">
                         <i class="bi bi-shield"></i>
                         Structures
                     </a>
@@ -53,25 +56,47 @@
 
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == "Registrants" ? "active" : "" }}" href="/dashboard/registrants">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Registrants' ? 'active' : '' }}"
+                        href="/dashboard/registrants">
                         <i class="bi bi-person-exclamation"></i>
                         Registrants
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Members' ? 'active' : '' }}" href="/dashboard/members">
                         <i class="bi bi-person-badge"></i>
                         Members
                     </a>
                 </li>
             </ul>
             </h6>
+            @if (Auth::user()->role == 'superadmin')
+                <h6
+                    class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                    <span>Users</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                    </a>
+                </h6>
+
+                <ul class="nav flex-column mb-auto">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Users' ? 'active' : '' }}"
+                            href="/dashboard/users">
+                            <i class="bi bi-people"></i>
+                            Users
+                        </a>
+                    </li>
+                </ul>
+                </h6>
+            @endif
+
 
             <hr class="my-3">
 
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="#">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Change Password' ? 'active' : '' }}"
+                        href="/dashboard/users/{{ Auth::user()->username }}/change-password">
                         <i class="bi bi-gear"></i>
                         Change Password
                     </a>

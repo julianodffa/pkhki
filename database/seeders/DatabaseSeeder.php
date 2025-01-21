@@ -6,7 +6,9 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Publication;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,12 +20,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
-        Author::create([
-            "name" => "Customer Support",
-            "slug" => "customer-support",
+        User::create([
+            "name" => "Super Admin",
+            "username" => "superadmin",
+            "email" => "superadmin@pkhki.com",
+            "password" => Hash::make("pkhki098"),
+            "role" => "superadmin",
         ]);
 
+        User::create([
+            "name" => "Customer Support",
+            "username" => "admin",
+            "email" => "admin@pkhki.com",
+            "password" => Hash::make("pkhki098"),
+            "role" => "admin",
+        ]);
 
         Category::create([
             "name" => "Berita",
@@ -34,12 +45,6 @@ class DatabaseSeeder extends Seeder
             "name" => "Kegiatan",
             "slug" => "kegiatan",
         ]);
-
-        // Publication::factory(20)->create()->each(function ($publication) {
-        //     // Mengaitkan kategori acak ke publication
-        //     $categories = Category::inRandomOrder()->take(rand(1, 2))->pluck('id');
-        //     $publication->categories()->attach($categories);
-        // });
 
         // Stucture Organization
         Role::create([

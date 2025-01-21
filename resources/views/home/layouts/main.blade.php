@@ -3,7 +3,6 @@
 
 @yield('contain')
 
-
-@if (!isset($showFooter) || $showFooter)
+@if(!isset($hideFooter) || !$hideFooter)
     @include('home.layouts.footer')
 @endif

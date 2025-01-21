@@ -28,6 +28,8 @@ class CreateMembersTable extends Migration
             $table->string('immigration_law_consultant_certificate')->nullable();
             $table->json('other_certificates')->nullable();
             $table->boolean('is_accepted_as_member')->default(false);
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }

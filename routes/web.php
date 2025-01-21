@@ -40,60 +40,95 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::get('/dashboard', function () {
     return view("dashboard.index", ["title" => "PKHKI"]);
+})->middleware(['auth', 'role:admin,superadmin']);
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/login', 'login')->name("login")->middleware("guest");
+    Route::post('/login', 'authenticate')->middleware("guest");
 });
 
+Route::post('/memberRegister', [MemberController::class, "store"]);
 
-// Publications
-Route::controller(CategoryController::class)->group(function () {
-    Route::get('/dashboard/publications/categories/create', 'create');
-    Route::post('/dashboard/publications/categories', 'store');
-    Route::get('/dashboard/publications/categories/{category}/edit', 'edit');
-    Route::put('/dashboard/publications/categories/{category}', 'update');
-    Route::delete('/dashboard/publications/categories/{category}', 'destroy');
+
+
+// Role Admin or Superadmin
+Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
+    // Category Routes
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/dashboard/publications/categories/create', 'create');
+        Route::post('/dashboard/publications/categories', 'store');
+        Route::get('/dashboard/publications/categories/{category}/edit', 'edit');
+        Route::put('/dashboard/publications/categories/{category}', 'update');
+        Route::delete('/dashboard/publications/categories/{category}', 'destroy');
+    });
+
+    // Author Routes
+    Route::controller(AuthorController::class)->group(function () {
+        Route::get('/dashboard/publications/authors/create', 'create');
+        Route::post('/dashboard/publications/authors', 'store');
+        Route::get('/dashboard/publications/authors/{author}/edit', 'edit');
+        Route::put('/dashboard/publications/authors/{author}', 'update');
+        Route::delete('/dashboard/publications/authors/{author}', 'destroy');
+    });
+
+    // Publication Routes
+    Route::controller(PublicationController::class)->group(function () {
+        Route::get('/dashboard/publications', 'index');
+        Route::get('/dashboard/publications/create', 'create');
+        Route::post('/dashboard/publications', 'store');
+        Route::get('/dashboard/publications/{publication}', 'show');
+        Route::get('/dashboard/publications/{publication}/edit', 'edit');
+        Route::put('/dashboard/publications/{publication}', 'update');
+        Route::delete('/dashboard/publications/{publication}', 'destroy');
+    });
+
+    // Role Routes (Structure Organizations)
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/dashboard/structures/roles/create', 'create');
+        Route::post('/dashboard/structures/roles', 'store');
+        Route::get('/dashboard/structures/roles/{role}/edit', 'edit');
+        Route::put('/dashboard/structures/roles/{role}', 'update');
+        Route::delete('/dashboard/structures/roles/{role}', 'destroy');
+    });
+
+    // Structure Organization Routes
+    Route::controller(StructureOrganizationController::class)->group(function () {
+        Route::get('/dashboard/structures', 'index');
+        Route::get('/dashboard/structures/create', 'create');
+        Route::post('/dashboard/structures', 'store');
+        Route::get('/dashboard/structures/{structureOrganization}', 'show');
+        Route::get('/dashboard/structures/{structureOrganization}/edit', 'edit');
+        Route::put('/dashboard/structures/{structureOrganization}', 'update');
+        Route::delete('/dashboard/structures/{structureOrganization}', 'destroy');
+    });
+
+    // Members Routes
+    Route::controller(MemberController::class)->group(function () {
+        Route::get('/dashboard/registrants', 'registrants');
+        Route::get('/dashboard/registrants/{member}', 'show');
+        Route::delete('/dashboard/members/{member}', 'destroy');
+        Route::get('/dashboard/members', 'members');
+        Route::put('/dashboard/members/{member}/acceptAsMember', 'acceptAsMember');
+        Route::put('/dashboard/members/{member}/returnAsRegistrant', 'returnAsRegistrant');
+        Route::get('/dashboard/members/{member}', 'show');
+    });
+
+    // Users Routes
+    Route::controller(UserController::class)->group(function () {
+        Route::get("/logout", "logout");
+        Route::post("/logout", "logout");
+        Route::get("/dashboard/users/{user:username}/change-password", "changePassword");
+        Route::post("/dashboard/users/{user:username}/change-password", "doChangePassword");
+    });
 });
 
-Route::controller(AuthorController::class)->group(function () {
-    Route::get('/dashboard/publications/authors/create', 'create');
-    Route::post('/dashboard/publications/authors', 'store');
-    Route::get('/dashboard/publications/authors/{author}/edit', 'edit');
-    Route::put('/dashboard/publications/authors/{author}', 'update');
-    Route::delete('/dashboard/publications/authors/{author}', 'destroy');
-});
-
-Route::controller(PublicationController::class)->group(function () {
-    Route::get('/dashboard/publications', 'index');
-    Route::get('/dashboard/publications/create', 'create');
-    Route::post('/dashboard/publications', 'store');
-    Route::get('/dashboard/publications/{publication}', 'show');
-    Route::get('/dashboard/publications/{publication}/edit', 'edit');
-    Route::put('/dashboard/publications/{publication}', 'update');
-    Route::delete('/dashboard/publications/{publication}', 'destroy');
-});
-
-
-// Structure Organizations
-Route::controller(RoleController::class)->group(function () {
-    Route::get('/dashboard/structures/roles/create', 'create');
-    Route::post('/dashboard/structures/roles', 'store');
-    Route::get('/dashboard/structures/roles/{role}/edit', 'edit');
-    Route::put('/dashboard/structures/roles/{role}', 'update');
-    Route::delete('/dashboard/structures/roles/{role}', 'destroy');
-});
-
-Route::controller(StructureOrganizationController::class)->group(function () {
-    Route::get('/dashboard/structures', 'index');
-    Route::get('/dashboard/structures/create', 'create');
-    Route::post('/dashboard/structures', 'store');
-    Route::get('/dashboard/structures/{structureOrganization}', 'show');
-    Route::get('/dashboard/structures/{structureOrganization}/edit', 'edit');
-    Route::put('/dashboard/structures/{structureOrganization}', 'update');
-    Route::delete('/dashboard/structures/{structureOrganization}', 'destroy');
-});
-
-// Members
-Route::controller(MemberController::class)->group(function () {
-    Route::get('/dashboard/registrants', 'registrants');
-    Route::get('/dashboard/registrants/{member}', 'show');
-    Route::delete('/dashboard/members/{member}', 'destroy');
-    Route::post('/memberRegister', 'store');
+// Role Super Admin
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
+    // Users
+    Route::controller(UserController::class)->group(function () {
+        Route::get("/dashboard/users", "index");
+        Route::get("/dashboard/users/create", "register");
+        Route::post("/dashboard/users/create", "store");
+        Route::delete("/dashboard/users/{user}", "destroy");
+    });
 });

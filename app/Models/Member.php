@@ -27,6 +27,7 @@ class Member extends Model
         'immigration_law_consultant_certificate',
         'other_certificates',
         'is_accepted_as_member',
+        'last_updated_by',
     ];
 
     // Cast JSON column to an array for easy access
@@ -35,4 +36,9 @@ class Member extends Model
         'is_member_of_other_legal_association' => 'boolean',
         'is_accepted_as_member' => 'boolean',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
