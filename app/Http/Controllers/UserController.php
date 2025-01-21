@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Stmt\Echo_;
 
 class UserController extends Controller
 {
+    protected $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function index()
     {
-        $users = User::where('role', 'admin')->get();
+        $users = $this->userService->getAdminUsers();
         return response()->view('dashboard.users.index', [
             "title" => "Users",
             "users" => $users
@@ -30,14 +36,12 @@ class UserController extends Controller
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate(
-            [
-                "username" => "required",
-                "password" => "required"
-            ]
-        );
+        $credentials = $request->validate([
+            "username" => "required",
+            "password" => "required"
+        ]);
 
-        if (Auth::attempt($credentials)) {
+        if ($this->userService->authenticateUser($credentials)) {
             $request->session()->regenerate();
             return redirect('/dashboard');
         }
@@ -61,16 +65,21 @@ class UserController extends Controller
             "password" => "required|min:8|max:255"
         ]);
 
-        $validatedData["password"] = Hash::make($validatedData["password"]);
-
-        User::create($validatedData);
+        $this->userService->registerUser($validatedData);
 
         return redirect("/dashboard/users")->with("success", "Registration Successful!");
     }
 
     public function destroy(Request $request, User $user)
     {
-        $user->delete();
+        $canDelete = $this->userService->canDeleteUser($user);
+
+        if (!$canDelete) {
+            return redirect('/dashboard/users')
+                ->with('error', 'Cannot delete this user because it is associated with one or more publications, or it is associated with one or more members approval.');
+        }
+
+        $this->userService->deleteUser($user);
         return redirect("/dashboard/users")->with("success", "User has been deleted!");
     }
 
@@ -95,27 +104,20 @@ class UserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        // Verifikasi password lama
+        // Update password
         $user = Auth::user();
-        if (!Hash::check($request->input('old-password'), $user->password)) {
+        if (!$this->userService->changeUserPassword($user, $request->input('old-password'), $request->input('new-password'))) {
             return back()->with('error', 'Old password is incorrect.');
         }
-
-        // Update password
-        $user->password = Hash::make($request->input('new-password'));
-        $user->save();
 
         // Redirect dengan pesan sukses
         return back()->with('success', 'Password changed successfully.');
     }
 
-
     public function logout(Request $request)
     {
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect("/login");
     }
 }

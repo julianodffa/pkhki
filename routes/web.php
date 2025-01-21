@@ -36,6 +36,8 @@ Route::controller(HomeController::class)->group(function () {
     // Route::get("/kegiatan", "pageKegiatan");
     Route::get("/kontak", "pageKontak");
     Route::get("/daftar-anggota", "pageDaftar");
+    Route::get("/berita", "pageBerita");
+    Route::get("/kegiatan", "pageKegiatan");
 });
 
 Route::get('/dashboard', function () {
