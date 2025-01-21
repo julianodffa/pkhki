@@ -36,7 +36,7 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $publication->title }}</td>
-                                    <td>{{ $publication->author->name }}</td>
+                                    <td>{{ $publication->user->name }}</td>
                                     <td>
                                         @foreach ($publication->categories as $category)
                                             <span class="badge rounded-pill text-bg-secondary">{{ $category->name }}</span>
@@ -113,62 +113,6 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-outline-danger"
                                                     onclick="return confirm('You will delete category that related to the publication, continue?')">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
-
-                <h4 class="mt-3">Authors</h4>
-                <a href="/dashboard/publications/authors/create">Create an
-                    Author</a>
-                @if (session('success-author'))
-                    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
-                        <strong>{{ session('success-author') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @elseif (session('error-author'))
-                    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
-                        <strong>{{ session('error-author') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                <div class="table-responsive mt-4">
-                    <table class="table table-bordered text-center">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col" colspan="2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (count($authors) == 0)
-                                <tr>
-                                    <td colspan="5" class="text-center">No Authors</td>
-                                </tr>
-                            @else
-                                @foreach ($authors as $author)
-                                    <tr>
-                                        <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $author->name }}</td>
-                                        <td>
-                                            <a href="/dashboard/publications/authors/{{ $author->id }}/edit"
-                                                class="btn btn-sm btn-outline-warning me-1"><i
-                                                    class="bi bi-pencil-square"></i></a>
-                                        </td>
-                                        <td>
-                                            <form action="/dashboard/publications/authors/{{ $author->id }}"
-                                                method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('You will delete author that related to the publication, continue?')">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>

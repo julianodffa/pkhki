@@ -62,15 +62,6 @@ Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
         Route::delete('/dashboard/publications/categories/{category}', 'destroy');
     });
 
-    // Author Routes
-    Route::controller(AuthorController::class)->group(function () {
-        Route::get('/dashboard/publications/authors/create', 'create');
-        Route::post('/dashboard/publications/authors', 'store');
-        Route::get('/dashboard/publications/authors/{author}/edit', 'edit');
-        Route::put('/dashboard/publications/authors/{author}', 'update');
-        Route::delete('/dashboard/publications/authors/{author}', 'destroy');
-    });
-
     // Publication Routes
     Route::controller(PublicationController::class)->group(function () {
         Route::get('/dashboard/publications', 'index');

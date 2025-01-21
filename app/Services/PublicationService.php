@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Publication;
 use App\Models\Category;
-use App\Models\Author;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +22,7 @@ class PublicationService
             'cover' => $coverName,
             'content' => $contentPath,
             'slug' => $slug,
-            'author_id' => $data['author_id'],
+            'user_id' => $data['user_id'],
             'excerpt' => Str::limit(strip_tags($data['content']), 200, '...')
         ]);
 

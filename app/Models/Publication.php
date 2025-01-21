@@ -9,15 +9,15 @@ class Publication extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'cover', 'slug', 'excerpt', 'content', 'author_id'];
+    protected $fillable = ['title', 'cover', 'slug', 'excerpt', 'content', 'user_id'];
 
     public function categories()
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function author()
+    public function user()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(User::class);
     }
 }

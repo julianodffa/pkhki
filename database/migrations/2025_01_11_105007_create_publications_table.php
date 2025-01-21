@@ -20,7 +20,7 @@ class CreatePublicationsTable extends Migration
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->text('content');
-            $table->foreignId('author_id')->contrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->contrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

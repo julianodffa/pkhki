@@ -12,8 +12,8 @@
 
                 <h1 class="my-3">{{ $publication->title }}</h1>
 
-
-                <p class="d-block mt-4">By: <b>{{ $publication->author->name }}</b>
+                <p>{{ $publication->created_at->diffForHumans() }}</p>
+                <p class="d-block mt-4">By: <b>{{ $publication->user->name }}</b>
                     in
                     @foreach ($publication->categories as $category)
                         <span class="badge text-bg-secondary">{{ $category->name }}</span>

@@ -42,18 +42,6 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="author_id" class="form-label">Author</label>
-                <select class="form-select" name="author_id">
-                    @foreach ($authors as $author)
-                        @if (old('author_id', $publication->author_id) == $author->id)
-                            <option value="{{ $author->id }}" selected>{{ $author->name }}</option>
-                        @else
-                            <option value="{{ $author->id }}">{{ $author->name }}</option>
-                        @endif
-                    @endforeach
-                </select>
-            </div>
-            <div class="mb-3">
                 <label for="cover" class="form-label">Publication Cover</label>
                 @if ($publication->cover)
                     <img src="{{ asset($publication->cover) }}" class="cover-preview img-fluid mb-3 col-sm-5 d-block">

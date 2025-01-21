@@ -19,37 +19,31 @@ class PublicationController extends Controller
 
     public function index()
     {
-        $publications = Publication::with(['author', 'categories'])->get();
+        $publications = Publication::with(['user', 'categories'])->get();
         $categories = Category::all();
-        $authors = Author::all();
         return response()->view('dashboard.publications.index', [
             "title" => "Publications",
             "publications" => $publications,
-            "categories" => $categories,
-            "authors" => $authors
+            "categories" => $categories
         ]);
     }
 
     public function show(Publication $publication)
     {
         $contentHtml = file_get_contents($publication->content);
-        $publication->with('author', 'categories')->get();
+        $publication->with('user', 'categories')->get();
         return response()->view('dashboard.publications.show', [
             "title" => "Publications",
             "publication" => $publication,
-            "authors" => Author::all(),
-            "categories" => Category::all(),
             "contentHtml" => $contentHtml
         ]);
     }
 
     public function create()
     {
-        $authors = Author::all();
         $categories = Category::all();
         return response()->view('dashboard.publications.create', [
             "title" => "Publications",
-            "authors" => $authors,
             "categories" => $categories,
         ]);
     }
@@ -60,10 +54,11 @@ class PublicationController extends Controller
             'title' => 'required|max:255|unique:publications,title',
             'cover' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             'content' => 'required',
-            'author_id' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
         ]);
+
+        $validated['user_id'] = auth()->id();
 
         $publication = $this->publicationService->createPublication($validated);
 
@@ -73,11 +68,10 @@ class PublicationController extends Controller
     public function edit(Publication $publication)
     {
         $contentHtml = file_get_contents($publication->content);
-        $publication->with('author', 'categories')->get();
+        $publication->with('user', 'categories')->get();
         return response()->view('dashboard.publications.edit', [
             "title" => "Publications",
             "publication" => $publication,
-            "authors" => Author::all(),
             "categories" => Category::all(),
             "contentHtml" => $contentHtml
         ]);
@@ -89,10 +83,11 @@ class PublicationController extends Controller
             'title' => 'required|max:255|unique:publications,title,' . $publication->id,
             'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
             'content' => 'required',
-            'author_id' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
         ]);
+
+        $validated['user_id'] = auth()->id();
 
         $this->publicationService->updatePublication($publication, $validated);
 
