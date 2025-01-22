@@ -19,10 +19,18 @@ class PublicationController extends Controller
 
     public function index()
     {
-        $publications = Publication::with(['user', 'categories'])->get();
+        $publications = Publication::latest();
+        if (request('s')) {
+            $search = request('s');
+            $publications->where('title', 'like', "%{$search}%");
+        }
+
+        $publications = $publications->with(['user', 'categories'])->paginate(50);
         $categories = Category::all();
         return response()->view('dashboard.publications.index', [
             "title" => "Publications",
+            "css" => "publications",
+            "js" => "publications",
             "publications" => $publications,
             "categories" => $categories
         ]);
@@ -31,7 +39,7 @@ class PublicationController extends Controller
     public function show(Publication $publication)
     {
         $contentHtml = file_get_contents($publication->content);
-        $publication->with('user', 'categories')->get();
+        $publication->load('user', 'categories');
         return response()->view('dashboard.publications.show', [
             "title" => "Publications",
             "publication" => $publication,
@@ -103,5 +111,16 @@ class PublicationController extends Controller
         $this->publicationService->deletePublication($publication);
 
         return redirect('/dashboard/publications')->with("success", "Publication has been deleted!");
+    }
+
+    public function searchSuggestions(Request $request)
+    {
+        $query = $request->get('query');
+        $suggestions = Publication::where('title', 'like', "%{$query}%")
+            ->limit(10)
+            ->orderByDesc('clicks')
+            ->pluck('title');
+
+        return response()->json($suggestions);
     }
 }

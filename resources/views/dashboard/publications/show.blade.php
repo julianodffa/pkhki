@@ -1,22 +1,23 @@
 @extends('dashboard.layouts.main')
 @section('container')
-    <div class="container">
-        <div class="row justify-content-start my-3">
+    <div class="container py-4">
+        <div class="row justify-content-start">
             <div class="col-md-10">
-                <a href="/dashboard/publications">
+                <a class="btn btn-success" href="/dashboard/publications">
                     Back
                 </a>
+                <a class="btn btn-warning text-white" href="/dashboard/publications/{{ $publication->slug }}/edit">Edit</a>
                 <div class="my-3">
                     <img src="{{ asset($publication->cover) }}" alt="image-of-{{ $publication->slug }}" class="img-fluid">
                 </div>
 
-                <h1 class="my-3">{{ $publication->title }}</h1>
+                <h1 class="mt-3">{{ $publication->title }}</h1>
 
-                <p>{{ $publication->created_at->diffForHumans() }}</p>
-                <p class="d-block mt-4">By: <b>{{ $publication->user->name }}</b>
+                <span><i class="bi bi-calendar"></i> {{ $publication->created_at->diffForHumans() }}</span>
+                <p class="d-block">By: <b>{{ $publication->user->name }}</b>
                     in
                     @foreach ($publication->categories as $category)
-                        <span class="badge text-bg-secondary">{{ $category->name }}</span>
+                        <b>{{ $category->name }}</b>
                     @endforeach
                 </p>
                 <article class="my-3">

@@ -18,7 +18,7 @@ class StructureOrganizationController extends Controller
 
     public function index()
     {
-        $Structures = StructureOrganization::all();
+        $Structures = StructureOrganization::with(['role'])->paginate(50);
         return response()->view('dashboard.structures.index', [
             "title" => "Structures",
             "structures" => $Structures,
@@ -54,11 +54,10 @@ class StructureOrganizationController extends Controller
 
     public function show(StructureOrganization $structureOrganization)
     {
-        $structureOrganization->with('role')->get();
+        $structureOrganization->load('role');
         return response()->view('dashboard.structures.show', [
             "title" => "Structures",
             "structure" => $structureOrganization,
-            "roles" => Role::all(),
         ]);
     }
 

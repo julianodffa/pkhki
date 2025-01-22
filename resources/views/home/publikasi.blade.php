@@ -1,16 +1,20 @@
 @extends('home.layouts.main')
 
 @section('contain')
-    <div class="container py-5">
+    <div id="section-1" class="container py-5">
         <div class="row justify-content-center mb-3">
             <div class="col-md-6">
                 <form action="/publikasi">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Cari..." name="s"
-                            value="{{ request('s') }}">
+                    <div class="input-group">
+                        <input type="text" id="search" class="form-control" placeholder="Cari..." name="s"
+                            value="{{ request('s') }}" autocomplete="off">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </div>
                 </form>
+                <div class="position-relative">
+                    <ul id="suggestion-list" class="suggestion-list list-group mt-2">
+                    </ul>
+                </div>
             </div>
         </div>
         <!-- resources/views/post/show.blade.php -->
@@ -29,7 +33,7 @@
                     <p class="lead my-3 text-white font-opensans">
                         {{ $publications[0]->excerpt }}
                     </p>
-                    <p class="lead mb-0"><a href="/{{ $publications[0]->slug }}" class="btn btn-primary">Baca
+                    <p class="lead mb-0"><a href="/{{ $publications[0]->slug }}" class="btn btn-blue">Baca
                             Selengkapnya</a>
                     </p>
                 </div>
@@ -58,7 +62,7 @@
                                             <h3 class="card-title mb-2">{{ $publication->title }}</h3>
                                             <p class="card-text">{!! $publication->excerpt !!}</p>
                                             <a href="{{ $publication->slug }}"
-                                                class="btn btn-primary text-decoration-none">Baca
+                                                class="btn btn-blue text-decoration-none">Baca
                                                 selengkapnya</a>
                                         </div>
                                     </div>
@@ -95,6 +99,5 @@
                 </div>
             </div>
         @endif
-
     </div>
 @endsection

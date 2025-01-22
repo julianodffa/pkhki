@@ -47,7 +47,7 @@ class HomeController extends Controller
         return view("home.anggota", [
             "title" => "Anggota",
             "css" => "anggota",
-            "members" => Member::where('is_accepted_as_member', true)->get()
+            "members" => Member::latest()->where('is_accepted_as_member', true)->get()
         ]);
     }
 
@@ -76,11 +76,12 @@ class HomeController extends Controller
         }
 
 
-        $publications = $publications->with(["user", "categories"])->paginate(3);
+        $publications = $publications->with(["user", "categories"])->paginate(20);
         $categories = Category::all();
         return view("home.publikasi", [
             "title" => "Publikasi",
             "css" => "publikasi",
+            "js" => "publikasi",
             "publications" => $publications,
             "categories" => $categories,
         ]);
@@ -88,37 +89,29 @@ class HomeController extends Controller
 
     public function publikasi(Publication $publication)
     {
+        $publication->load('user', 'categories');
         $contentHtml = file_get_contents($publication->content);
-        $publication->with('user', 'categories')->get();
         $publication->increment('clicks');
         $categories = Category::all();
+
         return view("home.detailPublikasi", [
             "title" => $publication->title,
             "css" => "detailPublikasi",
             "publication" => $publication,
             "contentHtml" => $contentHtml,
             "categories" => $categories,
-
         ]);
     }
 
     public function pageKategori(Category $category)
     {
-        // Ambil publikasi berdasarkan kategori yang dipilih
-        $publications = $category->publications()->with(["user", "categories"])->orderBy('created_at', 'desc')->paginate(10);
-
-        // Ambil semua kategori untuk filter
+        $publications = $category->publications()->with(["user", "categories"])->orderBy('created_at', 'desc')->paginate(20);
         $categories = Category::all();
+        $title = $category->name == "kegiatan" ? "Kegiatan" : $category->name;
 
-        $title = $category->name;
-        if ($category->name == "kegiatan") {
-            $title = "Kegiatan";
-        }
-
-        // Kembalikan ke view dengan data yang diperlukan
         return view("home.kategori", [
-            "title" => "$category->name",
-            "css" => "publikasi",
+            "title" => $title,
+            "css" => "kategori",
             "publications" => $publications,
             "categories" => $categories,
         ]);

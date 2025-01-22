@@ -1,8 +1,8 @@
 @extends('home.layouts.main')
 
 @section('contain')
-    <div class="container py-5">
-        @if (count($publications) > 1)
+    <div id="section-1" class="container py-5">
+        @if (count($publications) >= 1)
             <div class="row g-5">
                 <div class="col-lg-9">
                     <div class="row">
@@ -25,7 +25,7 @@
                                             <h3 class="card-title mb-2">{{ $publication->title }}</h3>
                                             <p class="card-text">{!! $publication->excerpt !!}</p>
                                             <a href="/{{ $publication->slug }}"
-                                                class="btn btn-primary text-decoration-none">Baca selengkapnya</a>
+                                                class="btn btn-blue text-decoration-none">Baca selengkapnya</a>
                                         </div>
                                     </div>
                                 </div>

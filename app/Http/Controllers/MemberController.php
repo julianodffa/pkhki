@@ -18,7 +18,7 @@ class MemberController extends Controller
 
     public function registrants()
     {
-        $registrants = Member::where('is_accepted_as_member', false)->get();
+        $registrants = Member::latest()->where('is_accepted_as_member', false)->paginate(50);
         return view('dashboard.members.registrants', [
             "title" => "Registrants",
             "registrants" => $registrants
@@ -27,12 +27,10 @@ class MemberController extends Controller
 
     public function members()
     {
-        $members = Member::with(['user'])->where('is_accepted_as_member', true)->get();
-        $users = User::all();
+        $members = Member::latest()->with(['user'])->where('is_accepted_as_member', true)->paginate(50);
         return view('dashboard.members.members', [
             "title" => "Members",
             "members" => $members,
-            "users" => $users
         ]);
     }
 
@@ -97,6 +95,6 @@ class MemberController extends Controller
     {
         $this->memberService->deleteMember($member);
 
-        return redirect('/dashboard/registrants')->with('success', 'Registrant deleted successfully.');
+        return redirect('/dashboard/registrants')->with('success', 'Registrant successfully deleted.');
     }
 }

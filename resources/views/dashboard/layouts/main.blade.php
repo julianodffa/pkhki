@@ -35,6 +35,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+    @if (!empty($css))
+        <link rel="stylesheet" href='{{ asset("assets/css/dashboard/$css.css") }}'>
+    @endif
 </head>
 
 <body>
@@ -45,7 +49,7 @@
         <div class="row">
             @include('dashboard.layouts.sidebar')
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-4 font-opensans">
                 @yield('container')
             </main>
         </div>
@@ -55,6 +59,9 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    @if (!empty($js))
+        <script src="{{ asset("assets/js/dashboard/$js.js") }}"></script>
+    @endif
 </body>
 
 </html>

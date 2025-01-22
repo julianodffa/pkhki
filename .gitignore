@@ -14,3 +14,9 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/storage
+/public/storage
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views

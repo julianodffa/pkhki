@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Author;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,12 +18,12 @@ class PublicationFactory extends Factory
     public function definition()
     {
         return [
-            'cover' => $this->faker->imageUrl(),
+            'cover' => asset('assets/testing/publications/covers/Untitled.png'),
             'title' => $this->faker->sentence,
             'slug' => $this->faker->slug,
             'excerpt' => $this->faker->text,
-            'content' => $this->faker->paragraph,
-            'author_id' => Author::all()->random()->id,
+            'content' => asset('assets/testing/publications/index.html'),
+            'user_id' => User::where('role', '!=', 'superadmin')->inRandomOrder()->first()->id
         ];
     }
 }

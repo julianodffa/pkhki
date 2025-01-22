@@ -1,19 +1,19 @@
 @extends('home.layouts.main')
 
 @section('contain')
-    <div class="container py-5">
+    <div id="section-1" class="container py-5">
         <div class="row g-5">
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-12 border p-4">
                         <h1 class="font-times"><b>{{ $publication->title }}</b></h1>
                         <div class="row py-3">
-                            <div class="col-6 text-start">
+                            <div class="col-lg-6 text-start">
                                 <span><i class="bi bi-person"></i> {{ $publication->user->name }} <i
                                         class="bi bi-calendar ms-2"></i>
                                     {{ $publication->created_at->diffForHumans() }}</span>
                             </div>
-                            <div class="col-6 text-end">
+                            <div class="col-lg-6 text-lg-end">
                                 @if ($publication->clicks > 1000)
                                     <span class="text-danger"><i class="bi bi-eye"></i> {{ $publication->clicks }}</span>
                                 @else

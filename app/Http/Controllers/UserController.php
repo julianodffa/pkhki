@@ -43,7 +43,7 @@ class UserController extends Controller
 
         if ($this->userService->authenticateUser($credentials)) {
             $request->session()->regenerate();
-            return redirect('/dashboard');
+            return redirect('/dashboard')->with("success", "success login!");
         }
 
         return back()->with("error", "Username or Password is Wrong!");

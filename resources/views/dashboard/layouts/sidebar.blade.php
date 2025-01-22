@@ -1,4 +1,4 @@
-<div class="sidebar border col-md-3 col-lg-2 p-0 bg-body-tertiary position-fixed">
+<div class="sidebar border col-md-3 col-lg-2 p-0 bg-body-tertiary position-fixed font-opensans">
     <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
         aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header mt-5">
@@ -89,19 +89,6 @@
                 </ul>
                 </h6>
             @endif
-
-
-            <hr class="my-3">
-
-            <ul class="nav flex-column mb-auto">
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Change Password' ? 'active' : '' }}"
-                        href="/dashboard/users/{{ Auth::user()->username }}/change-password">
-                        <i class="bi bi-gear"></i>
-                        Change Password
-                    </a>
-                </li>
-            </ul>
         </div>
     </div>
 </div>

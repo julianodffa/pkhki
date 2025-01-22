@@ -33,6 +33,7 @@ Route::controller(UserController::class)->group(function () {
 
 Route::post('/memberRegister', [MemberController::class, "store"]);
 
+Route::get('/search-suggestions', [PublicationController::class, 'searchSuggestions'])->name('search.suggestions');
 
 
 // Role Admin or Superadmin
@@ -51,8 +52,8 @@ Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
         Route::get('/dashboard/publications', 'index');
         Route::get('/dashboard/publications/create', 'create');
         Route::post('/dashboard/publications', 'store');
-        Route::get('/dashboard/publications/{publication}', 'show');
-        Route::get('/dashboard/publications/{publication}/edit', 'edit');
+        Route::get('/dashboard/publications/{publication:slug}', 'show');
+        Route::get('/dashboard/publications/{publication:slug}/edit', 'edit');
         Route::put('/dashboard/publications/{publication}', 'update');
         Route::delete('/dashboard/publications/{publication}', 'destroy');
     });

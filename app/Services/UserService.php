@@ -10,7 +10,7 @@ class UserService
 {
     public function getAdminUsers()
     {
-        return User::where('role', 'admin')->get();
+        return User::where('role', 'admin')->paginate(50);
     }
 
     public function authenticateUser($credentials)
