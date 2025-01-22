@@ -48,13 +48,14 @@
                                     <td>{{ $registrant->company_email }}</td>
                                     <td>{{ $registrant->is_member_of_other_legal_association ? 'Yes' : 'No' }}</td>
                                     <td>
-                                        <form action="/dashboard/members/{{ $registrant->id }}/acceptAsMember" method="post">
+                                        <button type="button" class="btn btn-sm btn-outline-success"
+                                            onclick='customConfirmation(event, {{ $registrant->id }}, "registrants", "Accept {{ $registrant->name }} as Member?", "Yes", "Membership Admission", "success")'>
+                                            <i class="bi bi-check2-circle"></i>
+                                        </button>
+                                        <form id="confirm-registrants-{{ $registrant->id }}" method="POST"
+                                            action="/dashboard/members/{{ $registrant->id }}/acceptAsMember" style="display: none;">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-sm btn-outline-success"
-                                                onclick="return confirm('Accept as Member?')">
-                                                <i class="bi bi-check2-circle"></i>
-                                            </button>
                                         </form>
                                     </td>
                                     <td>
@@ -62,13 +63,14 @@
                                             class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a>
                                     </td>
                                     <td>
-                                        <form action="/dashboard/members/{{ $registrant->id }}" method="post">
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                            onclick="deleteConfirmation(event, {{ $registrant->id }}, 'members', '{{ $registrant->name }}')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <form id="delete-members-{{ $registrant->id }}" method="POST"
+                                            action="/dashboard/members/{{ $registrant->id }}" style="display: none;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                onclick="return confirm('you will delete this registrant, continue?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
                                         </form>
                                     </td>
                                 </tr>

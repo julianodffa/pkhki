@@ -97,6 +97,6 @@ class MemberController extends Controller
     {
         $this->memberService->deleteMember($member);
 
-        return redirect('/dashboard/registrants')->with('success', 'Member deleted successfully.');
+        return redirect('/dashboard/registrants')->with('success', 'Registrant deleted successfully.');
     }
 }

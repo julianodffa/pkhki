@@ -50,14 +50,16 @@
                                     <td>{{ $member->is_member_of_other_legal_association ? 'Yes' : 'No' }}</td>
                                     <td>{{ $member->user->name }}</td>
                                     <td>
-                                        <form action="/dashboard/members/{{ $member->id }}/returnAsRegistrant"
-                                            method="post">
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                            onclick='customConfirmation(event, {{ $member->id }}, "members", "Return {{ $member->name }} as Registrant?", "Yes", "Membership", "warning")'>
+                                            <i class="bi bi-exclamation-circle"></i>
+
+                                        </button>
+                                        <form id="confirm-members-{{ $member->id }}" method="POST"
+                                            action="/dashboard/members/{{ $member->id }}/returnAsRegistrant"
+                                            style="display: none;">
                                             @csrf
-                                            @method('put')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                onclick="return confirm('return as registrant?')">
-                                                <i class="bi bi-exclamation-circle"></i>
-                                            </button>
+                                            @method('PUT')
                                         </form>
                                     </td>
                                     <td>

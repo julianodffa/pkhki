@@ -51,13 +51,14 @@
                                             class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
                                     </td>
                                     <td>
-                                        <form action="/dashboard/publications/{{ $publication->id }}" method="post">
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                            onclick="deleteConfirmation(event, {{ $publication->id }}, 'publications', '{{ $publication->title }}')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <form id="delete-publications-{{ $publication->id }}" method="POST"
+                                            action="/dashboard/publications/{{ $publication->id }}" style="display: none;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                onclick="return confirm('you will delete this publication, continue?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -107,14 +108,15 @@
                                                     class="bi bi-pencil-square"></i></a>
                                         </td>
                                         <td>
-                                            <form action="/dashboard/publications/categories/{{ $category->id }}"
-                                                method="post">
+                                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                                onclick="deleteConfirmation(event, {{ $category->id }}, 'categories', '{{ $category->name }}')">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            <form id="delete-categories-{{ $category->id }}" method="POST"
+                                                action="/dashboard/publications/categories/{{ $category->id }}"
+                                                style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('You will delete category that related to the publication, continue?')">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
                                             </form>
                                         </td>
                                     </tr>

@@ -49,13 +49,14 @@
                                             class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
                                     </td>
                                     <td>
-                                        <form action="/dashboard/structures/{{ $structure->id }}" method="post">
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                            onclick="deleteConfirmation(event, {{ $structure->id }}, 'structures', '{{ $structure->name }}')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <form id="delete-structures-{{ $structure->id }}" method="POST"
+                                            action="/dashboard/structures/{{ $structure->id }}" style="display: none;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                onclick="return confirm('you will change the structures, continue?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -105,13 +106,15 @@
                                                     class="bi bi-pencil-square"></i></a>
                                         </td>
                                         <td>
-                                            <form action="/dashboard/structures/roles/{{ $role->id }}" method="post">
+                                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                                onclick="deleteConfirmation(event, {{ $role->id }}, 'roles', '{{ $role->name }}')">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            <form id="delete-roles-{{ $role->id }}" method="POST"
+                                                action="/dashboard/structures/roles/{{ $role->id }}"
+                                                style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('You will delete category that related to the publication, continue?')">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
                                             </form>
                                         </td>
                                     </tr>

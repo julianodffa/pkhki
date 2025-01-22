@@ -93,6 +93,6 @@ class StructureOrganizationController extends Controller
         $this->structurOrganizationService->deleteStructure($structureOrganization);
         $name = $structureOrganization['name'];
 
-        return redirect('/dashboard/structures')->with("error", "$name has been deleted from structure!");
+        return redirect('/dashboard/structures')->with("success", "$name has been deleted from structure!");
     }
 }
