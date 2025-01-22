@@ -52,10 +52,12 @@ class PublicationController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255|unique:publications,title',
-            'cover' => 'required|image|mimes:jpeg,png,jpg|max:1024',
+            'cover' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:ratio=16/9',
             'content' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
+        ], [
+            'cover.dimensions' => "Image Ratio Must be 16/9"
         ]);
 
         $validated['user_id'] = auth()->id();
@@ -81,10 +83,12 @@ class PublicationController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:255|unique:publications,title,' . $publication->id,
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:1024|dimensions:ratio=16/9',
             'content' => 'required',
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
+        ], [
+            'cover.dimensions' => "Image Ratio Must be 16/9"
         ]);
 
         $validated['user_id'] = auth()->id();

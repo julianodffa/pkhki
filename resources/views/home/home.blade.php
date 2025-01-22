@@ -35,13 +35,13 @@
             <h1 class="text-white text-center mt-5 mb-5 pb-4 pb-lg-5 mb-lg-0 font-times text-shadow  fw-bold">BERITA</h1>
             <div class="row d-flex justify-content-evenly text-center align-items-center fade-in">
                 @if ($news->isNotEmpty())
-                    @foreach ($news as $n)
-                        <div class="col-12 col-lg-3 mb-3 mb-lg-5">
-                            <div class="card text-start border-0 w-100 text-blue" style="width: 18rem;">
+                    @foreach ($news->take(3) as $n)
+                        <div class="col-12 col-lg-4 mb-3 mb-lg-5">
+                            <div class="card text-start border-0 text-blue">
                                 <img src="{{ asset($n->cover) }}" class="card-img-top" alt="{{ $n->slug }}">
                                 <div class="card-body mx-3">
                                     <p class="card-text">{!! $n->excerpt !!}</p>
-                                    <a href="#">Read More <i class="bi bi-arrow-right"></i></a>
+                                    <a href="/{{ $n->slug }}">Read More <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                     </div>
                 @endif
                 <div class="col-12">
-                    <a href="" class="text-white fs-1 text-center">
+                    <a href="/kategori/berita" class="text-white fs-1 text-center">
                         <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>
@@ -99,7 +99,7 @@
                     <img src="{{ asset('assets/images/kegiatan.png') }}" class="card-img-top" alt="...">
                 </div>
                 <div class="col-12 col-lg-1 text-center mt-3">
-                    <a href="" class="fs-1 text-blue">
+                    <a href="/kategori/kegiatan" class="fs-1 text-blue">
                         <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>
@@ -118,7 +118,7 @@
                 <div class="p-0 col-6 col-lg-4 text-center">
                     <h1 class="text-white mt-3 mt-lg-5 mb-lg-0 pb-md-3 pb-lg-5 font-times text-shadow fw-bold">PUBLIKASI
                     </h1>
-                    <a href="" class="text-white fs-1">
+                    <a href="/publikasi" class="text-white fs-1">
                         <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>

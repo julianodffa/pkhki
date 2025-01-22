@@ -22,24 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::controller(HomeController::class)->group(function () {
-    Route::get("/", "pageHome");
-    Route::get("/tentang-kami", "pageTentang");
-    Route::get("/struktur", "pageStruktur");
-    // Route::get("/kode-etik", "pageKodeEtik");
-    // Route::get("/anggota", "pageAnggota");
-    // Route::get("/publikasi", "pagePublikasi");
-    // Route::get("/kegiatan", "pageKegiatan");
-    Route::get("/kontak", "pageKontak");
-    Route::get("/daftar-anggota", "pageDaftar");
-    Route::get("/berita", "pageBerita");
-    Route::get("/kegiatan", "pageKegiatan");
-});
-
 Route::get('/dashboard', function () {
     return view("dashboard.index", ["title" => "PKHKI"]);
 })->middleware(['auth', 'role:admin,superadmin']);
@@ -124,4 +106,17 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
         Route::post("/dashboard/users/create", "store");
         Route::delete("/dashboard/users/{user}", "destroy");
     });
+});
+
+Route::controller(HomeController::class)->group(function () {
+    Route::get("/", "pageHome");
+    Route::get("/tentang-kami", "pageTentang");
+    Route::get("/struktur", "pageStruktur");
+    // Route::get("/kode-etik", "pageKodeEtik");
+    Route::get("/anggota", "pageAnggota");
+    Route::get("/kontak", "pageKontak");
+    Route::get("/daftar-anggota", "pageDaftar");
+    Route::get("/publikasi", "pagePublikasi");
+    Route::get("/kategori/{category:slug}", "pageKategori");
+    Route::get("/{publication:slug}", "publikasi");
 });

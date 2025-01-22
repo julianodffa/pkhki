@@ -15,6 +15,7 @@ class CreatePublicationsTable extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('clicks')->default(0);
             $table->string('title');
             $table->string('cover');
             $table->string('slug')->unique();

@@ -33,7 +33,7 @@
                         <a class="nav-link" aria-current="page" href="/publikasi">Publikasi</a>
                     </li>
                     <li class="nav-item {{ $title == 'Kegiatan' ? 'active' : '' }} mx-lg-3 my-1 my-lg-0">
-                        <a class="nav-link" aria-current="page" href="/kegiatan">Kegiatan</a>
+                        <a class="nav-link" aria-current="page" href="/kategori/kegiatan">Kegiatan</a>
                     </li>
                     <!-- <li class="nav-item dropdown">
                         <span class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

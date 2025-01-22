@@ -88,7 +88,7 @@
                     ['insert', ['table', 'link', 'picture',
                         'video'
                     ]] // Menambahkan Table, Link, Gambar dan Video
-                ]
+                ],
             });
 
             $('#multiple-select-field').select2({

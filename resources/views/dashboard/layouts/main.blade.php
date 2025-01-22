@@ -28,6 +28,9 @@
     <link href="{{ asset('assets/css/summernote-bs5.min.css') }}" rel="stylesheet">
     <script src="{{ asset('assets/js/summernote-bs5.min.js') }}"></script>
 
+    {{-- Sweet Alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     {{-- Multiple Select --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet"
