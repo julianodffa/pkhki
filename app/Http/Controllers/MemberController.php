@@ -18,18 +18,30 @@ class MemberController extends Controller
 
     public function registrants()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Registrants', 'url' => url("/dashboard/registrants"), 'active' => true],
+        ];
+
         $registrants = Member::latest()->where('is_accepted_as_member', false)->paginate(50);
         return view('dashboard.members.registrants', [
             "title" => "Registrants",
+            'breadcrumbs' => $breadcrumbs,
             "registrants" => $registrants
         ]);
     }
 
     public function members()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Members', 'url' => url("/dashboard/members"), 'active' => true],
+        ];
+
         $members = Member::latest()->with(['user'])->where('is_accepted_as_member', true)->paginate(50);
         return view('dashboard.members.members', [
             "title" => "Members",
+            'breadcrumbs' => $breadcrumbs,
             "members" => $members,
         ]);
     }
@@ -48,7 +60,7 @@ class MemberController extends Controller
             'company_email' => 'required|email',
             'is_member_of_other_legal_association' => 'boolean',
             'immigration_law_consultant_certificate' => 'required|mimes:pdf|max:2048',
-            'other_certificates' => 'required|array|max:2048',
+            'other_certificates' => 'array|max:2048',
             'other_certificates.*' => 'max:2048|mimes:pdf',
         ], [
             'other_certificates.array' => 'The certificates field must be an array of files.',
@@ -70,7 +82,7 @@ class MemberController extends Controller
         $member->user_id = auth()->id();
         $member->is_accepted_as_member = true;
         $member->save();
-        return redirect("/dashboard/members")->with('success', "$name has been accepted as a member!");
+        return redirect("/dashboard/registrants")->with('success', "$name has been accepted as a member!");
     }
 
     public function returnAsRegistrant(Member $member)
@@ -80,13 +92,26 @@ class MemberController extends Controller
         $member->user_id = auth()->id();
         $member->is_accepted_as_member = false;
         $member->save();
-        return redirect("/dashboard/registrants")->with('success', "$name has been returned as a registrant!");
+        return redirect("/dashboard/members")->with('success', "$name has been returned as a registrant!");
     }
 
     public function show(Member $member)
     {
+        if ($member->is_accepted_as_member == true) {
+            $status = ['Members', 'members'];
+        } else {
+            $status = ['Registrants', 'registrants'];
+        }
+
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => $status[0], 'url' => url("/dashboard/$status[1]"), 'active' => false],
+            ['label' => $member->name, 'url' => '', 'active' => true],
+        ];
+
         return view("dashboard.members.show", [
             "title" => "Registrant",
+            'breadcrumbs' => $breadcrumbs,
             "registrant" => $member
         ]);
     }

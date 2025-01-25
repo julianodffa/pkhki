@@ -18,9 +18,15 @@ class StructureOrganizationController extends Controller
 
     public function index()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => true],
+        ];
+
         $Structures = StructureOrganization::with(['role'])->paginate(50);
         return response()->view('dashboard.structures.index', [
             "title" => "Structures",
+            'breadcrumbs' => $breadcrumbs,
             "structures" => $Structures,
             "roles" => Role::all()
         ]);
@@ -28,9 +34,16 @@ class StructureOrganizationController extends Controller
 
     public function create()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
+            ['label' => 'Create', 'url' => '', 'active' => true],
+        ];
+
         $roles = Role::all();
         return response()->view('dashboard.structures.create', [
             "title" => "Structures",
+            'breadcrumbs' => $breadcrumbs,
             "roles" => $roles,
         ]);
     }
@@ -54,18 +67,32 @@ class StructureOrganizationController extends Controller
 
     public function show(StructureOrganization $structureOrganization)
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
+            ['label' => $structureOrganization->name, 'url' => '', 'active' => true],
+        ];
+
         $structureOrganization->load('role');
         return response()->view('dashboard.structures.show', [
             "title" => "Structures",
+            'breadcrumbs' => $breadcrumbs,
             "structure" => $structureOrganization,
         ]);
     }
 
     public function edit(StructureOrganization $structureOrganization)
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
+            ['label' => $structureOrganization->name, 'url' => '', 'active' => true],
+        ];
+
         $structureOrganization->with('role')->get();
         return response()->view('dashboard.structures.edit', [
             "title" => "Structures",
+            'breadcrumbs' => $breadcrumbs,
             "structure" => $structureOrganization,
             "roles" => Role::all(),
         ]);

@@ -17,8 +17,15 @@ class RoleController extends Controller
 
     public function create()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
+            ['label' => 'Create', 'url' => '', 'active' => true],
+        ];
+
         return response()->view('dashboard.structures.roles.create', [
             "title" => "Structures",
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -36,8 +43,15 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
+            ['label' => $role->name, 'url' => '', 'active' => true],
+        ];
+
         return response()->view('dashboard.structures.roles.edit', [
             "title" => "structures",
+            'breadcrumbs' => $breadcrumbs,
             "role" => $role,
         ]);
     }

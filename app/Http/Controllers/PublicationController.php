@@ -20,6 +20,12 @@ class PublicationController extends Controller
     public function index()
     {
         $publications = Publication::latest();
+
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => true],
+        ];
+
         if (request('s')) {
             $search = request('s');
             $publications->where('title', 'like', "%{$search}%");
@@ -31,6 +37,7 @@ class PublicationController extends Controller
             "title" => "Publications",
             "css" => "publications",
             "js" => "publications",
+            'breadcrumbs' => $breadcrumbs,
             "publications" => $publications,
             "categories" => $categories
         ]);
@@ -38,10 +45,17 @@ class PublicationController extends Controller
 
     public function show(Publication $publication)
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
+            ['label' => $publication->title, 'url' => '', 'active' => true],
+        ];
+
         $contentHtml = file_get_contents($publication->content);
         $publication->load('user', 'categories');
         return response()->view('dashboard.publications.show', [
             "title" => "Publications",
+            'breadcrumbs' => $breadcrumbs,
             "publication" => $publication,
             "contentHtml" => $contentHtml
         ]);
@@ -50,8 +64,16 @@ class PublicationController extends Controller
     public function create()
     {
         $categories = Category::all();
+
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
+            ['label' => 'Create', 'url' => '', 'active' => true],
+        ];
+
         return response()->view('dashboard.publications.create', [
             "title" => "Publications",
+            'breadcrumbs' => $breadcrumbs,
             "categories" => $categories,
         ]);
     }
@@ -77,10 +99,17 @@ class PublicationController extends Controller
 
     public function edit(Publication $publication)
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
+            ['label' => $publication->title, 'url' => '', 'active' => true],
+        ];
+
         $contentHtml = file_get_contents($publication->content);
         $publication->with('user', 'categories')->get();
         return response()->view('dashboard.publications.edit', [
             "title" => "Publications",
+            'breadcrumbs' => $breadcrumbs,
             "publication" => $publication,
             "categories" => Category::all(),
             "contentHtml" => $contentHtml

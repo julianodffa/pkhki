@@ -20,9 +20,15 @@ class UserController extends Controller
 
     public function index()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Users', 'url' => url('/dashboard/users'), 'active' => true],
+        ];
+
         $users = $this->userService->getAdminUsers();
         return response()->view('dashboard.users.index', [
             "title" => "Users",
+            'breadcrumbs' => $breadcrumbs,
             "users" => $users
         ]);
     }
@@ -31,6 +37,7 @@ class UserController extends Controller
     {
         return response()->view('home.login.login', [
             "title" => "Login",
+            "css" => "login"
         ]);
     }
 
@@ -51,8 +58,15 @@ class UserController extends Controller
 
     public function register()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Users', 'url' => url('/dashboard/users'), 'active' => false],
+            ['label' => 'Create', 'url' => '', 'active' => true],
+        ];
+
         return view("dashboard.users.registration", [
-            "title" => "Users"
+            "title" => "Users",
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -85,8 +99,15 @@ class UserController extends Controller
 
     public function changePassword($username)
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Change Password', 'url' => url('/dashboard/users'), 'active' => true],
+            ['label' => $username, '', 'active' => true],
+        ];
+
         return view("dashboard.users.changePassword", [
-            "title" => "Change Password"
+            "title" => "Change Password",
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 

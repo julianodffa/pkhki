@@ -29,7 +29,7 @@
 
                 <div class="col-lg-12 px-0 position-relative z-index-2">
                     <h1 class="display-4 fst-italic font-times text-white">{{ $publications[0]->title }}</h1>
-                    <p class="lead my-3 text-white font-poppins">{{ $publications[0]->created_at->diffForHumans() }}</p>
+                    <p class="lead my-3 text-white font-poppins"><i class="bi bi-clock"></i> {{ $publications[0]->created_at->diffForHumans() }}</p>
                     <p class="lead my-3 text-white font-opensans">
                         {{ $publications[0]->excerpt }}
                     </p>
@@ -57,8 +57,8 @@
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6">
                                         <div class="py-3 py-md-0">
-                                            <small><i class="bi bi-calendar"></i>
-                                                {{ $publications[0]->created_at->diffForHumans() }}</small>
+                                            <small>
+                                                <i class="bi bi-clock"></i>{{ $publication->created_at->diffForHumans() }}</small>
                                             <h3 class="card-title mb-2">{{ $publication->title }}</h3>
                                             <p class="card-text">{!! $publication->excerpt !!}</p>
                                             <a href="{{ $publication->slug }}"

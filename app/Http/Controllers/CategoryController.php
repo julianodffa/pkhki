@@ -17,8 +17,15 @@ class CategoryController extends Controller
 
     public function create()
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
+            ['label' => 'Create Category', 'url' => '', 'active' => true],
+        ];
+
         return response()->view('dashboard.publications.categories.create', [
             "title" => "Publications",
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -35,9 +42,16 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
+        $breadcrumbs = [
+            ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
+            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
+            ['label' => $category->name, 'url' => '', 'active' => true],
+        ];
+
         return response()->view('dashboard.publications.categories.edit', [
             "title" => "Publications",
             "category" => $category,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 

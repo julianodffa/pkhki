@@ -50,7 +50,10 @@
             @include('dashboard.layouts.sidebar')
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-4 font-opensans">
-                @yield('container')
+                <div class="container py-4">
+                    @include('dashboard.layouts.breadcrumbs')
+                    @yield('container')
+                </div>
             </main>
         </div>
     </div>
