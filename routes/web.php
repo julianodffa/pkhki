@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PublicationController;
@@ -23,9 +24,8 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view("dashboard.index", ["title" => "PKHKI"]);
-})->middleware(['auth', 'role:admin,superadmin']);
+Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'role:admin,superadmin']);
+
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'login')->name("login")->middleware("guest");

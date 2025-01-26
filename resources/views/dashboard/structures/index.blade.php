@@ -1,6 +1,24 @@
 @extends('dashboard.layouts.main')
 @section('container')
     <div class="row">
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="font-poppins-bold text-warning">{{ count($structures) }}</h1>
+                    <h5 class="card-title font-poppins-bold">Structures</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="font-poppins-bold text-warning">{{ count($roles) }}</h1>
+                    <h5 class="card-title font-poppins-bold">Roles</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8">
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

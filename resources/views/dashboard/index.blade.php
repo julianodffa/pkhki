@@ -18,6 +18,45 @@
             </div>
         @endif
     @endif
-    <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="row">
+        <!-- First Menu -->
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="font-poppins-bold text-warning">{{ $count['publications'] }}</h1>
+                    <h5 class="card-title font-poppins-bold">Publications</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Menu -->
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="font-poppins-bold text-warning">{{ $count['structures'] }}</h1>
+                    <h5 class="card-title font-poppins-bold">Structures</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third Menu -->
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="font-poppins-bold text-warning">{{ $count['registrants'] }}</h1>
+                    <h5 class="card-title font-poppins-bold">Registrants</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fourth Menu -->
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="font-poppins-bold text-warning">{{ $count['members'] }}</h1>
+                    <h5 class="card-title font-poppins-bold">Members</h5>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
