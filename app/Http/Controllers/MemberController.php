@@ -53,8 +53,8 @@ class MemberController extends Controller
             'phone' => 'required|string|max:15',
             'email' => 'required|email|unique:members,email',
             'address' => 'required|string',
-            'ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ktp' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'institution' => 'required|string',
             'position' => 'required|string',
             'company_email' => 'required|email',
@@ -63,9 +63,13 @@ class MemberController extends Controller
             'other_certificates' => 'array|max:2048',
             'other_certificates.*' => 'max:2048|mimes:pdf',
         ], [
+            'ktp.max' => 'Maximum file size is 2MB.',
+            'photo.max' => 'Maximum file size is 2MB.',
+            'immigration_law_consultant_certificate.max' => 'Maximum file size is 2MB.',
             'other_certificates.array' => 'The certificates field must be an array of files.',
             'other_certificates.*.mimes' => 'Each certificate file must be a pdf.',
-            'immigration_law_consultant_certificate.mimes' => 'Certificate file must be a pdf.',
+            'other_certificates.*.max' => 'The maximum size of each file is 2 MB.',
+            'immigration_law_consultant_certificate.mimes' => 'Each certificate file must be a pdf.',
         ]);
 
         $validatedData['is_member_of_other_legal_association'] = $request->input('is_member_of_other_legal_association', false);

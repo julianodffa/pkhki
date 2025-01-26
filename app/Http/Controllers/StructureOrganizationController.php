@@ -57,6 +57,9 @@ class StructureOrganizationController extends Controller
             'email' => 'required|email:dns|unique:structure_organizations,email',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
             'role_id' => 'required',
+        ], [
+            'image.dimensions' => "Image dimension must have 300px Width and 450px Height",
+            'image.max' => "Max Cover size is 1MB"
         ]);
 
         $structureOrganization = $this->structurOrganizationService->createStructure($validated);
@@ -107,6 +110,9 @@ class StructureOrganizationController extends Controller
             'email' => 'required|email:dns|unique:structure_organizations,email,' . $structureOrganization->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
             'role_id' => 'required',
+        ], [
+            'image.dimensions' => "Image dimension must have 300px Width and 450px Height",
+            'image.max' => "Max Cover size is 1MB"
         ]);
 
         $this->structurOrganizationService->updateStructure($structureOrganization, $validated);
