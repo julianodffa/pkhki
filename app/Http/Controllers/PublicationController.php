@@ -55,6 +55,7 @@ class PublicationController extends Controller
         $publication->load('user', 'categories');
         return response()->view('dashboard.publications.show', [
             "title" => "Publications",
+            "css" => "detailPublication",
             'breadcrumbs' => $breadcrumbs,
             "publication" => $publication,
             "contentHtml" => $contentHtml

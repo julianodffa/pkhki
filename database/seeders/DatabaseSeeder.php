@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             "role" => "admin",
         ]);
 
+        // Publications
         Category::create([
             "name" => "Berita",
             "slug" => "berita",
@@ -49,13 +50,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Membuat 20 Publication menggunakan factory
-        Publication::factory(50)->create()->each(function ($publication) {
-            // Mengaitkan kategori acak ke publication
-            $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id');
-            $publication->categories()->attach($categories);
-        });
+        // Publication::factory(50)->create()->each(function ($publication) {
+        //     $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id');
+        //     $publication->categories()->attach($categories);
+        // });
 
-        // Stucture Organization
+        // Stucture Organization 
         Role::create([
             "name" => "Dewan Kehormatan",
             "slug" => "dewan-kehormatan",
@@ -76,7 +76,6 @@ class DatabaseSeeder extends Seeder
             'position' => 'Ketua Umum',
             'lawfirm' => 'Murzal and Partners',
             'email' => 'jufrianmurzal@pkhki.com',
-            'image' => 'assets/testing/structures/images/struktur-card.png',
             'role_id' => 1
         ]);
 
@@ -85,7 +84,6 @@ class DatabaseSeeder extends Seeder
             'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
             'lawfirm' => 'Murzal and Partners',
             'email' => 'jamesjunior@pkhki.com',
-            'image' => 'assets/testing/structures/images/struktur-card.png',
             'role_id' => 1
         ]);
 
@@ -94,7 +92,6 @@ class DatabaseSeeder extends Seeder
             'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
             'lawfirm' => 'Murzal and Partners',
             'email' => 'yanmap@pkhki.com',
-            'image' => 'assets/testing/structures/images/struktur-card.png',
             'role_id' => 1
         ]);
 
@@ -103,11 +100,11 @@ class DatabaseSeeder extends Seeder
             'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
             'lawfirm' => 'Murzal and Partners',
             'email' => 'salsabila@pkhki.com',
-            'image' => 'assets/testing/structures/images/struktur-card.png',
             'role_id' => 1
         ]);
 
-        Member::factory(10)->create();
+        // Registrants
+        // Member::factory(10)->create();
 
     }
 }
