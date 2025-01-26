@@ -18,11 +18,11 @@ class PublicationFactory extends Factory
     public function definition()
     {
         return [
-            'cover' => asset('assets/testing/publications/covers/Untitled.png'),
+            'cover' => 'assets/testing/publications/covers/Untitled.png',
             'title' => $this->faker->sentence,
             'slug' => $this->faker->slug,
             'excerpt' => $this->faker->text,
-            'content' => asset('assets/testing/publications/index.html'),
+            'content' => 'assets/testing/publications/index.html',
             'user_id' => User::where('role', '!=', 'superadmin')->inRandomOrder()->first()->id
         ];
     }

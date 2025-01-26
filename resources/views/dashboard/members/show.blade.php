@@ -63,7 +63,8 @@
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                 <div class="accordion-body">
                     @if ($registrant->ktp)
-                        <img src="{{ asset($registrant->ktp) }}" alt="KTP" class="img-fluid">
+                        <img src="{{ route('member.file', ['folder' => 'ktp', 'filename' => basename($registrant->ktp)]) }}"
+                            alt="KTP" class="img-fluid">
                     @else
                         <p>No KTP uploaded.</p>
                     @endif
@@ -81,7 +82,8 @@
             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                 <div class="accordion-body">
                     @if ($registrant->photo)
-                        <img src="{{ asset($registrant->photo) }}" alt="Photo" class="img-fluid">
+                        <img src="{{ route('member.file', ['folder' => 'photo', 'filename' => basename($registrant->photo)]) }}"
+                            alt="Photo" class="img-fluid">
                     @else
                         <p>No Photo uploaded.</p>
                     @endif
@@ -99,8 +101,9 @@
             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                 <div class="accordion-body">
                     @if ($registrant->immigration_law_consultant_certificate)
-                        <iframe src="{{ asset($registrant->immigration_law_consultant_certificate) }}" width="100%"
-                            height="800px"></iframe>
+                        <iframe
+                            src="{{ route('member.file', ['folder' => 'ilc_certificate', 'filename' => basename($registrant->immigration_law_consultant_certificate)]) }}"
+                            width="100%" height="800px"></iframe>
                     @else
                         <p>No Immigration Law Consultant Certificate uploaded.</p>
                     @endif
@@ -120,7 +123,9 @@
                     @if ($registrant->other_certificates)
                         @foreach ($registrant->other_certificates as $certificate)
                             <div class="mb-2">
-                                <iframe src="{{ asset($certificate) }}" width="100%" height="800px"></iframe>
+                                <iframe
+                                    src="{{ route('member.file', ['folder' => 'other_certificate', 'filename' => basename($certificate)]) }}"
+                                    width="100%" height="800px"></iframe>
                             </div>
                         @endforeach
                     @else

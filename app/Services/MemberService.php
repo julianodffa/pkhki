@@ -3,18 +3,19 @@
 namespace App\Services;
 
 use App\Models\Member;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
 
 class MemberService
 {
     public function createMember(array $validatedData)
     {
-        $ktp = isset($validatedData['ktp']) ? $this->storeFile($validatedData['ktp'], 'assets/members/ktp') : null;
-        $photo = isset($validatedData['photo']) ? $this->storeFile($validatedData['photo'], 'assets/members/photo') : null;
-        $immigrationCert = isset($validatedData['immigration_law_consultant_certificate']) ? $this->storeFile($validatedData['immigration_law_consultant_certificate'], 'assets/members/ilc_certificate') : null;
+        // Store the files in the storage directory and get the file paths
+        $ktp = isset($validatedData['ktp']) ? $this->storeFile($validatedData['ktp'], 'ktp') : null;
+        $photo = isset($validatedData['photo']) ? $this->storeFile($validatedData['photo'], 'photo') : null;
+        $immigrationCert = isset($validatedData['immigration_law_consultant_certificate']) ? $this->storeFile($validatedData['immigration_law_consultant_certificate'], 'ilc_certificate') : null;
         $otherCertificates = isset($validatedData['other_certificates']) ? array_map(function ($file) {
-            return $this->storeFile($file, 'assets/members/other_certificate');
+            return $this->storeFile($file, 'other_certificate');
         }, $validatedData['other_certificates']) : [];
 
         // Create the member using the validated data
@@ -59,22 +60,20 @@ class MemberService
 
     protected function storeFile($file, $folder)
     {
+        // Generate a unique filename
         $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
-        $path = public_path($folder);
 
-        if (!is_dir($path)) {
-            mkdir($path, 0755, true); // Create the directory if it doesn't exist
-        }
+        // Store the file in the storage folder
+        $path = $file->storeAs("members/$folder", $filename, 'local'); // 'local' points to storage/app
 
-        $file->move($path, $filename);
-
-        return "$folder/$filename";
+        return $path; // Return relative path to the file in storage
     }
+
     protected function deleteFile($filePath)
     {
-        $fullPath = public_path($filePath);
-        if (file_exists($fullPath)) {
-            unlink($fullPath);
+        // Delete the file from storage
+        if (Storage::exists($filePath)) {
+            Storage::delete($filePath);
         }
     }
 }
