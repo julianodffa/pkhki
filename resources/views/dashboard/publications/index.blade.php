@@ -4,7 +4,7 @@
         <div class="col-12 col-md-3 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="font-poppins-bold text-warning">{{ count($publications) }}</h1>
+                    <h1 class="font-poppins-bold text-warning">{{ $countPublications }}</h1>
                     <h5 class="card-title font-poppins-bold">Publications</h5>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="row justify-content-start mt-4">
                 <div class="col-md-6">
-                    <a class="btn btn-blue" href="/dashboard/publications/create">Create</a>
+                    <a class="btn btn-blue mb-3 mb-md-0" href="/dashboard/publications/create">Create</a>
                 </div>
                 <div class="col-md-6">
                     <form action="/dashboard/publications">
@@ -65,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($publications) == 0)
+                        @if ($countPublications == 0)
                             <tr>
                                 <td colspan="5" class="text-center">No Publications</td>
                             </tr>

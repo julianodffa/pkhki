@@ -27,7 +27,8 @@ class MemberController extends Controller
         return view('dashboard.members.registrants', [
             "title" => "Registrants",
             'breadcrumbs' => $breadcrumbs,
-            "registrants" => $registrants
+            "registrants" => $registrants,
+            "countRegistrants" => Member::where('is_accepted_as_member', false)->count()
         ]);
     }
 
@@ -43,6 +44,7 @@ class MemberController extends Controller
             "title" => "Members",
             'breadcrumbs' => $breadcrumbs,
             "members" => $members,
+            "countMembers" => Member::where('is_accepted_as_member', true)->count()
         ]);
     }
 
@@ -66,10 +68,10 @@ class MemberController extends Controller
             'ktp.max' => 'Maximum file size is 2MB.',
             'photo.max' => 'Maximum file size is 2MB.',
             'immigration_law_consultant_certificate.max' => 'Maximum file size is 2MB.',
+            'immigration_law_consultant_certificate.mimes' => 'Certificate file must be a pdf.',
             'other_certificates.array' => 'The certificates field must be an array of files.',
             'other_certificates.*.mimes' => 'Each certificate file must be a pdf.',
             'other_certificates.*.max' => 'The maximum size of each file is 2 MB.',
-            'immigration_law_consultant_certificate.mimes' => 'Each certificate file must be a pdf.',
         ]);
 
         $validatedData['is_member_of_other_legal_association'] = $request->input('is_member_of_other_legal_association', false);

@@ -32,7 +32,7 @@
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>
                             <input type="text" class="form-control rounded-pill @error('name') is-invalid @enderror"
-                                id="nama" name="name" placeholder="Type here" value="{{ old('name') }}">
+                                id="nama" name="name" placeholder="Type here" value="{{ old('name') }}" required>
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -42,7 +42,8 @@
                         <div class="mb-3">
                             <label for="noTelp" class="form-label">Nomor Telepon</label>
                             <input type="number" class="form-control rounded-pill @error('phone') is-invalid @enderror"
-                                id="noTelp" name="phone" placeholder="Type here" value="{{ old('phone') }}">
+                                id="noTelp" name="phone" placeholder="Type here" value="{{ old('phone') }}"
+                                autocomplete="off" required>
                             @error('phone')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -52,7 +53,7 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control rounded-pill @error('email') is-invalid @enderror"
-                                id="email" name="email" placeholder="Type here" value="{{ old('email') }}">
+                                id="email" name="email" placeholder="Type here" value="{{ old('email') }}" required>
                             @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -62,7 +63,8 @@
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat Domisili</label>
                             <input type="text" class="form-control rounded-pill @error('address') is-invalid @enderror"
-                                id="alamat" name="address" placeholder="Type here" value="{{ old('address') }}">
+                                id="alamat" name="address" placeholder="Type here" value="{{ old('address') }}"
+                                autocomplete="off" required>
                             @error('address')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -72,7 +74,7 @@
                         <div class="mb-3">
                             <label for="ktp" class="form-label">Salinan KTP</label>
                             <input class="form-control @error('ktp') is-invalid @enderror" type="file" id="ktp"
-                                name="ktp" value="{{ old('ktp') }}">
+                                name="ktp" value="{{ old('ktp') }}" required>
                             @error('ktp')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -82,7 +84,7 @@
                         <div class="mb-3">
                             <label for="pasFoto" class="form-label">Pas Foto</label>
                             <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo"
-                                id="pasFoto" value="{{ old('photo') }}">
+                                id="pasFoto" value="{{ old('photo') }}" required>
                             @error('photo')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -95,7 +97,8 @@
                     <div class="mb-3">
                         <label for="namaInstansi" class="form-label">Nama Instansi/Firma Hukum/Perusahaan</label>
                         <input type="text" class="form-control rounded-pill @error('institution') is-invalid @enderror"
-                            id="namaInstansi" name="institution" placeholder="Type here" value="{{ old('institution') }}">
+                            id="namaInstansi" name="institution" placeholder="Type here" value="{{ old('institution') }}"
+                            autocomplete="off" required>
                         @error('institution')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -105,7 +108,8 @@
                     <div class="mb-3">
                         <label for="jabatan" class="form-label">Jabatan</label>
                         <input type="text" class="form-control rounded-pill @error('position') is-invalid @enderror"
-                            id="jabatan" name="position" placeholder="Type here" value="{{ old('position') }}">
+                            id="jabatan" name="position" placeholder="Type here" value="{{ old('position') }}"
+                            autocomplete="off" required>
                         @error('position')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -117,7 +121,7 @@
                         <input type="email"
                             class="form-control rounded-pill @error('company_email') is-invalid @enderror"
                             id="CompanyEmail" name="company_email" placeholder="Type here"
-                            value="{{ old('company_email') }}">
+                            value="{{ old('company_email') }}" autocomplete="off" required>
                         @error('company_email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -148,7 +152,7 @@
                         <label for="sertifikatKHKI" class="form-label">Sertifikat Konsultan Hukum Keimigrasian</label>
                         <input class="form-control @error('immigration_law_consultant_certificate') is-invalid @enderror"
                             type="file" id="sertifikatKHKI" name="immigration_law_consultant_certificate"
-                            value="{{ old('immigration_law_consultant_certificate') }}">
+                            value="{{ old('immigration_law_consultant_certificate') }}" required>
                         @error('immigration_law_consultant_certificate')
                             <div class="invalid-feedback">
                                 {{ $message }}

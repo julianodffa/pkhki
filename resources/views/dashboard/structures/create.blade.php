@@ -13,7 +13,7 @@
                         class="form-control @error('name')
                     is-invalid
                 @enderror"
-                        id="name" name="name" value="{{ old('name') }}" required>
+                        id="name" name="name" value="{{ old('name') }}" autocomplete="off" required>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -23,15 +23,13 @@
         </div>
 
         <div class="col-12 col-md-4">
-            <form action="/dashboard/structures" method="post" enctype="multipart/form-data">
-                @csrf
                 <div class="mb-3">
                     <label for="position" class="form-label">Position</label>
                     <input type="text"
                         class="form-control @error('position')
                     is-invalid
                 @enderror"
-                        id="position" name="position" value="{{ old('position') }}" required>
+                        id="position" name="position" value="{{ old('position') }}"  autocomplete="off" required>
                     @error('position')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -47,7 +45,7 @@
                     class="form-control @error('lawfirm')
                     is-invalid
                 @enderror"
-                    id="lawfirm" name="lawfirm" value="{{ old('lawfirm') }}" required>
+                    id="lawfirm" name="lawfirm" value="{{ old('lawfirm') }}"  autocomplete="off" required>
                 @error('lawfirm')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -63,7 +61,7 @@
                     class="form-control @error('email')
                     is-invalid
                 @enderror"
-                    id="email" name="email" value="{{ old('email') }}" required>
+                    id="email" name="email" value="{{ old('email') }}"  autocomplete="off" required>
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -75,7 +73,7 @@
         <div class="col-12 col-md-6">
             <div class="mb-3">
                 <label for="role_id" class="form-label">Role</label>
-                <select class="form-select" name="role_id">
+                <select class="form-select" name="role_id" required>
                     @foreach ($roles as $role)
                         @if (old('role_id') == $role->id)
                             <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
@@ -96,7 +94,7 @@
                 @error('image')
                     is-invalid
                 @enderror"
-                    type="file" id="cover" name="image" onchange="previewCover()">
+                    type="file" id="cover" name="image" onchange="previewCover()" required>
                 @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}

@@ -13,7 +13,7 @@
                         class="form-control @error('name')
                     is-invalid
                 @enderror"
-                        id="name" name="name" value="{{ old('name') }}" placeholder="Category Name" required>
+                        id="name" name="name" value="{{ old('name') }}" placeholder="Category Name" autocomplete="off" required>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}

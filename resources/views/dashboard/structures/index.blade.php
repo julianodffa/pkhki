@@ -4,7 +4,7 @@
         <div class="col-12 col-md-3 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="font-poppins-bold text-warning">{{ count($structures) }}</h1>
+                    <h1 class="font-poppins-bold text-warning">{{ $countStructures }}</h1>
                     <h5 class="card-title font-poppins-bold">Structures</h5>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($structures) == 0)
+                        @if ($countStructures == 0)
                             <tr>
                                 <td colspan="6" class="text-center">No structures</td>
                             </tr>

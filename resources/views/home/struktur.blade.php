@@ -46,7 +46,7 @@
                                         {{-- Hero Section --}}
                                         @if (!empty($structures[$role->id][0]))
                                             <div class="col col-10 col-md-5 col-lg-3 align-self-center p-0 text-center">
-                                                <img src="{{ asset('assets/images/struktur-card.png') }}" alt="Avatar"
+                                                <img src="{{ asset($structures[$role->id][0]->image) }}" alt="{{ $structures[$role->id][0]->name }}"
                                                     class="img-fluid" />
                                                 <div class="title">
                                                     <p class="h-100 p-2 row justify-content-center align-items-center">
@@ -77,7 +77,7 @@
                                         {{-- Additional Members --}}
                                         @foreach ($structures[$role->id]->skip(1) as $structure)
                                             <div class="col col-10 col-md-5 col-lg-3 mx-lg-1 align-self-center p-0 text-center mb-3">
-                                                <img src="{{ asset('assets/images/struktur-card.png') }}" alt="Avatar"
+                                                <img src="{{ asset($structure->image) }}" alt="{{ $structure->name }}"
                                                     class="img-fluid" />
                                                 <div class="title">
                                                     <p class="h-100 p-2 row justify-content-center align-items-center">

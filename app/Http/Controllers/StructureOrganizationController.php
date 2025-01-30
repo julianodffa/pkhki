@@ -23,11 +23,12 @@ class StructureOrganizationController extends Controller
             ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => true],
         ];
 
-        $Structures = StructureOrganization::with(['role'])->paginate(50);
+        $Structures = StructureOrganization::with(['role'])->latest()->paginate(50);
         return response()->view('dashboard.structures.index', [
             "title" => "Structures",
             'breadcrumbs' => $breadcrumbs,
             "structures" => $Structures,
+            "countStructures" => StructureOrganization::count(),
             "roles" => Role::all()
         ]);
     }

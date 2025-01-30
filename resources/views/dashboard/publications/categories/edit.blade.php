@@ -15,7 +15,7 @@
                     is-invalid
                 @enderror"
                         id="name" name="name" value="{{ old('name', $category->name) }}" placeholder="Category Name"
-                        required>
+                        autocomplete="off" required>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}

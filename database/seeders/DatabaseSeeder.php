@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             "name" => "Super Admin",
             "username" => "superadmin",
             "email" => "superadmin@pkhki.com",
-            "password" => Hash::make("pkhki098"),
+            "password" => Hash::make("pkhki098sa"),
             "role" => "superadmin",
         ]);
 
@@ -49,8 +49,8 @@ class DatabaseSeeder extends Seeder
             "slug" => "kegiatan",
         ]);
 
-        // Membuat 20 Publication menggunakan factory
-        // Publication::factory(50)->create()->each(function ($publication) {
+        // Membuat 51 Publication menggunakan factory
+        // Publication::factory(51)->create()->each(function ($publication) {
         //     $categories = Category::inRandomOrder()->take(rand(1, 3))->pluck('id');
         //     $publication->categories()->attach($categories);
         // });
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Registrants
-        // Member::factory(10)->create();
+        // Member::factory(51)->create();
 
     }
 }

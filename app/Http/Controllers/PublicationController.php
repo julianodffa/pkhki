@@ -39,6 +39,7 @@ class PublicationController extends Controller
             "js" => "publications",
             'breadcrumbs' => $breadcrumbs,
             "publications" => $publications,
+            "countPublications" => Publication::count(),
             "categories" => $categories
         ]);
     }
@@ -89,7 +90,7 @@ class PublicationController extends Controller
             'categories.*' => 'exists:categories,id',
         ], [
             'cover.dimensions' => "Image Ratio Must be 16/9, for example 1920x1080 (FHD) or 1280x720 (HD)",
-            'cover.max' => "Max Cover size is 2MB"
+            'cover.max' => "Max Cover size is 1MB"
         ]);
 
         $validated['user_id'] = auth()->id();

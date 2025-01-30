@@ -21,7 +21,7 @@
                 <div class="mb-3">
                     <label for="old-password" class="form-label">Old Password</label>
                     <input type="password" class="form-control @error('old-password') is-invalid @enderror"
-                        id="old-password" name="old-password">
+                        id="old-password" name="old-password" autocomplete="off" required>
                     @error('old-password')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -31,7 +31,7 @@
                 <div class="mb-3">
                     <label for="new-password" class="form-label">New Password</label>
                     <input type="password" class="form-control @error('new-password') is-invalid @enderror"
-                        id="new-password" name="new-password">
+                        id="new-password" name="new-password" autocomplete="off" required>
                     @error('new-password')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -41,7 +41,7 @@
                 <div class="mb-3">
                     <label for="confirm-new-password" class="form-label">Confirm New Password</label>
                     <input type="password" class="form-control @error('confirm-new-password') is-invalid @enderror"
-                        id="confirm-new-password" name="confirm-new-password">
+                        id="confirm-new-password" name="confirm-new-password" autocomplete="off" required>
                     @error('confirm-new-password')
                         <div class="invalid-feedback">
                             {{ $message }}

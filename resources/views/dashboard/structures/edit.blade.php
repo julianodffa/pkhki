@@ -14,7 +14,8 @@
                         class="form-control @error('name')
                     is-invalid
                 @enderror"
-                        id="name" name="name" value="{{ old('name', $structure->name) }}" required>
+                        id="name" name="name" value="{{ old('name', $structure->name) }}" autocomplete="off"
+                        required>
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -32,7 +33,8 @@
                         class="form-control @error('position')
                     is-invalid
                 @enderror"
-                        id="position" name="position" value="{{ old('position', $structure->position) }}" required>
+                        id="position" name="position" value="{{ old('position', $structure->position) }}"
+                        autocomplete="off" required>
                     @error('position')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -48,7 +50,7 @@
                     class="form-control @error('lawfirm')
                     is-invalid
                 @enderror"
-                    id="lawfirm" name="lawfirm" value="{{ old('lawfirm', $structure->lawfirm) }}" required>
+                    id="lawfirm" name="lawfirm" value="{{ old('lawfirm', $structure->lawfirm) }}"  autocomplete="off" required>
                 @error('lawfirm')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -64,7 +66,7 @@
                     class="form-control @error('email')
                     is-invalid
                 @enderror"
-                    id="email" name="email" value="{{ old('email', $structure->email) }}" required>
+                    id="email" name="email" value="{{ old('email', $structure->email) }}"  autocomplete="off" required>
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -76,7 +78,7 @@
         <div class="col-12 col-md-6">
             <div class="mb-3">
                 <label for="role_id" class="form-label">Role</label>
-                <select class="form-select" name="role_id">
+                <select class="form-select" name="role_id" required>
                     @foreach ($roles as $role)
                         @if (old('role_id', $structure->role_id) == $role->id)
                             <option value="{{ $role->id }}" selected>{{ $role->name }}</option>

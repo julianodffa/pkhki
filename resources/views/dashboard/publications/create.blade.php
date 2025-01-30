@@ -13,7 +13,7 @@
                         class="form-control @error('title')
                     is-invalid
                 @enderror"
-                        id="title" name="title" value="{{ old('title') }}" required>
+                        id="title" name="title" value="{{ old('title') }}" autocomplete="off" required>
                     @error('title')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -26,7 +26,7 @@
             <div class="mb-3">
                 <label for="categories" class="form-label">Category</label>
                 <select id="multiple-select-field" class="form-select @error('categories') is-invalid @enderror" multiple
-                    name="categories[]">
+                    name="categories[]" required>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}" @if (in_array($category->id, old('categories', []))) selected @endif>
                             {{ $category->name }}
@@ -54,7 +54,7 @@
                 @error('cover')
                     is-invalid
                 @enderror"
-                type="file" id="cover" name="cover" onchange="previewCover()">
+                type="file" id="cover" name="cover" onchange="previewCover()" required>
             @error('cover')
                 <div class="invalid-feedback">
                     {{ $message }}

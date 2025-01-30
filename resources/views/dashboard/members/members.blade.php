@@ -4,7 +4,7 @@
         <div class="col-12 col-md-3 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="font-poppins-bold text-warning">{{ count($members) }}</h1>
+                    <h1 class="font-poppins-bold text-warning">{{ $countMembers }}</h1>
                     <h5 class="card-title font-poppins-bold">Members</h5>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($members) == 0)
+                        @if ($countMembers == 0)
                             <tr>
                                 <td colspan="10" class="text-center">No one has been accepted as a member yet</td>
                             </tr>

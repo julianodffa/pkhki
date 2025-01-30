@@ -58,7 +58,7 @@
                 <button class="accordion-button rounded-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                     aria-controls="panelsStayOpen-collapseOne">
-                    <b>displayed content </b>
+                    <b>Displayed Content</b>
                 </button>
             </h2>
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">

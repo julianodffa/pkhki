@@ -29,7 +29,7 @@
                         class="form-select @error('categories')
                     is-invalid
                 @enderror"
-                        multiple name="categories[]">
+                        multiple name="categories[]" required>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" @if ($publication->categories->contains($category->id)) selected @endif>
                                 {{ $category->name }}
