@@ -63,7 +63,7 @@
             </h2>
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                 <div class="accordion-body">
-                    <article id="contentHtml" class="my-3 lh-lg font-opensans text-secondary text-start fw-medium">
+                    <article id="contentHtml" class="my-3 lh-lg font-opensans">
                         {!! $contentHtml !!}
                     </article>
                 </div>

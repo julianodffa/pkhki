@@ -11,28 +11,25 @@
     <meta name="description" content="Author: Murzal Pathway">
     <title>{{ $title }}</title>
 
-    <!-- Favicon -->
+    {{-- Favicon --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/icons/sinnar-favicon.png') }}">
     <link rel="shortcut icon" href="{{ asset('assets/icons/sinnar-favicon.png') }}" type="image/x-icon">
 
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    @if (!empty($css))
-        <link rel="stylesheet" href='{{ asset("assets/css/home/$css.css") }}'>
-    @endif
-
-
-    <!-- Bootstrap Icon -->
+    {{-- CSS --}}
+    {{-- Important --}}
+    {{-- Bootstrap --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap/bootstrap.min.css') }}">
+    {{-- Bootstrap Icon --}}
     <link href="{{ asset('assets/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet">
+    {{-- Customize Home Page --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
 
-    <!-- Javascript -->
-    <script src="{{ asset('assets/js/scrollreveal.js') }}"></script>
-    
-    {{-- Jquery --}}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    {{-- Optional --}}
+    @if (!empty($css))
+        @foreach ($css as $c)
+            <link rel="stylesheet" href='{{ $c }}'>
+        @endforeach
+    @endif
 </head>
 
 <body>

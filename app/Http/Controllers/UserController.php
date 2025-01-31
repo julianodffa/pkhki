@@ -7,7 +7,6 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -22,14 +21,18 @@ class UserController extends Controller
     {
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
-            ['label' => 'Users', 'url' => url('/dashboard/users'), 'active' => true],
+            ['label' => 'Users', 'url' => url('/dashboard/users'), 'active' => true]
         ];
 
         $users = $this->userService->getAdminUsers();
         return response()->view('dashboard.users.index', [
             "title" => "Users",
             'breadcrumbs' => $breadcrumbs,
-            "users" => $users
+            "users" => $users,
+            "javascript" => [
+                "/assets/js/sweetalert/sweetalert.js",
+                "/assets/js/sweetalert/sweetalert-trigger.js"
+            ]
         ]);
     }
 
@@ -37,7 +40,7 @@ class UserController extends Controller
     {
         return response()->view('home.login.login', [
             "title" => "Login",
-            "css" => "login"
+            "css" => ["/assets/css/home/login.css"]
         ]);
     }
 
@@ -61,12 +64,12 @@ class UserController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Users', 'url' => url('/dashboard/users'), 'active' => false],
-            ['label' => 'Create', 'url' => '', 'active' => true],
+            ['label' => 'Create', 'url' => '', 'active' => true]
         ];
 
         return view("dashboard.users.registration", [
             "title" => "Users",
-            'breadcrumbs' => $breadcrumbs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -80,7 +83,6 @@ class UserController extends Controller
         ]);
 
         $this->userService->registerUser($validatedData);
-
         return redirect("/dashboard/users")->with("success", "Registration Successful!");
     }
 
@@ -102,12 +104,12 @@ class UserController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Change Password', 'url' => url('/dashboard/users'), 'active' => true],
-            ['label' => $username, '', 'active' => true],
+            ['label' => $username, '', 'active' => true]
         ];
 
         return view("dashboard.users.changePassword", [
             "title" => "Change Password",
-            'breadcrumbs' => $breadcrumbs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -117,7 +119,7 @@ class UserController extends Controller
         $request->validate([
             'old-password' => 'required',
             'new-password' => 'required|min:8',
-            'confirm-new-password' => 'required|same:new-password',
+            'confirm-new-password' => 'required|same:new-password'
         ]);
 
         // Verifikasi apakah pengguna yang dimaksud adalah pengguna yang sedang login

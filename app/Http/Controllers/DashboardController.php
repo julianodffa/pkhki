@@ -17,8 +17,9 @@ class DashboardController extends Controller
             "registrants" => Member::where('is_accepted_as_member', false)->count(),
             "members" => Member::where('is_accepted_as_member', true)->count()
         ];
+        
         return view("dashboard.index", [
-            "title" => "PKHKI",
+            "title" => "Dashboard - PKHKI",
             "count" => $count
         ]);
     }

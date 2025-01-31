@@ -44,11 +44,17 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="cover" class="form-label">Publication Cover</label>
+                <label for="cover" class="form-label">Publication Cover <span class="d-inline-block" tabindex="0"
+                        data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-title="Allowed" data-bs-html="true"
+                        data-bs-content="
+                    Image Ratio Must be <strong>16/9</strong><br>
+                Max Cover size is <strong>1MB</strong>
+                    ">
+                        <i class="bi bi-question-circle"></i></span></label>
                 @if ($publication->cover)
-                    <img src="{{ asset($publication->cover) }}" class="cover-preview img-fluid mb-3 col-sm-5 d-block">
+                    <img src="{{ asset($publication->cover) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
                 @else
-                    <img class="cover-preview img-fluid mb-3 col-sm-5">
+                    <img class="img-preview img-fluid mb-3 col-sm-5">
                 @endif
                 <input
                     class="form-control 
@@ -63,7 +69,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="content" class="form-label">Content</label>
+                <label for="summernote" class="form-label">Content</label>
                 @error('content')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -72,48 +78,4 @@
         </div>
         <button type="submit" class="btn btn-blue">Update</button>
     </form>
-
-    <script>
-        // $(document).ready(function() {
-        //     $('#summernote').summernote();
-        // });
-
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                height: 300, // Ukuran tinggi editor
-                toolbar: [
-                    ['style', ['style']], // Menambahkan opsi Style (heading, dll)
-                    ['font', ['bold', 'underline']], // Menambahkan Bold dan Underline
-                    ['para', ['ul', 'ol',
-                        'paragraph'
-                    ]], // Menambahkan Unordered list, Ordered list, dan Paragraph
-                    ['insert', ['table', 'link', 'picture',
-                        'video'
-                    ]] // Menambahkan Table, Link, Gambar dan Video
-                ],
-            });
-
-            $('#multiple-select-field').select2({
-                theme: "bootstrap-5",
-                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
-                    'style',
-                placeholder: $(this).data('placeholder'),
-                closeOnSelect: false,
-            });
-        });
-
-        function previewCover() {
-            const cover = document.querySelector("#cover");
-            const imgPreview = document.querySelector(".cover-preview");
-
-            imgPreview.style.display = "block";
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(cover.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
-    </script>
 @endsection

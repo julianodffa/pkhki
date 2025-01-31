@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
-use App\Models\User;
 use App\Services\MemberService;
 use Illuminate\Http\Request;
 
@@ -20,7 +19,7 @@ class MemberController extends Controller
     {
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
-            ['label' => 'Registrants', 'url' => url("/dashboard/registrants"), 'active' => true],
+            ['label' => 'Registrants', 'url' => url("/dashboard/registrants"), 'active' => true]
         ];
 
         $registrants = Member::latest()->where('is_accepted_as_member', false)->paginate(50);
@@ -28,7 +27,11 @@ class MemberController extends Controller
             "title" => "Registrants",
             'breadcrumbs' => $breadcrumbs,
             "registrants" => $registrants,
-            "countRegistrants" => Member::where('is_accepted_as_member', false)->count()
+            "countRegistrants" => Member::where('is_accepted_as_member', false)->count(),
+            "javascript" => [
+                "/assets/js/sweetalert/sweetalert.js",
+                "/assets/js/sweetalert/sweetalert-trigger.js"
+            ]
         ]);
     }
 
@@ -36,7 +39,7 @@ class MemberController extends Controller
     {
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
-            ['label' => 'Members', 'url' => url("/dashboard/members"), 'active' => true],
+            ['label' => 'Members', 'url' => url("/dashboard/members"), 'active' => true]
         ];
 
         $members = Member::latest()->with(['user'])->where('is_accepted_as_member', true)->paginate(50);
@@ -44,7 +47,11 @@ class MemberController extends Controller
             "title" => "Members",
             'breadcrumbs' => $breadcrumbs,
             "members" => $members,
-            "countMembers" => Member::where('is_accepted_as_member', true)->count()
+            "countMembers" => Member::where('is_accepted_as_member', true)->count(),
+            "javascript" => [
+                "/assets/js/sweetalert/sweetalert.js",
+                "/assets/js/sweetalert/sweetalert-trigger.js"
+            ]
         ]);
     }
 
@@ -76,7 +83,6 @@ class MemberController extends Controller
 
         $validatedData['is_member_of_other_legal_association'] = $request->input('is_member_of_other_legal_association', false);
 
-        // Buat Registrants
         $this->memberService->createMember($validatedData);
         return redirect("/daftar-anggota")->with('success', 'Terimakasih telah mendaftar!');
     }
@@ -84,20 +90,20 @@ class MemberController extends Controller
     public function acceptAsMember(Member $member)
     {
         $name = $member->name;
-
         $member->user_id = auth()->id();
         $member->is_accepted_as_member = true;
         $member->save();
+
         return redirect("/dashboard/registrants")->with('success', "$name has been accepted as a member!");
     }
 
     public function returnAsRegistrant(Member $member)
     {
         $name = $member->name;
-
         $member->user_id = auth()->id();
         $member->is_accepted_as_member = false;
         $member->save();
+
         return redirect("/dashboard/members")->with('success', "$name has been returned as a registrant!");
     }
 
@@ -112,7 +118,7 @@ class MemberController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => $status[0], 'url' => url("/dashboard/$status[1]"), 'active' => false],
-            ['label' => $member->name, 'url' => '', 'active' => true],
+            ['label' => $member->name, 'url' => '', 'active' => true]
         ];
 
         return view("dashboard.members.show", [
@@ -125,7 +131,6 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         $this->memberService->deleteMember($member);
-
         return redirect('/dashboard/registrants')->with('success', 'Registrant successfully deleted.');
     }
 }

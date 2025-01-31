@@ -45,11 +45,12 @@
                         Association</th>
                     <td class="align-middle">{{ $registrant->is_member_of_other_legal_association ? 'Yes' : 'No' }}</td>
                 </tr>
-                <tr>
-                    <th class="table-light" scope="row" style="width: 1%; white-space: nowrap;">Accepted By</th>
-                    <td class="align-middle"><strong>{{ $registrant->user->name }}</strong></td>
-
-                </tr>
+                @if ($registrant->is_accepted_as_member == true)
+                    <tr>
+                        <th class="table-light" scope="row" style="width: 1%; white-space: nowrap;">Accepted By</th>
+                        <td class="align-middle"><strong>{{ $registrant->user->name }}</strong></td>
+                    </tr>
+                @endif
             </tbody>
         </table>
     </div>
@@ -140,4 +141,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection

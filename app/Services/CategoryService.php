@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Category;
-use Illuminate\Support\Str;
 
 class CategoryService
 {
@@ -17,20 +16,18 @@ class CategoryService
     public function createCategory(string $name): Category
     {
         $slug = $this->publicationService->createSlug($name);
-
         return Category::create([
             'name' => $name,
-            'slug' => $slug,
+            'slug' => $slug
         ]);
     }
 
     public function updateCategory(Category $category, string $newName): bool
     {
         $slug = $this->publicationService->createSlug($newName);
-
         return $category->update([
             'name' => $newName,
-            'slug' => $slug,
+            'slug' => $slug
         ]);
     }
 

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Role;
-use Illuminate\Support\Str;
 
 class RoleService
 {
@@ -17,20 +16,18 @@ class RoleService
     public function createRole(string $name): Role
     {
         $slug = $this->publicationService->createSlug($name);
-
         return Role::create([
             'name' => $name,
-            'slug' => $slug,
+            'slug' => $slug
         ]);
     }
 
     public function updateRole(Role $role, string $newName): bool
     {
         $slug = $this->publicationService->createSlug($newName);
-
         return $role->update([
             'name' => $newName,
-            'slug' => $slug,
+            'slug' => $slug
         ]);
     }
 

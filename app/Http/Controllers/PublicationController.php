@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\PublicationService;
-use App\Models\Author;
 use App\Models\Category;
 use App\Models\Publication;
 use Illuminate\Http\Request;
@@ -23,7 +22,7 @@ class PublicationController extends Controller
 
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
-            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => true],
+            ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => true]
         ];
 
         if (request('s')) {
@@ -35,12 +34,16 @@ class PublicationController extends Controller
         $categories = Category::all();
         return response()->view('dashboard.publications.index', [
             "title" => "Publications",
-            "css" => "publications",
-            "js" => "publications",
             'breadcrumbs' => $breadcrumbs,
             "publications" => $publications,
             "countPublications" => Publication::count(),
-            "categories" => $categories
+            "categories" => $categories,
+            "css" => ['/assets/css/dashboard/publications.css'],
+            "javascript" => [
+                "/assets/js/sweetalert/sweetalert.js",
+                "/assets/js/sweetalert/sweetalert-trigger.js",
+                "/assets/js/dashboard/publications.js"
+            ]
         ]);
     }
 
@@ -49,17 +52,17 @@ class PublicationController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
-            ['label' => $publication->title, 'url' => '', 'active' => true],
+            ['label' => $publication->title, 'url' => '', 'active' => true]
         ];
 
         $contentHtml = file_get_contents($publication->content);
         $publication->load('user', 'categories');
         return response()->view('dashboard.publications.show', [
             "title" => "Publications",
-            "css" => "detailPublication",
             'breadcrumbs' => $breadcrumbs,
             "publication" => $publication,
-            "contentHtml" => $contentHtml
+            "contentHtml" => $contentHtml,
+            "css" => ["/assets/css/both/detailPublication.css"]
         ]);
     }
 
@@ -70,13 +73,25 @@ class PublicationController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
-            ['label' => 'Create', 'url' => '', 'active' => true],
+            ['label' => 'Create', 'url' => '', 'active' => true]
         ];
 
         return response()->view('dashboard.publications.create', [
             "title" => "Publications",
             'breadcrumbs' => $breadcrumbs,
             "categories" => $categories,
+            "css" => [
+                "/assets/css/summernote-bs5.min.css",
+                "/assets/css/select2/select2.min.css",
+                "/assets/css/select2/select2-bootstrap-5-theme.min.css"
+            ],
+            "javascript" => [
+                "/assets/js/summernote-bs5.min.js",
+                "/assets/js/select2/select2.full.min.js",
+                "/assets/js/dashboard/summernote-select2.js",
+                "/assets/js/dashboard/preview-cover.js",
+                "/assets/js/popovers.js"
+            ]
         ]);
     }
 
@@ -87,7 +102,7 @@ class PublicationController extends Controller
             'cover' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:ratio=16/9',
             'content' => 'required',
             'categories' => 'required|array',
-            'categories.*' => 'exists:categories,id',
+            'categories.*' => 'exists:categories,id'
         ], [
             'cover.dimensions' => "Image Ratio Must be 16/9, for example 1920x1080 (FHD) or 1280x720 (HD)",
             'cover.max' => "Max Cover size is 1MB"
@@ -96,7 +111,6 @@ class PublicationController extends Controller
         $validated['user_id'] = auth()->id();
 
         $publication = $this->publicationService->createPublication($validated);
-
         return redirect("/dashboard/publications")->with("success", "New Publication has been added!");
     }
 
@@ -105,7 +119,7 @@ class PublicationController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
-            ['label' => $publication->title, 'url' => '', 'active' => true],
+            ['label' => $publication->title, 'url' => '', 'active' => true]
         ];
 
         $contentHtml = file_get_contents($publication->content);
@@ -115,7 +129,19 @@ class PublicationController extends Controller
             'breadcrumbs' => $breadcrumbs,
             "publication" => $publication,
             "categories" => Category::all(),
-            "contentHtml" => $contentHtml
+            "contentHtml" => $contentHtml,
+            "css" => [
+                "/assets/css/summernote-bs5.min.css",
+                "/assets/css/select2/select2.min.css",
+                "/assets/css/select2/select2-bootstrap-5-theme.min.css"
+            ],
+            "javascript" => [
+                "/assets/js/summernote-bs5.min.js",
+                "/assets/js/select2/select2.full.min.js",
+                "/assets/js/dashboard/summernote-select2.js",
+                "/assets/js/dashboard/preview-cover.js",
+                "/assets/js/popovers.js"
+            ]
         ]);
     }
 
@@ -126,7 +152,7 @@ class PublicationController extends Controller
             'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:1024|dimensions:ratio=16/9',
             'content' => 'required',
             'categories' => 'required|array',
-            'categories.*' => 'exists:categories,id',
+            'categories.*' => 'exists:categories,id'
         ], [
             'cover.dimensions' => "Image Ratio Must be 16/9, for example 1920x1080 (FHD) or 1280x720 (HD)",
             'cover.max' => "Max Cover size is 2MB"
@@ -135,14 +161,12 @@ class PublicationController extends Controller
         $validated['user_id'] = auth()->id();
 
         $this->publicationService->updatePublication($publication, $validated);
-
         return redirect("/dashboard/publications")->with("success", "Publication has been updated!");
     }
 
     public function destroy(Publication $publication)
     {
         $this->publicationService->deletePublication($publication);
-
         return redirect('/dashboard/publications')->with("success", "Publication has been deleted!");
     }
 

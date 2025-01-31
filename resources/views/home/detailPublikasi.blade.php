@@ -21,7 +21,7 @@
                                 @endif
                             </div>
                         </div>
-                        <article id="contentHtml" class="my-3 lh-lg font-opensans text-secondary text-start fw-medium">
+                        <article id="contentHtml" class="my-3 font-opensans">
                             {!! $contentHtml !!}
                         </article>
                     </div>

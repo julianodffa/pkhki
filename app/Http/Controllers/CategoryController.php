@@ -20,23 +20,22 @@ class CategoryController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
-            ['label' => 'Create Category', 'url' => '', 'active' => true],
+            ['label' => 'Create Category', 'url' => '', 'active' => true]
         ];
 
         return response()->view('dashboard.publications.categories.create', [
             "title" => "Publications",
-            'breadcrumbs' => $breadcrumbs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:categories,name',
+            'name' => 'required|max:255|unique:categories,name'
         ]);
 
         $this->categoryService->createCategory($validated['name']);
-
         return redirect("/dashboard/publications")->with("success-category", "New Category has been added!");
     }
 
@@ -45,24 +44,23 @@ class CategoryController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Publications', 'url' => url('/dashboard/publications'), 'active' => false],
-            ['label' => $category->name, 'url' => '', 'active' => true],
+            ['label' => $category->name, 'url' => '', 'active' => true]
         ];
 
         return response()->view('dashboard.publications.categories.edit', [
             "title" => "Publications",
             "category" => $category,
-            'breadcrumbs' => $breadcrumbs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:categories,name,' . $category->id,
+            'name' => 'required|max:255|unique:categories,name,' . $category->id
         ]);
 
         $this->categoryService->updateCategory($category, $validated['name']);
-
         return redirect("/dashboard/publications")->with("success-category", "Category has been updated!");
     }
 
@@ -76,7 +74,6 @@ class CategoryController extends Controller
         }
 
         $this->categoryService->deleteCategory($category);
-
         return redirect('/dashboard/publications')
             ->with('success-category', 'Category has been deleted!');
     }

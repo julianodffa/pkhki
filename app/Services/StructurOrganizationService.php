@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Publication;
 use App\Models\StructureOrganization;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -11,7 +10,7 @@ class StructurOrganizationService
 {
     public function createStructure($data)
     {
-        // Handle file upload and content saving
+        // Handle file upload dan penyimpanan konten
         $imageName = $this->uploadImage($data['image']);
 
         $structureOrganization = StructureOrganization::create([
@@ -36,7 +35,6 @@ class StructurOrganizationService
         }
 
         $structureOrganization->update($validatedData);
-
         return $structureOrganization;
     }
 
@@ -46,7 +44,7 @@ class StructurOrganizationService
         $structureOrganization->delete();
     }
 
-    // Helper functions for file handling
+    // Helper functions untuk handle file
     private function uploadImage($image)
     {
         $imageName = Str::random(16) . '.' . $image->getClientOriginalExtension();

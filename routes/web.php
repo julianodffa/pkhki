@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -9,33 +8,13 @@ use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StructureOrganizationController;
 use App\Http\Controllers\UserController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'role:admin,superadmin']);
-
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'login')->name("login")->middleware("guest");
     Route::post('/login', 'authenticate')->middleware("guest");
 });
-
-Route::post('/memberRegister', [MemberController::class, "store"]);
-
-Route::get('/search-suggestions', [PublicationController::class, 'searchSuggestions'])->name('search.suggestions');
-
 
 // Role Admin or Superadmin
 Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
@@ -123,6 +102,11 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
         Route::delete("/dashboard/users/{user}", "destroy");
     });
 });
+
+Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'role:admin,superadmin']);
+
+Route::post('/memberRegister', [MemberController::class, "store"]);
+Route::get('/search-suggestions', [PublicationController::class, 'searchSuggestions'])->name('search.suggestions');
 
 Route::controller(HomeController::class)->group(function () {
     Route::get("/", "pageHome");

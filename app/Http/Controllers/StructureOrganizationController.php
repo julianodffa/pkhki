@@ -20,7 +20,7 @@ class StructureOrganizationController extends Controller
     {
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
-            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => true],
+            ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => true]
         ];
 
         $Structures = StructureOrganization::with(['role'])->latest()->paginate(50);
@@ -29,7 +29,11 @@ class StructureOrganizationController extends Controller
             'breadcrumbs' => $breadcrumbs,
             "structures" => $Structures,
             "countStructures" => StructureOrganization::count(),
-            "roles" => Role::all()
+            "roles" => Role::all(),
+            "javascript" => [
+                "/assets/js/sweetalert/sweetalert.js",
+                "/assets/js/sweetalert/sweetalert-trigger.js"
+            ]
         ]);
     }
 
@@ -38,7 +42,7 @@ class StructureOrganizationController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
-            ['label' => 'Create', 'url' => '', 'active' => true],
+            ['label' => 'Create', 'url' => '', 'active' => true]
         ];
 
         $roles = Role::all();
@@ -46,6 +50,10 @@ class StructureOrganizationController extends Controller
             "title" => "Structures",
             'breadcrumbs' => $breadcrumbs,
             "roles" => $roles,
+            "javascript" => [
+                "/assets/js/dashboard/preview-cover.js",
+                "/assets/js/popovers.js"
+            ]
         ]);
     }
 
@@ -57,7 +65,7 @@ class StructureOrganizationController extends Controller
             'lawfirm' => 'required|max:255',
             'email' => 'required|email:dns|unique:structure_organizations,email',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
-            'role_id' => 'required',
+            'role_id' => 'required'
         ], [
             'image.dimensions' => "Image dimension must have 300px Width and 450px Height",
             'image.max' => "Max Cover size is 1MB"
@@ -65,7 +73,6 @@ class StructureOrganizationController extends Controller
 
         $structureOrganization = $this->structurOrganizationService->createStructure($validated);
         $name = $validated['name'];
-
         return redirect("/dashboard/structures")->with("success", "$name has been added to structure!");
     }
 
@@ -74,14 +81,14 @@ class StructureOrganizationController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
-            ['label' => $structureOrganization->name, 'url' => '', 'active' => true],
+            ['label' => $structureOrganization->name, 'url' => '', 'active' => true]
         ];
 
         $structureOrganization->load('role');
         return response()->view('dashboard.structures.show', [
             "title" => "Structures",
             'breadcrumbs' => $breadcrumbs,
-            "structure" => $structureOrganization,
+            "structure" => $structureOrganization
         ]);
     }
 
@@ -90,7 +97,7 @@ class StructureOrganizationController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
-            ['label' => $structureOrganization->name, 'url' => '', 'active' => true],
+            ['label' => $structureOrganization->name, 'url' => '', 'active' => true]
         ];
 
         $structureOrganization->with('role')->get();
@@ -99,6 +106,10 @@ class StructureOrganizationController extends Controller
             'breadcrumbs' => $breadcrumbs,
             "structure" => $structureOrganization,
             "roles" => Role::all(),
+            "javascript" => [
+                "/assets/js/dashboard/preview-cover.js",
+                "/assets/js/popovers.js"
+            ]
         ]);
     }
 
@@ -110,14 +121,13 @@ class StructureOrganizationController extends Controller
             'lawfirm' => 'required|max:255',
             'email' => 'required|email:dns|unique:structure_organizations,email,' . $structureOrganization->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
-            'role_id' => 'required',
+            'role_id' => 'required'
         ], [
             'image.dimensions' => "Image dimension must have 300px Width and 450px Height",
             'image.max' => "Max Cover size is 1MB"
         ]);
 
         $this->structurOrganizationService->updateStructure($structureOrganization, $validated);
-
         return redirect("/dashboard/structures")->with("success", "Structures has been updated!");
     }
 
@@ -125,7 +135,6 @@ class StructureOrganizationController extends Controller
     {
         $this->structurOrganizationService->deleteStructure($structureOrganization);
         $name = $structureOrganization['name'];
-
         return redirect('/dashboard/structures')->with("success", "$name has been deleted from structure!");
     }
 }

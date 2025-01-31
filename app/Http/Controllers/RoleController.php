@@ -20,24 +20,23 @@ class RoleController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
-            ['label' => 'Create', 'url' => '', 'active' => true],
+            ['label' => 'Create', 'url' => '', 'active' => true]
         ];
 
         return response()->view('dashboard.structures.roles.create', [
             "title" => "Structures",
-            'breadcrumbs' => $breadcrumbs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:roles,name',
+            'name' => 'required|max:255|unique:roles,name'
         ]);
 
         $this->roleService->createRole($validated['name']);
         $name = $validated["name"];
-
         return redirect("/dashboard/structures")->with("success-role", "$name has been added!");
     }
 
@@ -46,24 +45,23 @@ class RoleController extends Controller
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Structures', 'url' => url('/dashboard/structures'), 'active' => false],
-            ['label' => $role->name, 'url' => '', 'active' => true],
+            ['label' => $role->name, 'url' => '', 'active' => true]
         ];
 
         return response()->view('dashboard.structures.roles.edit', [
             "title" => "structures",
             'breadcrumbs' => $breadcrumbs,
-            "role" => $role,
+            "role" => $role
         ]);
     }
 
     public function update(Request $request, Role $role)
     {
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:roles,name,' . $role->id,
+            'name' => 'required|max:255|unique:roles,name,' . $role->id
         ]);
 
         $this->roleService->updateRole($role, $validated['name']);
-
         return redirect("/dashboard/structures")->with("success-role", "Role has been updated!");
     }
 
@@ -79,7 +77,6 @@ class RoleController extends Controller
         }
 
         $this->roleService->deleteRole($role);
-
         return redirect('/dashboard/structures/')
             ->with('success-role', "$name has been deleted!");
     }

@@ -58,7 +58,8 @@
                                     <div class="col-12 col-md-6 col-lg-6">
                                         <div class="py-3 py-md-0">
                                             <small>
-                                                <i class="bi bi-clock"></i>{{ $publication->created_at->diffForHumans() }}</small>
+                                                <i
+                                                    class="bi bi-clock"></i> {{ $publication->created_at->diffForHumans() }}</small>
                                             <h3 class="card-title mb-2">{{ $publication->title }}</h3>
                                             <p class="card-text">{!! $publication->excerpt !!}</p>
                                             <a href="{{ $publication->slug }}"

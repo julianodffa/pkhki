@@ -3,16 +3,14 @@
 namespace App\Services;
 
 use App\Models\Publication;
-use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class PublicationService
 {
     public function createPublication($data)
     {
-        // Handle file upload and content saving
+        // Pengunggahan file dan penyimpanan konten
         $coverName = $this->uploadCover($data['cover']);
         $contentPath = $this->saveContentAsHtml($data['content']);
         $slug = $this->createSlug($data['title']);
@@ -27,7 +25,6 @@ class PublicationService
         ]);
 
         $publication->categories()->attach($data['categories']);
-
         return $publication;
     }
 
@@ -52,10 +49,8 @@ class PublicationService
         }
 
         $validatedData['excerpt'] = Str::limit(strip_tags($data['content']), 200, '...');
-
         $publication->update($validatedData);
         $publication->categories()->sync($data['categories']);
-
         return $publication;
     }
 
@@ -67,7 +62,7 @@ class PublicationService
         $publication->delete();
     }
 
-    // Helper functions for file handling
+    // Helper functions untuk file handling
     private function uploadCover($cover)
     {
         $coverName = Str::random(16) . '.' . $cover->getClientOriginalExtension();
@@ -99,7 +94,7 @@ class PublicationService
         }
     }
 
-    // Slug Creator
+    // Function untuk membuat Slug
     public function createSlug($title): string
     {
         return strtolower(str_replace(' ', '-', preg_replace("/[^a-zA-Z0-9 ]/", '', str_replace("'", '', $title))));

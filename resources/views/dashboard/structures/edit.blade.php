@@ -50,7 +50,8 @@
                     class="form-control @error('lawfirm')
                     is-invalid
                 @enderror"
-                    id="lawfirm" name="lawfirm" value="{{ old('lawfirm', $structure->lawfirm) }}"  autocomplete="off" required>
+                    id="lawfirm" name="lawfirm" value="{{ old('lawfirm', $structure->lawfirm) }}" autocomplete="off"
+                    required>
                 @error('lawfirm')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -66,7 +67,7 @@
                     class="form-control @error('email')
                     is-invalid
                 @enderror"
-                    id="email" name="email" value="{{ old('email', $structure->email) }}"  autocomplete="off" required>
+                    id="email" name="email" value="{{ old('email', $structure->email) }}" autocomplete="off" required>
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -92,11 +93,21 @@
 
         <div class="col-12 mb-3">
             <div class="mb-3">
-                <label for="cover" class="form-label">Image</label>
+                <label for="cover" class="form-label">Image <span class="d-inline-block" tabindex="0"
+                        data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-title="Allowed" data-bs-html="true"
+                        data-bs-content="
+            <ul class='py-0 my-0'>
+                    <li>Image dimension must have <strong>300px Width</strong> and <strong>450px Height</strong>
+                    </li>
+                    <li>Max Image size is <strong>1MB</strong></li>
+                    </ul>
+                    ">
+                        <i class="bi bi-question-circle"></i>
+                    </span></label>
                 @if ($structure->image)
                     <img src="{{ asset($structure->image) }}" class="cover-preview img-fluid mb-3 col-sm-5 d-block">
                 @else
-                    <img class="cover-preview img-fluid mb-3 col-sm-5">
+                    <img class="img-preview img-fluid mb-3 col-sm-3">
                 @endif
                 <input
                     class="form-control 
@@ -114,20 +125,4 @@
             </form>
         </div>
     </div>
-
-    <script>
-        function previewCover() {
-            const cover = document.querySelector("#cover");
-            const imgPreview = document.querySelector(".cover-preview");
-
-            imgPreview.style.display = "block";
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(cover.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
-    </script>
 @endsection

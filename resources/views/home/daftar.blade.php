@@ -72,7 +72,17 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="ktp" class="form-label">Salinan KTP</label>
+                            <label for="ktp" class="form-label">Salinan KTP
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-trigger="hover focus" data-bs-title="Format File" data-bs-html="true"
+                                    data-bs-content="
+                                    <ul class='py-0 my-0'>
+                                        <li>Format File <small>(.jpg, .png)</small></li>
+                                        <li>Ukuran File Maksimal <strong>2MB</strong></li>
+                                    </ul>">
+                                    <i class="bi bi-question-circle fw-normal"></i>
+                                </span>
+                            </label>
                             <input class="form-control @error('ktp') is-invalid @enderror" type="file" id="ktp"
                                 name="ktp" value="{{ old('ktp') }}" required>
                             @error('ktp')
@@ -82,7 +92,17 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="pasFoto" class="form-label">Pas Foto</label>
+                            <label for="pasFoto" class="form-label">Pas Foto
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-trigger="hover focus" data-bs-title="Format File" data-bs-html="true"
+                                    data-bs-content="
+                                    <ul class='py-0 my-0'>
+                                        <li>Format File <small>(.jpg, .png)</small></li>
+                                        <li>Ukuran File Maksimal <strong>2MB</strong></li>
+                                    </ul>">
+                                    <i class="bi bi-question-circle fw-normal"></i>
+                                </span>
+                            </label>
                             <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo"
                                 id="pasFoto" value="{{ old('photo') }}" required>
                             @error('photo')
@@ -97,8 +117,8 @@
                     <div class="mb-3">
                         <label for="namaInstansi" class="form-label">Nama Instansi/Firma Hukum/Perusahaan</label>
                         <input type="text" class="form-control rounded-pill @error('institution') is-invalid @enderror"
-                            id="namaInstansi" name="institution" placeholder="Type here" value="{{ old('institution') }}"
-                            autocomplete="off" required>
+                            id="namaInstansi" name="institution" placeholder="Type here"
+                            value="{{ old('institution') }}" autocomplete="off" required>
                         @error('institution')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -149,7 +169,17 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="sertifikatKHKI" class="form-label">Sertifikat Konsultan Hukum Keimigrasian</label>
+                        <label for="sertifikatKHKI" class="form-label">Sertifikat Konsultan Hukum Keimigrasian
+                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                data-bs-trigger="hover focus" data-bs-title="Format File" data-bs-html="true"
+                                data-bs-content="
+                                    <ul class='py-0 my-0'>
+                                        <li>Format File <small>(.pdf)</small></li>
+                                        <li>Ukuran File Maksimal <strong>2MB</strong></li>
+                                    </ul>">
+                                <i class="bi bi-question-circle fw-normal"></i>
+                            </span>
+                        </label>
                         <input class="form-control @error('immigration_law_consultant_certificate') is-invalid @enderror"
                             type="file" id="sertifikatKHKI" name="immigration_law_consultant_certificate"
                             value="{{ old('immigration_law_consultant_certificate') }}" required>
@@ -160,7 +190,19 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="sertifikasiLain" class="form-label">Sertifikasi Lain yang Relevan</label>
+                        <label for="sertifikasiLain" class="form-label">Sertifikasi Lain yang Relevan
+                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                data-bs-trigger="hover focus" data-bs-title="Format Seluruh File" data-bs-html="true"
+                                data-bs-content="
+                                    <ul class='py-0 my-0'>
+                                        <li><strong>Anda bisa kosongkan form ini</strong></li>
+                                        <li>Anda bisa mengirim 1 file atau lebih</li>
+                                        <li>Format Untuk Setiap File <small>(.pdf)</small></li>
+                                        <li>Ukuran Setiap File Maksimal <strong>2MB</strong></li>
+                                    </ul>">
+                                <i class="bi bi-question-circle fw-normal"></i>
+                            </span>
+                        </label>
                         <input
                             class="form-control @error('other_certificates') is-invalid @enderror @error('other_certificates.*') is-invalid @enderror"
                             type="file" id="sertifikasiLain" name="other_certificates[]"
@@ -192,5 +234,6 @@
             </div>
         </div>
     </section>
+    <script src="{{ asset('assets/js/popovers.js') }}"></script>
     <!-- End Form Daftar Anggota -->
 @endsection
