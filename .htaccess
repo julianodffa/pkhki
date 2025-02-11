@@ -1,0 +1,21 @@
+# Aktifkan mod_rewrite
+RewriteEngine On
+
+# Pastikan server tahu bahwa Laravel berada di dalam folder public
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
+
+# Cegah akses ke file yang tidak diinginkan
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Blokir akses langsung ke folder selain public
+RewriteCond %{REQUEST_URI} ^/(app|bootstrap|config|database|resources|routes|storage|tests|vendor)/
+RewriteRule ^.*$ - [F,L]

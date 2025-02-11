@@ -33,9 +33,6 @@
     {{-- Important --}}
     {{-- Bootstrap Bundle --}}
     <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
-    {{-- Scroll Reveal --}}
-    <script src="{{ asset('assets/js/scrollreveal/scrollreveal.js') }}"></script>
-    <script src="{{ asset('assets/js/scrollreveal/scrollreveal-trigger.js') }}"></script>
     {{-- Custom JS --}}
     <script src="{{ asset('assets/js/home/app.js') }}"></script>
 

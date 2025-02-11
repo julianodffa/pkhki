@@ -20,7 +20,11 @@ class HomeController extends Controller
         return view("home.home", [
             "title" => "Perhimpunan Konsultan Hukum Keimigrasian",
             "news" => $news,
-            "css" => ["/assets/css/home/home.css"]
+            "css" => ["/assets/css/home/home.css"],
+            "javascript" => [
+                "/assets/js/scrollreveal/scrollreveal.js",
+                "/assets/js/scrollreveal/scrollreveal-trigger.js"
+            ]
         ]);
     }
 
@@ -28,7 +32,11 @@ class HomeController extends Controller
     {
         return view("home.tentang", [
             "title" => "Tentang Kami",
-            "css" => ["/assets/css/home/tentang.css"]
+            "css" => ["/assets/css/home/tentang.css"],
+            "javascript" => [
+                "/assets/js/scrollreveal/scrollreveal.js",
+                "/assets/js/scrollreveal/scrollreveal-trigger.js"
+            ]
         ]);
     }
 
@@ -75,7 +83,7 @@ class HomeController extends Controller
             $publications->where('title', 'like', "%{$search}%");
         }
 
-        $publications = $publications->with(["user", "categories"])->paginate(20);
+        $publications = $publications->with(["user", "categories"])->paginate(11);
         $categories = Category::all();
 
         return view("home.publikasi", [
@@ -84,7 +92,7 @@ class HomeController extends Controller
             "categories" => $categories,
             "css" => ["/assets/css/home/publikasi.css"],
             "javascript" => [
-                "assets/js/jquery/jquery-3.7.1.min.js",
+                "/assets/js/jquery/jquery-3.7.1.min.js",
                 "/assets/js/home/publikasi.js"
             ]
         ]);
@@ -108,7 +116,7 @@ class HomeController extends Controller
 
     public function pageKategori(Category $category)
     {
-        $publications = $category->publications()->with(["user", "categories"])->orderBy('created_at', 'desc')->paginate(20);
+        $publications = $category->publications()->with(["user", "categories"])->orderBy('created_at', 'desc')->paginate(11);
         $categories = Category::all();
         $title = $category->name == "kegiatan" ? "Kegiatan" : $category->name;
 
