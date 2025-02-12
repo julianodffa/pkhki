@@ -109,6 +109,7 @@ class PublicationController extends Controller
         ]);
 
         $validated['user_id'] = auth()->id();
+        $validated['coverWebp'] = $this->publicationService->storeCoverAsWebp($validated['cover']);
 
         $publication = $this->publicationService->createPublication($validated);
         return redirect("/dashboard/publications")->with("success", "New Publication has been added!");
@@ -159,6 +160,10 @@ class PublicationController extends Controller
         ]);
 
         $validated['user_id'] = auth()->id();
+
+        if (isset($validated['cover'])) {
+            $validated['coverWebp'] = $this->publicationService->storeCoverAsWebp($validated['cover']);
+        }
 
         $this->publicationService->updatePublication($publication, $validated);
         return redirect("/dashboard/publications")->with("success", "Publication has been updated!");

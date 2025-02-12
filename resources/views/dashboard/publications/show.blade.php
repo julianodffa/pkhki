@@ -55,13 +55,32 @@
     <div class="accordion" id="accordionPanelsStayOpenExample" class="rounded-0">
         <div class="accordion-item rounded-0">
             <h2 class="accordion-header">
-                <button class="accordion-button rounded-0" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                <button class="accordion-button rounded-0 collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
                     aria-controls="panelsStayOpen-collapseOne">
+                    <b>Cover</b>
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                    <div class="col-12 col-md-6">
+                        <picture class="img-fluid">
+                            <source srcset="{{ asset($publication->cover_webp) }}" type="image/webp">
+                            <img src="{{ asset($publication->cover) }}" class="w-100" alt="Fallback image">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item rounded-0">
+            <h2 class="accordion-header">
+                <button class="accordion-button rounded-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseTwo">
                     <b>Displayed Content</b>
                 </button>
             </h2>
-            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
                 <div class="accordion-body">
                     <article id="contentHtml" class="my-3 lh-lg font-opensans">
                         {!! $contentHtml !!}

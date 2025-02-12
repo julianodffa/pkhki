@@ -43,8 +43,8 @@
         <div class="col-12 col-md-3 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="font-poppins-bold text-warning">{{ $count['registrants'] }}</h1>
-                    <h5 class="card-title font-poppins-bold">Registrants</h5>
+                    <h1 class="font-poppins-bold text-warning">{{ $count['newRegistrants'] }}</h1>
+                    <h5 class="card-title font-poppins-bold"><sup class="text-warning">New</sup> Registrants</h5>
                 </div>
             </div>
         </div>

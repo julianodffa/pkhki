@@ -9,6 +9,14 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="font-poppins-bold text-warning">{{ $countNewRegistrants }}</h1>
+                    <h5 class="card-title font-poppins-bold"><sup class="text-warning">New</sup> Registrants</h5>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-12">
@@ -35,6 +43,7 @@
                             <th scope="col">Phone</th>
                             <th scope="col">Email</th>
                             <th scope="col">Institution</th>
+                            <th scope="col">Register On</th>
                             <th scope="col" colspan="3">Action</th>
                         </tr>
                     </thead>
@@ -45,11 +54,12 @@
                             </tr>
                         @else
                             @foreach ($registrants as $registrant)
-                                <tr>
-                                    <td class="align-middle">{{ $registrant->name }}</td>
+                                <tr @if ($registrant->checked == true) class="table-secondary" @endif>
+                                    <td class="align-middle @if ($registrant->checked == false) fw-bold @endif">{{ $registrant->name }}</td>
                                     <td class="align-middle">{{ $registrant->phone }}</td>
                                     <td class="align-middle">{{ $registrant->email }}</td>
                                     <td class="align-middle">{{ $registrant->institution }}</td>
+                                    <td class="align-middle @if ($registrant->checked == false) fw-bold @endif">{{ $registrant->created_at->isToday() ? $registrant->created_at->format('H:i') : $registrant->created_at->format('d M Y') }}</td>
                                     <td class="align-middle">
                                         <button type="button" class="btn btn-sm btn-success"
                                             onclick='customConfirmation(event, {{ $registrant->id }}, "registrants", "Accept {{ $registrant->name }} as Member?", "Yes", "Membership Admission", "success")'>

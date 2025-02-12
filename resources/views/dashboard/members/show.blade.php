@@ -51,6 +51,10 @@
                         <td class="align-middle"><strong>{{ $registrant->user->name }}</strong></td>
                     </tr>
                 @endif
+                <tr>
+                    <th class="table-light" scope="row" style="width: 1%; white-space: nowrap;">Register On</th>
+                    <td class="align-middle">{{ $registrant->created_at->isToday() ? $registrant->created_at->format('H:i') : $registrant->created_at->format('d M Y') }}</td>
+                </tr>
             </tbody>
         </table>
     </div>

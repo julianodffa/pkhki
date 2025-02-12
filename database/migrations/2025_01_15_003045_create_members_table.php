@@ -29,6 +29,7 @@ class CreateMembersTable extends Migration
             $table->json('other_certificates')->nullable();
             $table->boolean('is_accepted_as_member')->default(false);
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->boolean('checked')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });

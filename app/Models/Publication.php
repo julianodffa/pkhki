@@ -9,7 +9,7 @@ class Publication extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'cover', 'slug', 'excerpt', 'content', 'user_id'];
+    protected $fillable = ['title', 'cover', 'cover_webp', 'slug', 'excerpt', 'content', 'user_id'];
 
     public function categories()
     {

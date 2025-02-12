@@ -18,6 +18,7 @@ class CreatePublicationsTable extends Migration
             $table->unsignedBigInteger('clicks')->default(0);
             $table->string('title');
             $table->string('cover');
+            $table->string('cover_webp');
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->text('content');

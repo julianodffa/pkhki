@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav id="navbar-example2" class="navbar navbar-expand-lg fixed-top bg-white shadow" aria-label="Offcanvas navbar large">
+<nav id="navbar-example2" class="navbar navbar-expand-lg fixed-top bg-white shadow-sm" aria-label="Offcanvas navbar large">
     <div class="container-fluid container-xxl">
         <a class="navbar-brand" href="/">
             <img src="{{ asset('assets/icons/pkhki.png') }}" alt="Logo PKHKI">

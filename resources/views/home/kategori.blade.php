@@ -5,18 +5,16 @@
         @if (count($publications) >= 1)
             <div class="row g-5">
                 <div class="col-lg-9">
-                    <div class="row">
-                        <div class="col-12 border border-bottom-0 p-4">
-                            <h1 class="font-times">{{ $title }}</h1>
-                        </div>
-                    </div>
-                    <div class="row border p-4">
+                    <div class="row p-4 shadow-sm">
+                        <h1 class="font-times fw-bold mb-4 pb-3 border-bottom">{{ $title }}</h1>
                         @foreach ($publications as $publication)
                             <div class="col-12 mb-2 mb-md-4">
                                 <div class="row justify-content-center">
                                     <div class="col-12 col-md-6 col-lg-6">
-                                        <img src="{{ asset($publication->cover) }}" alt="{{ $publication->name }}"
-                                            class="w-100">
+                                        <picture class="img-fluid">
+                                            <source srcset="{{ asset($publication->cover_webp) }}" type="image/webp">
+                                            <img src="{{ asset($publication->cover) }}" class="w-100" alt="Fallback image">
+                                        </picture>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-6">
                                         <div class="py-3 py-md-0">
@@ -38,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 p-4 border">
+                <div class="col-lg-3 p-4 shadow-sm">
                     <div class="position-sticky" style="top: 2rem;">
                         <div>
                             <h4 class="fst-italic font-times">Kunjungi Sosial Media Kami</h4>

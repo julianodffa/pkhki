@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Registrants
-        Member::factory(51)->create();
+        // Member::factory(51)->create();
 
     }
 }

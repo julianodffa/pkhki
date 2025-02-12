@@ -28,6 +28,7 @@ class MemberController extends Controller
             'breadcrumbs' => $breadcrumbs,
             "registrants" => $registrants,
             "countRegistrants" => Member::where('is_accepted_as_member', false)->count(),
+            "countNewRegistrants" => Member::where('checked', false)->count(),
             "javascript" => [
                 "/assets/js/sweetalert/sweetalert.js",
                 "/assets/js/sweetalert/sweetalert-trigger.js"
@@ -109,6 +110,7 @@ class MemberController extends Controller
 
     public function show(Member $member)
     {
+        $member->update(['checked' => true]);
         if ($member->is_accepted_as_member == true) {
             $status = ['Members', 'members'];
         } else {

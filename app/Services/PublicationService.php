@@ -3,21 +3,25 @@
 namespace App\Services;
 
 use App\Models\Publication;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class PublicationService
 {
     public function createPublication($data)
     {
         // Pengunggahan file dan penyimpanan konten
-        $coverName = $this->uploadCover($data['cover']);
+        $coverReal = $this->uploadCover($data['cover']);
+        $coverWebp = $data['coverWebp'];
         $contentPath = $this->saveContentAsHtml($data['content']);
         $slug = $this->createSlug($data['title']);
 
         $publication = Publication::create([
             'title' => $data['title'],
-            'cover' => $coverName,
+            'cover' => $coverReal,
+            'cover_webp' => $coverWebp,
             'content' => $contentPath,
             'slug' => $slug,
             'user_id' => $data['user_id'],
@@ -39,6 +43,7 @@ class PublicationService
         if (isset($data['cover'])) {
             $this->deleteOldCover($publication);
             $validatedData['cover'] = $this->uploadCover($data['cover']);
+            $validatedData['cover_webp'] = $data['coverWebp'];
         }
 
         if ($data['content'] !== file_get_contents(public_path($publication->content))) {
@@ -70,11 +75,24 @@ class PublicationService
         return 'assets/publications/covers/' . $coverName;
     }
 
+    public function storeCoverAsWebp(UploadedFile $file)
+    {
+        $coverName = Str::random(16);
+        $image = Image::make($file)->encode('webp', 90); // Quality 90%
+        $image->save(public_path('assets/publications/covers') . "/$coverName" . ".webp");
+        return 'assets/publications/covers/' . $coverName . ".webp";
+    }
+
     private function deleteOldCover(Publication $publication)
     {
         $coverPath = public_path($publication->cover);
         if (File::exists($coverPath)) {
             File::delete($coverPath);
+        }
+
+        $coverWebp = public_path($publication->cover_webp);
+        if (File::exists($coverWebp)) {
+            File::delete($coverWebp);
         }
     }
 

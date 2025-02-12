@@ -14,10 +14,10 @@ class DashboardController extends Controller
         $count = [
             "publications" => Publication::count(),
             "structures" => StructureOrganization::count(),
-            "registrants" => Member::where('is_accepted_as_member', false)->count(),
+            "newRegistrants" => Member::where('is_accepted_as_member', false)->where('checked', false)->count(),
             "members" => Member::where('is_accepted_as_member', true)->count()
         ];
-        
+
         return view("dashboard.index", [
             "title" => "Dashboard - PKHKI",
             "count" => $count
