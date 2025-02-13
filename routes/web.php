@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 
-Route::controller(UserController::class)->group(function () {
-    Route::get('/login', 'login')->name("login")->middleware("guest");
-    Route::post('/login', 'authenticate')->middleware("guest");
-    Route::get('/lupa-password', 'showForgetPasswordForm')->middleware("guest");
-    Route::post('/lupa-password', 'sendResetLink')->middleware("guest");
-    Route::get('/reset-password/{token}', 'showResetPasswordForm')->middleware("guest");
-    Route::post('/reset-password', 'resetPassword')->middleware("guest");
+Route::controller(UserController::class)->middleware('guest')->group(function () {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'authenticate');
+    Route::get('/lupa-password', 'showForgetPasswordForm');
+    Route::post('/lupa-password', 'sendResetLink');
+    Route::get('/reset-password/{token}', 'showResetPasswordForm');
+    Route::post('/reset-password', 'resetPassword');
 });
 
 // Role Admin or Superadmin

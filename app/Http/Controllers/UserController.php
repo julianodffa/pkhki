@@ -7,11 +7,6 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use App\Models\PasswordReset;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
-
 class UserController extends Controller
 {
     protected $userService;
@@ -149,7 +144,6 @@ class UserController extends Controller
         ]);
     }
 
-    // Kirim email reset password
     public function sendResetLink(Request $request)
     {
         $request->validate(
@@ -159,21 +153,9 @@ class UserController extends Controller
             ]
         );
 
-        $token = Str::random(60);
+        $this->userService->sendResetLink($request->email);
 
-        // Simpan token ke database (hapus yang lama jika ada)
-        PasswordReset::updateOrCreate(
-            ['email' => $request->email],
-            ['token' => $token, 'created_at' => now()]
-        );
-
-        // Kirim email ke user
-        Mail::send('emails.resetPassword', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Reset Password');
-        });
-
-        return redirect('/login')->with('status', 'Email reset password telah dikirim');
+        return redirect('/login')->with('status', 'Email reset password telah dikirim.');
     }
 
     // Tampilkan halaman reset password
@@ -197,26 +179,13 @@ class UserController extends Controller
             'password.min' => "Password paling sedikit mengandung 8 karakter!"
         ]);
 
-        // Cari token di tabel password_resets
-        $resetData = PasswordReset::where('token', $request->token)->first();
+        $result = $this->userService->resetPassword($request->token, $request->password);
 
-        // Periksa apakah token ada dan belum expired (dengan batas waktu 60 menit)
-        if (!$resetData || now()->diffInMinutes($resetData->created_at) > 60) {
-            return back()->withErrors(['error' => 'Token tidak valid atau sudah kedaluwarsa.']);
+        if (isset($result['error'])) {
+            return back()->withErrors(['error' => $result['error']]);
         }
 
-        // Cari user berdasarkan email dari token
-        $user = User::where('email', $resetData->email)->first();
-        if (!$user) {
-            return back()->withErrors(['error' => 'Email tidak ditemukan.']);
-        }
-
-        // Update password user dengan yang baru (dengan hash)
-        $user->update(['password' => Hash::make($request->password)]);
-        // Hapus token dari tabel password_resets setelah berhasil digunakan
-        PasswordReset::where('email', $user->email)->delete();
-
-        return redirect('/login')->with('status', 'Password berhasil direset. Silakan login dengan password baru.');
+        return redirect('/login')->with('status', $result['success']);
     }
 
     public function logout(Request $request)
