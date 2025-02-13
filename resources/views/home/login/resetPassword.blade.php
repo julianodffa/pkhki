@@ -4,34 +4,24 @@
     <div class="container mx-3">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4 bg-white p-5 rounded-5">
-                <h1 class="text-start border-bottom pb-2 mb-4 font-poppins-bold">Login</h1>
-                <form action="/login" method="post">
+                <h1 class="text-start">Reset Password</h1>
+                <form action="/reset-password" method="post">
                     @csrf
-                    @if (session('error'))
-                        <div class="alert alert-danger d-flex align-items-center" role="alert">
-                            <div>
-                                <i class="bi bi-exclamation-triangle-fill"></i> {{ session('error') }}
+                    <input type="hidden" class="form-control rounded-start-pill" name="token"
+                        value="{{ $token }}">
+
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger d-flex align-items-center font-poppins" role="alert">
+                                <div>
+                                    <i class="bi bi-exclamation-triangle-fill"></i> {{ $error }}
+                                </div>
                             </div>
-                        </div>
-                    @elseif (session('status'))
-                        <div class="alert alert-success d-flex align-items-center font-poppins" role="alert">
-                            <div>
-                                <i class="bi bi-check-circle"></i> {{ session('status') }}
-                            </div>
-                        </div>
+                        @endforeach
                     @endif
+
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control rounded-pill @error('email') is-invalid @enderror"
-                            id="email" name="email" value="{{ old('email') }}" required>
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="mb-2">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">Password Baru</label>
                         <div class="input-group">
                             <input type="password"
                                 class="form-control rounded-start-pill @error('password') is-invalid @enderror"
@@ -47,10 +37,20 @@
                             </div>
                         @enderror
                     </div>
+
                     <div class="mb-3">
-                        <a href="/lupa-password" class="text-decoration-none text-dark font-poppins">Lupa Password?</a>
+                        <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                        <input type="password"
+                            class="form-control rounded-pill @error('password_confirmation') is-invalid @enderror"
+                            id="password_confirmation" name="password_confirmation" required>
+                        @error('password_confirmation')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-blue form-control rounded-pill">Login</button>
+
+                    <button type="submit" class="btn btn-blue form-control rounded-pill">Reset Password</button>
                 </form>
             </div>
         </div>

@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Crypt;
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'login')->name("login")->middleware("guest");
     Route::post('/login', 'authenticate')->middleware("guest");
+    Route::get('/lupa-password', 'showForgetPasswordForm')->middleware("guest");
+    Route::post('/lupa-password', 'sendResetLink')->middleware("guest");
+    Route::get('/reset-password/{token}', 'showResetPasswordForm')->middleware("guest");
+    Route::post('/reset-password', 'resetPassword')->middleware("guest");
 });
 
 // Role Admin or Superadmin
@@ -75,8 +79,8 @@ Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
     Route::controller(UserController::class)->group(function () {
         Route::get("/logout", "logout");
         Route::post("/logout", "logout");
-        Route::get("/dashboard/users/{user:username}/change-password", "changePassword");
-        Route::post("/dashboard/users/{user:username}/change-password", "doChangePassword");
+        Route::get("/dashboard/users/{user:email}/change-password", "changePassword");
+        Route::post("/dashboard/users/{user:email}/change-password", "doChangePassword");
     });
 });
 

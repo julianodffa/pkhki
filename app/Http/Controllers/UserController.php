@@ -7,6 +7,10 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PasswordReset;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -40,14 +44,14 @@ class UserController extends Controller
     {
         return response()->view('home.login.login', [
             "title" => "Login",
-            "css" => ["/assets/css/home/login.css"]
+            "css" => ["/assets/css/home/login.css"],
         ]);
     }
 
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            "username" => "required",
+            "email" => "required|email",
             "password" => "required"
         ]);
 
@@ -56,7 +60,7 @@ class UserController extends Controller
             return redirect('/dashboard')->with("success", "success login!");
         }
 
-        return back()->with("error", "Username or Password is Wrong!");
+        return back()->with("error", "Email or Password is Wrong!");
     }
 
     public function register()
@@ -77,8 +81,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             "name" => "required|max:255",
-            "username" => "required|min:5|max:255|unique:users",
-            "email" => "required|email:dns|unique:users",
+            "email" => "required|email|unique:users",
             "password" => "required|min:8|max:255"
         ]);
 
@@ -99,21 +102,22 @@ class UserController extends Controller
         return redirect("/dashboard/users")->with("success", "User has been deleted!");
     }
 
-    public function changePassword($username)
+    public function changePassword($email)
     {
         $breadcrumbs = [
             ['label' => 'Dashboard', 'url' => url('/dashboard'), 'active' => false],
             ['label' => 'Change Password', 'url' => url('/dashboard/users'), 'active' => true],
-            ['label' => $username, '', 'active' => true]
+            ['label' => $email, '', 'active' => true]
         ];
 
         return view("dashboard.users.changePassword", [
             "title" => "Change Password",
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            "javascript" => ['/assets/js/dashboard/change-password.js']
         ]);
     }
 
-    public function doChangePassword(Request $request, $username)
+    public function doChangePassword(Request $request, $email)
     {
         // Validasi input
         $request->validate([
@@ -123,7 +127,7 @@ class UserController extends Controller
         ]);
 
         // Verifikasi apakah pengguna yang dimaksud adalah pengguna yang sedang login
-        if (Auth::user()->username !== $username) {
+        if (Auth::user()->email !== $email) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -135,6 +139,84 @@ class UserController extends Controller
 
         // Redirect dengan pesan sukses
         return back()->with('success', 'Password changed successfully.');
+    }
+
+    public function showForgetPasswordForm()
+    {
+        return response()->view('home.login.forgetPassword', [
+            "title" => "Forget Password",
+            "css" => ["/assets/css/home/login.css"],
+        ]);
+    }
+
+    // Kirim email reset password
+    public function sendResetLink(Request $request)
+    {
+        $request->validate(
+            ['email' => 'required|email|exists:users,email'],
+            [
+                'email.exists' => 'Email yang anda masukkan salah.',
+            ]
+        );
+
+        $token = Str::random(60);
+
+        // Simpan token ke database (hapus yang lama jika ada)
+        PasswordReset::updateOrCreate(
+            ['email' => $request->email],
+            ['token' => $token, 'created_at' => now()]
+        );
+
+        // Kirim email ke user
+        Mail::send('emails.resetPassword', ['token' => $token], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Reset Password');
+        });
+
+        return redirect('/login')->with('status', 'Email reset password telah dikirim');
+    }
+
+    // Tampilkan halaman reset password
+    public function showResetPasswordForm($token)
+    {
+        return response()->view('home.login.resetPassword', [
+            "title" => "Reset Password",
+            "css" => ["/assets/css/home/login.css"],
+            'token' => $token
+        ]);
+    }
+
+    // Reset password
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'password' => 'required|min:8|max:255|confirmed',
+        ], [
+            'password.confirmed' => "Konfirmasi password tidak sama!",
+            'password.min' => "Password paling sedikit mengandung 8 karakter!"
+        ]);
+
+        // Cari token di tabel password_resets
+        $resetData = PasswordReset::where('token', $request->token)->first();
+
+        // Periksa apakah token ada dan belum expired (dengan batas waktu 60 menit)
+        if (!$resetData || now()->diffInMinutes($resetData->created_at) > 60) {
+            return back()->withErrors(['error' => 'Token tidak valid atau sudah kedaluwarsa.']);
+        }
+
+        // Cari user berdasarkan email dari token
+        $user = User::where('email', $resetData->email)->first();
+        if (!$user) {
+            return back()->withErrors(['error' => 'Email tidak ditemukan.']);
+        }
+
+        // Update password user dengan yang baru (dengan hash)
+        $user->update(['password' => Hash::make($request->password)]);
+        // Hapus token dari tabel password_resets setelah berhasil digunakan
+        PasswordReset::where('email', $user->email)->delete();
+
+        return redirect('/login')->with('status', 'Password berhasil direset. Silakan login dengan password baru.');
     }
 
     public function logout(Request $request)

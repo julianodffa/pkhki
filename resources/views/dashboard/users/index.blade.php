@@ -34,7 +34,6 @@
                         <tr>
                             <th scope="col">name</th>
                             <th scope="col">email</th>
-                            <th scope="col">username</th>
                             <th scope="col">role</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -49,7 +48,6 @@
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->username }}</td>
                                     <td>{{ $user->role }}</td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-danger"

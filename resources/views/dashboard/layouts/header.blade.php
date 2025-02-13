@@ -19,7 +19,7 @@
                 {{ Auth::user()->name }}
             </button>
             <ul class="dropdown-menu dropdown-menu-end position-absolute mx-3">
-                <li><a class="dropdown-item" href="/dashboard/users/{{ Auth::user()->username }}/change-password"><i class="bi bi-gear"></i> Change Password</a></li>
+                <li><a class="dropdown-item" href="/dashboard/users/{{ Auth::user()->email }}/change-password"><i class="bi bi-gear"></i> Change Password</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>

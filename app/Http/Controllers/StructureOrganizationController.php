@@ -63,7 +63,7 @@ class StructureOrganizationController extends Controller
             'name' => 'required|max:255',
             'position' => 'required|max:255',
             'lawfirm' => 'required|max:255',
-            'email' => 'required|email:dns|unique:structure_organizations,email',
+            'email' => 'required|email|unique:structure_organizations,email',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
             'role_id' => 'required'
         ], [
@@ -119,7 +119,7 @@ class StructureOrganizationController extends Controller
             'name' => 'required|max:255',
             'position' => 'required|max:255',
             'lawfirm' => 'required|max:255',
-            'email' => 'required|email:dns|unique:structure_organizations,email,' . $structureOrganization->id,
+            'email' => 'required|email|unique:structure_organizations,email,' . $structureOrganization->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
             'role_id' => 'required'
         ], [
