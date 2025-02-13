@@ -28,6 +28,7 @@ class Member extends Model
         'other_certificates',
         'is_accepted_as_member',
         'last_updated_by',
+        'checked'
     ];
 
     // Cast JSON column to an array for easy access
@@ -35,6 +36,7 @@ class Member extends Model
         'other_certificates' => 'array',
         'is_member_of_other_legal_association' => 'boolean',
         'is_accepted_as_member' => 'boolean',
+        'checked' => 'boolean',
     ];
 
     public function user()

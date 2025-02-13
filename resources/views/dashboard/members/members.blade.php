@@ -46,7 +46,7 @@
                             </tr>
                         @else
                             @foreach ($members as $member)
-                                <tr>
+                                <tr @if ($member->checked == true) class="table-secondary" @endif>
                                     <td>{{ $member->name }}</td>
                                     <td>{{ $member->phone }}</td>
                                     <td>{{ $member->email }}</td>

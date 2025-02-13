@@ -5,18 +5,18 @@ namespace App\Services;
 use App\Models\Member;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
 
 class MemberService
 {
     public function createMember(array $validatedData)
     {
         // Simpan file di direktori penyimpanan dan dapatkan path file
-        $ktp = isset($validatedData['ktp']) ? $this->storeFile($validatedData['ktp'], 'ktp') : null;
-        $photo = isset($validatedData['photo']) ? $this->storeFile($validatedData['photo'], 'photo') : null;
-        $immigrationCert = isset($validatedData['immigration_law_consultant_certificate']) ? $this->storeFile($validatedData['immigration_law_consultant_certificate'], 'ilc_certificate') : null;
-        $otherCertificates = isset($validatedData['other_certificates']) ? array_map(function ($file) {
-            return $this->storeFile($file, 'other_certificate');
-        }, $validatedData['other_certificates']) : [];
+        $ktp = $validatedData['ktp'];
+        $photo = $validatedData['photo'];
+        $immigrationCert = $validatedData['immigration_law_consultant_certificate'];
+
+        $otherCertificates = $validatedData['other_certificates'];
 
         // Buat anggota menggunakan data yang telah divalidasi
         Member::create([
@@ -59,12 +59,52 @@ class MemberService
 
     protected function storeFile($file, $folder)
     {
-        // Hasilkan nama file yang unik
         $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
-        // Simpan file di folder penyimpanan
-        $path = $file->storeAs("members/$folder", $filename, 'local'); // 'lokal' menunjuk ke penyimpanan/aplikasi
-        return $path; // kembalikan relative path
+        $path = $file->storeAs("members/$folder", $filename, 'local');
+        return $path;
     }
+
+    public function storeEncryptFile($file, $folder)
+    {
+        $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        $fileContent = file_get_contents($file->getRealPath());
+
+        // Enkripsi isi file
+        $encryptedContent = Crypt::encrypt($fileContent);
+        // Simpan file di storage/app/uploads
+        Storage::put("members/$folder/{$filename}", $encryptedContent);
+        $path = "members/$folder/{$filename}";
+        return $path;
+    }
+
+    public function getFileContent($folder, $filename)
+    {
+        $filePath = "members/$folder/$filename";
+
+        if (!Storage::exists($filePath)) {
+            return response('', 200);
+        }
+
+        $encryptedContent = Storage::get($filePath);
+        $mimeType = mime_content_type(storage_path("app/$filePath"));
+
+        $decryptFolders = ['ktp', 'photo', 'ilc_certificate', 'other_certificate'];
+
+        if (in_array($folder, $decryptFolders)) {
+            $decryptedContent = Crypt::decrypt($encryptedContent);
+
+            if (in_array($folder, ['ilc_certificate', 'other_certificate'])) {
+                return response($decryptedContent)
+                    ->header('Content-Type', 'application/pdf')
+                    ->header('Content-Disposition', 'inline; filename="' . $filename . '"');
+            }
+
+            return response($decryptedContent, 200)->header('Content-Type', $mimeType);
+        }
+
+        return response()->file(Storage::path($filePath));
+    }
+
 
     protected function deleteFile($filePath)
     {

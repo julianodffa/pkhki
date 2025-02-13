@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Services\MemberService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class MemberController extends Controller
 {
@@ -84,6 +86,13 @@ class MemberController extends Controller
 
         $validatedData['is_member_of_other_legal_association'] = $request->input('is_member_of_other_legal_association', false);
 
+        $validatedData['ktp'] = $this->memberService->storeEncryptFile($validatedData['ktp'], 'ktp');
+        $validatedData['photo'] = $this->memberService->storeEncryptFile($validatedData['photo'], 'photo');
+        $validatedData['immigration_law_consultant_certificate'] = $this->memberService->storeEncryptFile($validatedData['immigration_law_consultant_certificate'], 'ilc_certificate');
+        $validatedData['other_certificates'] = isset($validatedData['other_certificates']) ? array_map(function ($file) {
+            return $this->memberService->storeEncryptFile($file, 'other_certificate');
+        }, $validatedData['other_certificates']) : [];
+
         $this->memberService->createMember($validatedData);
         return redirect("/daftar-anggota")->with('success', 'Terimakasih telah mendaftar!');
     }
@@ -128,6 +137,11 @@ class MemberController extends Controller
             'breadcrumbs' => $breadcrumbs,
             "registrant" => $member
         ]);
+    }
+
+    public function getFile($folder, $filename)
+    {
+        return $this->memberService->getFileContent($folder, $filename);
     }
 
     public function destroy(Member $member)

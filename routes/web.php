@@ -10,6 +10,7 @@ use App\Http\Controllers\StructureOrganizationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'login')->name("login")->middleware("guest");
@@ -67,6 +68,7 @@ Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
         Route::put('/dashboard/members/{member}/acceptAsMember', 'acceptAsMember');
         Route::put('/dashboard/members/{member}/returnAsRegistrant', 'returnAsRegistrant');
         Route::get('/dashboard/members/{member}', 'show');
+        Route::get('/member/file/{folder}/{filename}', 'getFile')->name("member.file");;
     });
 
     // Users Routes
@@ -76,20 +78,6 @@ Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
         Route::get("/dashboard/users/{user:username}/change-password", "changePassword");
         Route::post("/dashboard/users/{user:username}/change-password", "doChangePassword");
     });
-
-    Route::get('/member/file/{folder}/{filename}', function ($folder, $filename) {
-        // Menentukan path file berdasarkan folder dan filename
-        $filePath = "members/$folder/$filename";  // Sesuaikan dengan struktur folder yang ada di storage
-
-        // Memeriksa apakah file ada di dalam storage
-        if (Storage::exists($filePath)) {
-            // Mengembalikan file sebagai response
-            return response()->file(Storage::path($filePath));
-        }
-
-        // Jika file tidak ditemukan, tampilkan halaman error 404
-        abort(404);
-    })->name("member.file");
 });
 
 // Role Super Admin
