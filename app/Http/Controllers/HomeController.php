@@ -85,11 +85,13 @@ class HomeController extends Controller
 
         $publications = $publications->with(["user", "categories"])->paginate(11);
         $categories = Category::all();
+        $topPublications = Publication::orderByDesc('clicks')->limit(5)->get();
 
         return view("home.publikasi", [
             "title" => "Publikasi",
             "publications" => $publications,
             "categories" => $categories,
+            "topPublications" => $topPublications,
             "css" => ["/assets/css/home/publikasi.css"],
             "javascript" => [
                 "/assets/js/jquery/jquery-3.7.1.min.js",
@@ -98,33 +100,39 @@ class HomeController extends Controller
         ]);
     }
 
+    public function pageKategori(Category $category)
+    {
+        $publications = $category->publications()->with(["user", "categories"])->orderBy('created_at', 'desc')->paginate(11);
+        $categories = Category::all();
+        $title = $category->name == "kegiatan" ? "Kegiatan" : $category->name;
+        $topPublications = Publication::orderByDesc('clicks')->limit(5)->get();
+
+        return view("home.kategori", [
+            "title" => $title,
+            "publications" => $publications,
+            "categories" => $categories,
+            "topPublications" => $topPublications,
+            "css" => ["/assets/css/home/kategori.css"]
+        ]);
+    }
+
+    // Detail Publikasi
     public function publikasi(Publication $publication)
     {
         $publication->load('user', 'categories');
         $contentHtml = file_get_contents($publication->content);
         $publication->increment('clicks');
         $categories = Category::all();
+        $topPublications = Publication::orderByDesc('clicks')->limit(5)->get();
 
         return view("home.detailPublikasi", [
             "title" => $publication->title,
             "publication" => $publication,
             "contentHtml" => $contentHtml,
             "categories" => $categories,
-            "css" => ["/assets/css/both/detailPublication.css"]
-        ]);
-    }
-
-    public function pageKategori(Category $category)
-    {
-        $publications = $category->publications()->with(["user", "categories"])->orderBy('created_at', 'desc')->paginate(11);
-        $categories = Category::all();
-        $title = $category->name == "kegiatan" ? "Kegiatan" : $category->name;
-
-        return view("home.kategori", [
-            "title" => $title,
-            "publications" => $publications,
-            "categories" => $categories,
-            "css" => ["/assets/css/home/kategori.css"]
+            "topPublications" => $topPublications,
+            "css" => ["/assets/css/both/detailPublication.css"],
+            "javascript" => ["/assets/js/home/detailPublikasi.js"]
         ]);
     }
 }

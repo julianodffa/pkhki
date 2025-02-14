@@ -110,6 +110,8 @@ Route::middleware(['auth', 'role:superadmin'])->group(function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, "index"])->middleware(['auth', 'role:admin,superadmin']);
+Route::get('/traffic-stats', [DashboardController::class, 'trafficStats'])->middleware(['auth', 'role:admin,superadmin']);
+
 
 Route::post('/memberRegister', [MemberController::class, "store"]);
 Route::get('/search-suggestions', [PublicationController::class, 'searchSuggestions'])->name('search.suggestions');
@@ -124,5 +126,5 @@ Route::controller(HomeController::class)->group(function () {
     Route::get("/daftar-anggota", "pageDaftar");
     Route::get("/publikasi", "pagePublikasi");
     Route::get("/kategori/{category:slug}", "pageKategori");
-    Route::get("/{publication:slug}", "publikasi");
+    Route::get("/{publication:slug}", "publikasi")->middleware('track.publication');
 });

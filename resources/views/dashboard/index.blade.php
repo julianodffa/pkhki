@@ -58,5 +58,15 @@
                 </div>
             </div>
         </div>
+        <!-- Fourth Menu -->
+        <div class="col-12 col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title font-poppins-bold mb-4 pb-4 pt-2 text-center border-bottom">Top 10 Most Popular
+                        Publications</h5>
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

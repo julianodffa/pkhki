@@ -23,6 +23,12 @@
                                 <i class="bi bi-exclamation-circle"></i> {{ session('error') }}
                             </div>
                         </div>
+                    @elseif (session('success'))
+                        <div class="alert alert-success d-flex align-items-center font-poppins mt-2" role="alert">
+                            <div>
+                                <i class="bi bi-check-circle"></i> {{ session('success') }}
+                            </div>
+                        </div>
                     @endif
 
                     <div class="mb-3">

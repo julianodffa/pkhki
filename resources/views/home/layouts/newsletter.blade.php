@@ -20,10 +20,10 @@
                         </div>
                     </div>
                 @enderror
-                @if (session('status'))
+                @if (session('success'))
                     <div class="alert alert-success d-flex align-items-center font-poppins mt-2" role="alert">
                         <div>
-                            <i class="bi bi-check-circle"></i> {{ session('status') }}
+                            <i class="bi bi-check-circle"></i> {{ session('success') }}
                         </div>
                     </div>
                 @elseif (session('error'))

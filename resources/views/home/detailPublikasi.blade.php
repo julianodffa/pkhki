@@ -3,21 +3,25 @@
 @section('contain')
     <div id="section-1" class="container py-5">
         <div class="row g-5">
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <div class="row">
                     <div class="col-12 border p-4">
-                        <h1 class="font-times"><b>{{ $publication->title }}</b></h1>
-                        <div class="row py-3">
+                        @foreach ($publication->categories as $category)
+                            <a href="/kategori/{{ $category->slug }}"><button
+                                    class="btn btn-sm btn-blue">{{ $category->name }}</button></a>
+                        @endforeach
+                        <h1 class="font-times mb-4 mt-3 pb-2 border-bottom"><b>{{ $publication->title }}</b></h1>
+                        <div class="row">
                             <div class="col-lg-6 text-start">
-                                <span><i class="bi bi-person"></i> {{ $publication->user->name }} <i
-                                        class="bi bi-calendar ms-2"></i>
+                                <span><i class="bi bi-person-circle"></i> {{ $publication->user->name }} <i
+                                        class="bi bi-clock ms-2"></i>
                                     {{ $publication->created_at->diffForHumans() }}</span>
                             </div>
                             <div class="col-lg-6 text-lg-end">
-                                @if ($publication->clicks > 1000)
-                                    <span class="text-danger"><i class="bi bi-eye"></i> {{ $publication->clicks }}</span>
+                                @if ($publication->clicks > 100)
+                                    <span class="text-danger"><i class="bi bi-fire"></i> {{ $publication->clicks }}</span>
                                 @else
-                                    <span><i class="bi bi-eye"></i> {{ $publication->clicks }}</span>
+                                    <span><i class="bi bi-eye-fill"></i> {{ $publication->clicks }}</span>
                                 @endif
                             </div>
                         </div>
@@ -27,28 +31,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3 p-4 border">
-                <div class="position-sticky" style="top: 2rem;">
-                    <div>
-                        <h4 class="fst-italic font-times">Kunjungi Sosial Media Kami</h4>
-                        <ol class="list-unstyled">
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Linked In</a></li>
-                            <li><a href="#">Youtube</a></li>
-                            <li><a href="#">Instagram</a></li>
-                        </ol>
-                    </div>
-                    <div class="p-4">
-                        <h4 class="fst-italic">Lainnya</h4>
-                        <ol class="list-unstyled mb-0">
-                            @foreach ($categories as $category)
-                                <li><a href="/kategori/{{ $category->slug }}">{{ $category->name }}</a></li>
-                            @endforeach
-                        </ol>
-                    </div>
-                </div>
+            <div class="col-lg-4">
+                @include('home.layouts.sidebarPublikasi')
             </div>
         </div>
     </div>
-@endsection
+    @endsection
