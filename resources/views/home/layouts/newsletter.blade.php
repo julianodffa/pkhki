@@ -7,11 +7,26 @@
                 <p class="text-dark-blue font-times fw-bold fs-1">Subscribe PKHKI’s Latest Update</p>
             </div>
             <div class="col-12 col-lg-8">
-                <form class="subscribe-form" action="/subscribe" method="POST">
+                <form class="subscribe-form" action="/newsletter/subscribe" method="POST">
                     @csrf
-                    <input type="email" placeholder="Enter your email address" name="email" autocomplete="off" required>
+                    <input type="email" placeholder="Enter your email address" name="email" autocomplete="off"
+                        value="{{ old('email') }}" required>
                     <button type="submit">Subscribe</button>
                 </form>
+                @error('email')
+                    <div class="alert alert-danger d-flex align-items-center font-poppins mt-2" role="alert">
+                        <div>
+                            <i class="bi bi-exclamation-triangle-fill"></i> {{ $message }}
+                        </div>
+                    </div>
+                @enderror
+                @if (session('status'))
+                    <div class="alert alert-success d-flex align-items-center font-poppins mt-2" role="alert">
+                        <div>
+                            <i class="bi bi-check-circle"></i> {{ session('status') }}
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

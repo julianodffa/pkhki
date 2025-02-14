@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Member;
+use App\Models\Newsletter;
 use App\Models\Publication;
 use App\Models\Role;
 use App\Models\StructureOrganization;
@@ -36,12 +37,12 @@ class DatabaseSeeder extends Seeder
             "role" => "admin",
         ]);
 
-        User::create([
-            "name" => "Juliano Daffa Adytia",
-            "email" => "julianodaffaaa@gmail.com",
-            "password" => Hash::make("Juliano332"),
-            "role" => "admin",
-        ]);
+        // User::create([
+        //     "name" => "Juliano Daffa Adytia",
+        //     "email" => "julianodaffaadytia@gmail.com",
+        //     "password" => Hash::make("Juliano332"),
+        //     "role" => "admin",
+        // ]);
 
         // Publications
         Category::create([
@@ -76,40 +77,43 @@ class DatabaseSeeder extends Seeder
             "slug" => "dewan-standar",
         ]);
 
-        StructureOrganization::create([
-            'name' => 'Jufrian Murzal',
-            'position' => 'Ketua Umum',
-            'lawfirm' => 'Murzal and Partners',
-            'email' => 'jufrianmurzal@pkhki.com',
-            'role_id' => 1
-        ]);
+        // StructureOrganization::create([
+        //     'name' => 'Jufrian Murzal',
+        //     'position' => 'Ketua Umum',
+        //     'lawfirm' => 'Murzal and Partners',
+        //     'email' => 'jufrianmurzal@pkhki.com',
+        //     'role_id' => 1
+        // ]);
 
-        StructureOrganization::create([
-            'name' => 'James Junior',
-            'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
-            'lawfirm' => 'Murzal and Partners',
-            'email' => 'jamesjunior@pkhki.com',
-            'role_id' => 1
-        ]);
+        // StructureOrganization::create([
+        //     'name' => 'James Junior',
+        //     'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
+        //     'lawfirm' => 'Murzal and Partners',
+        //     'email' => 'jamesjunior@pkhki.com',
+        //     'role_id' => 1
+        // ]);
 
-        StructureOrganization::create([
-            'name' => 'Yanma Aditya Pratama',
-            'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
-            'lawfirm' => 'Murzal and Partners',
-            'email' => 'yanmap@pkhki.com',
-            'role_id' => 1
-        ]);
+        // StructureOrganization::create([
+        //     'name' => 'Yanma Aditya Pratama',
+        //     'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
+        //     'lawfirm' => 'Murzal and Partners',
+        //     'email' => 'yanmap@pkhki.com',
+        //     'role_id' => 1
+        // ]);
 
-        StructureOrganization::create([
-            'name' => 'Salsabila',
-            'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
-            'lawfirm' => 'Murzal and Partners',
-            'email' => 'salsabila@pkhki.com',
-            'role_id' => 1
-        ]);
+        // StructureOrganization::create([
+        //     'name' => 'Salsabila',
+        //     'position' => 'Wakil Ketua Umum Bidang Pendidikan dan Sertifikasi',
+        //     'lawfirm' => 'Murzal and Partners',
+        //     'email' => 'salsabila@pkhki.com',
+        //     'role_id' => 1
+        // ]);
 
         // Registrants
         // Member::factory(51)->create();
+
+        // Newsletter
+        // Newsletter::factory(51)->create();
 
     }
 }

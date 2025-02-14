@@ -47,7 +47,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Jika ingin memudahkan pengecekan role, bisa membuat method seperti ini
     public function isAdmin()
     {
         return $this->role === self::ROLE_ADMIN;

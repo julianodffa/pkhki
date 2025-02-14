@@ -19,6 +19,7 @@ class PublicationFactory extends Factory
     {
         return [
             'cover' => 'assets/testing/publications/covers/Untitled.png',
+            'cover_webp' => 'assets/testing/publications/covers/Untitled.webp',
             'title' => $this->faker->sentence,
             'slug' => $this->faker->slug,
             'excerpt' => $this->faker->text,

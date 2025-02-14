@@ -25,6 +25,8 @@ class MemberFactory extends Factory
             'company_email' => $this->faker->companyEmail(),
             'is_member_of_other_legal_association' => false,
             'is_accepted_as_member' => false,
+            // 'is_accepted_as_member' => true,
+            // 'user_id' => 2,
         ];
     }
 }

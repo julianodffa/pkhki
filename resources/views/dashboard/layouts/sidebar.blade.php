@@ -63,12 +63,31 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Members' ? 'active' : '' }}" href="/dashboard/members">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Members' ? 'active' : '' }}"
+                        href="/dashboard/members">
                         <i class="bi bi-person-badge"></i>
                         Members
                     </a>
                 </li>
             </ul>
+
+            <h6
+                class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+                <span>Newsletter</span>
+                <a class="link-secondary" href="#" aria-label="Add a new report">
+                </a>
+            </h6>
+
+            <ul class="nav flex-column mb-auto">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ $title == 'Newsletter Subscribers' ? 'active' : '' }}"
+                        href="/dashboard/newsletter">
+                        <i class="bi bi-newspaper"></i>
+                        Subscribers
+                    </a>
+                </li>
+            </ul>
+
             </h6>
             @if (Auth::user()->role == 'superadmin')
                 <h6

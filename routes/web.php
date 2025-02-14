@@ -4,10 +4,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StructureOrganizationController;
 use App\Http\Controllers\UserController;
+use App\Models\Newsletter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
@@ -19,6 +21,12 @@ Route::controller(UserController::class)->middleware('guest')->group(function ()
     Route::post('/lupa-password', 'sendResetLink');
     Route::get('/reset-password/{token}', 'showResetPasswordForm');
     Route::post('/reset-password', 'resetPassword');
+});
+
+Route::controller(NewsletterController::class)->middleware('guest')->group(function () {
+    Route::post('/newsletter/subscribe', 'subscribe');
+    Route::get('/newsletter/verify/{email}', 'verifyForm');
+    Route::post('/newsletter/verify', 'verify');
 });
 
 // Role Admin or Superadmin
@@ -81,6 +89,12 @@ Route::middleware(['auth', 'role:admin,superadmin'])->group(function () {
         Route::post("/logout", "logout");
         Route::get("/dashboard/users/{user:email}/change-password", "changePassword");
         Route::post("/dashboard/users/{user:email}/change-password", "doChangePassword");
+    });
+
+    // Newsletter Routes
+    Route::controller(NewsletterController::class)->group(function () {
+        Route::get("/dashboard/newsletter", "index");
+        Route::delete("/dashboard/newsletter/{newsletter}", "destroy");
     });
 });
 
