@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use App\Models\EmailLog;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\PasswordReset;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 
 class UserService
@@ -49,6 +52,44 @@ class UserService
     public function sendResetLink($email)
     {
         $token = Str::random(60);
+
+        // -- Start Rate Limiter -- 
+        $today = Carbon::today();
+        $key = 'forgot-password:' . $email;
+
+        // Cek Rate Limiter (1x per 5 menit per email)
+        if (RateLimiter::tooManyAttempts($key, 1)) {
+            return redirect('/login')->with('error', 'Terlalu banyak permintaan reset password, coba lagi dalam 5 menit.');
+        }
+
+        // Cek Global Limit (Maksimal 490 email per hari)
+        $totalEmailsToday = EmailLog::whereDate('sent_at', $today)
+                                    ->where('type', 'password_reset')
+                                    ->count();
+        if ($totalEmailsToday >= 490) {
+            return redirect('/login')->with('error', 'Batas pengiriman reset password hari ini telah tercapai. Coba lagi besok.');
+        }
+
+        // Cek Limit Per User (Maksimal 2 kali per hari)
+        $userEmailCount = EmailLog::where('email', $email)
+                                  ->where('type', 'password_reset')
+                                  ->whereDate('sent_at', $today)
+                                  ->count();
+        if ($userEmailCount >= 2) {
+            return redirect('/login')->with('error', 'Anda hanya bisa mengirim permintaan reset password 2 kali per hari.');
+        }
+
+        // Simpan ke Riwayat Pengiriman Email
+        EmailLog::create([
+            'email' => $email,
+            'type' => 'password_reset',
+            'sent_at' => now(),
+        ]);
+
+        // Hit Rate Limiter (Berlaku 5 menit)
+        RateLimiter::hit($key, 300); // 300 detik = 5 menit
+
+        // -- End Rate Limiter -- 
 
         // Simpan token ke database (hapus yang lama jika ada)
         PasswordReset::updateOrCreate(

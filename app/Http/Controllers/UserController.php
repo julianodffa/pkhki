@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\UserService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -183,7 +184,7 @@ class UserController extends Controller
         $result = $this->userService->resetPassword($request->token, $request->password);
 
         if (isset($result['error'])) {
-            return ['error' => 'Token tidak valid atau sudah kedaluwarsa.'];
+            return redirect('/login')->with('error', $result['error']);
         }
 
         return redirect('/login')->with('status', $result['success']);

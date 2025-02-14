@@ -10,14 +10,18 @@
                     <input type="hidden" class="form-control rounded-start-pill" name="token"
                         value="{{ $token }}">
 
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger d-flex align-items-center font-poppins" role="alert">
-                                <div>
-                                    <i class="bi bi-exclamation-triangle-fill"></i> {{ $error }}
-                                </div>
+                    @if (session('error'))
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <div>
+                                <i class="bi bi-exclamation-triangle-fill"></i> {{ session('error') }}
                             </div>
-                        @endforeach
+                        </div>
+                    @elseif (session('status'))
+                        <div class="alert alert-success d-flex align-items-center font-poppins" role="alert">
+                            <div>
+                                <i class="bi bi-check-circle"></i> {{ session('status') }}
+                            </div>
+                        </div>
                     @endif
 
                     <div class="mb-3">
