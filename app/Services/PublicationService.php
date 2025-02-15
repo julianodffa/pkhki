@@ -78,7 +78,10 @@ class PublicationService
     public function storeCoverAsWebp(UploadedFile $file)
     {
         $coverName = Str::random(16);
-        $image = Image::make($file)->encode('jpg', 100); // Quality 100%
+        $image = Image::make($file)->resize(1000, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })
+        ->encode("jpg", 90);; // Quality 100%
         $image->save(public_path('assets/publications/covers') . "/$coverName" . ".jpg");
         return 'assets/publications/covers/' . $coverName . ".jpg";
     }
