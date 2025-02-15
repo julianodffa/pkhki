@@ -60,7 +60,7 @@
                     </p>
                 </div>
                 <div class="col-12 col-lg-5 order-first wrapper d-none d-lg-block p-0 scroll-left">
-                    <img src="{{ asset('assets/images/visi.png') }}" alt="Sejarah Image" class="img-fluid">
+                    <img src="{{ asset('assets/images/visi.jpg') }}" alt="Sejarah Image" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
                     </ol>
                 </div>
                 <div class="col-12 col-lg-5 wrapper d-none d-lg-block p-0 scroll-right">
-                    <img src="{{ asset('assets/images/misi.png') }}" alt="Sejarah Image" class="img-fluid">
+                    <img src="{{ asset('assets/images/misi.jpg') }}" alt="Sejarah Image" class="img-fluid">
                 </div>
             </div>
         </div>

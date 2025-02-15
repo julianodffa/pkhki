@@ -97,7 +97,7 @@
             <h1 class="text-blue text-start mt-3 mt-lg-5 mb-3 mb-lg-0 pb-lg-5 font-times text-shadow fw-bold">KEGIATAN</h1>
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-12 col-lg-11">
-                    <img src="{{ asset('assets/images/kegiatan.png') }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('assets/images/kegiatan.jpg') }}" class="card-img-top" alt="...">
                 </div>
                 <div class="col-12 col-lg-1 text-center mt-3 scroll-right">
                     <a href="/kategori/kegiatan" class="fs-1 text-blue">
@@ -114,7 +114,7 @@
         <div class="container-fluid">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="p-0 col-6 col-lg-8">
-                    <img src="{{ asset('assets/images/publikasi.png') }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('assets/images/publikasi.jpg') }}" class="card-img-top" alt="...">
                 </div>
                 <div class="p-0 col-6 col-lg-4 text-center">
                     <h1 class="text-white mt-3 mt-lg-5 mb-lg-0 pb-md-3 pb-lg-5 font-times text-shadow fw-bold">PUBLIKASI
