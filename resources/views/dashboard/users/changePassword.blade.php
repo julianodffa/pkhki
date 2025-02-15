@@ -27,12 +27,12 @@
                         <button type="button" class="btn btn-outline-secondary toggle-password" data-target="old-password">
                             <i class="bi bi-eye"></i>
                         </button>
+                        @error('old-password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    @error('old-password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="new-password" class="form-label">New Password</label>
@@ -42,12 +42,12 @@
                         <button type="button" class="btn btn-outline-secondary toggle-password" data-target="new-password">
                             <i class="bi bi-eye"></i>
                         </button>
+                        @error('new-password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    @error('new-password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
                 </div>
                 <div class="mb-3">
                     <label for="confirm-new-password" class="form-label">Confirm New Password</label>
@@ -58,12 +58,12 @@
                             data-target="confirm-new-password">
                             <i class="bi bi-eye"></i>
                         </button>
+                        @error('confirm-new-password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                    @error('confirm-new-password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
                 </div>
                 <button type="submit" class="btn btn-blue">Change Password</button>
             </form>

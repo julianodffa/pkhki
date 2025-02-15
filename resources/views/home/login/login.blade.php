@@ -22,7 +22,7 @@
                     @endif
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control rounded-pill @error('email') is-invalid @enderror"
+                        <input type="email" class="form-control rounded-pill @error('email') is-invalid @enderror"
                             id="email" name="email" value="{{ old('email') }}" required>
                         @error('email')
                             <div class="invalid-feedback">

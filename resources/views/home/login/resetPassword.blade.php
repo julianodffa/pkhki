@@ -34,12 +34,12 @@
                                 id="togglePassword">
                                 <i class="bi bi-eye"></i>
                             </button>
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
 
                     <div class="mb-3">

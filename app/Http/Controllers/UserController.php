@@ -121,6 +121,8 @@ class UserController extends Controller
             'old-password' => 'required',
             'new-password' => 'required|min:8',
             'confirm-new-password' => 'required|same:new-password'
+        ],[
+            'confirm-new-password.same' => "New Password must match with Password Confirmation."
         ]);
 
         // Verifikasi apakah pengguna yang dimaksud adalah pengguna yang sedang login
