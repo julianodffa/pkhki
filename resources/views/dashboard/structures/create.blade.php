@@ -73,7 +73,9 @@
         <div class="col-12 col-md-6">
             <div class="mb-3">
                 <label for="role_id" class="form-label">Role</label>
-                <select class="form-select" name="role_id" required>
+                <select class="form-select @error('role_id')
+                    is-invalid
+                @enderror" name="role_id" required>
                     @foreach ($roles as $role)
                         @if (old('role_id') == $role->id)
                             <option value="{{ $role->id }}" selected>{{ $role->name }}</option>

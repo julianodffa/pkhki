@@ -65,7 +65,7 @@ class StructureOrganizationController extends Controller
             'lawfirm' => 'required|max:255',
             'email' => 'required|email|unique:structure_organizations,email',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
-            'role_id' => 'required'
+            'role_id' => 'required|exists:roles,id'
         ], [
             'image.dimensions' => "Image dimension must have 300px Width and 450px Height",
             'image.max' => "Max Cover size is 1MB"
@@ -121,7 +121,7 @@ class StructureOrganizationController extends Controller
             'lawfirm' => 'required|max:255',
             'email' => 'required|email|unique:structure_organizations,email,' . $structureOrganization->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024|dimensions:width=300,height=450',
-            'role_id' => 'required'
+            'role_id' => 'required|exists:roles,id'
         ], [
             'image.dimensions' => "Image dimension must have 300px Width and 450px Height",
             'image.max' => "Max Cover size is 1MB"
