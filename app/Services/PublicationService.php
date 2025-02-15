@@ -78,9 +78,9 @@ class PublicationService
     public function storeCoverAsWebp(UploadedFile $file)
     {
         $coverName = Str::random(16);
-        $image = Image::make($file)->encode('webp', 90); // Quality 90%
-        $image->save(public_path('assets/publications/covers') . "/$coverName" . ".webp");
-        return 'assets/publications/covers/' . $coverName . ".webp";
+        $image = Image::make($file)->encode('jpg', 100); // Quality 100%
+        $image->save(public_path('assets/publications/covers') . "/$coverName" . ".jpg");
+        return 'assets/publications/covers/' . $coverName . ".jpg";
     }
 
     private function deleteOldCover(Publication $publication)

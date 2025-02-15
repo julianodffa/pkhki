@@ -38,7 +38,7 @@
                     @foreach ($news->take(3) as $n)
                         <div class="col-12 col-lg-4 mb-3 mb-lg-5">
                             <div class="card text-start border-0 text-blue">
-                                <img src="{{ asset($n->cover) }}" class="card-img-top" alt="{{ $n->slug }}">
+                                <img src="{{ asset($n->cover_webp) }}" class="card-img-top" alt="{{ $n->slug }}">
                                 <div class="card-body mx-3">
                                     <p class="card-text">{!! $n->excerpt !!}</p>
                                     <a href="/{{ $n->slug }}" class="scroll-right">Read More <i

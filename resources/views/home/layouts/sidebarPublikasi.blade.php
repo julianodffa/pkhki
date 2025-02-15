@@ -30,7 +30,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-4 col-lg-6">
                                     <picture class="img-fluid">
-                                        <source srcset="{{ asset($topPublication->cover_webp) }}" type="image/webp">
+                                        <source srcset="{{ asset($topPublication->cover_webp) }}" type="image/jpg">
                                         <img src="{{ asset($topPublication->cover) }}" class="w-100" alt="Fallback image">
                                     </picture>
                                 </div>
