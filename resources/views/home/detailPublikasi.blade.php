@@ -2,7 +2,7 @@
 
 @section('contain')
     <div id="section-1" class="container py-5">
-        <div class="row g-5">
+        <div class="row g-0 gy-5 g-sm-5">
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col-12 border p-4">

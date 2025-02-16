@@ -29,7 +29,7 @@
 
                 <div class="col-lg-12 px-0 position-relative z-index-2">
                     <a href="/{{ $publications[0]->slug }}" class="text-decoration-none">
-                        <h1 class="display-4 fst-italic font-times text-white hover-blue">{{ $publications[0]->title }}</h1>
+                        <h1 class="display-4 fst-italic font-times text-white">{{ $publications[0]->title }}</h1>
                     </a>
                     <p class="lead my-3 text-white font-poppins"><i class="bi bi-clock"></i>
                         {{ $publications[0]->created_at->diffForHumans() }}</p>
@@ -48,7 +48,7 @@
         @endif
 
         @if (count($publications) > 1)
-            <div class="row g-5">
+            <div class="row g-0 gy-5 g-sm-5">
                 <div class="col-lg-8">
                     <div class="row p-4 border">
                         @foreach ($publications->skip(1) as $publication)

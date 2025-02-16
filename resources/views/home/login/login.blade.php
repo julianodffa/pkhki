@@ -4,7 +4,7 @@
     <div class="container mx-3">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4 bg-white p-5 rounded-5">
-                <h1 class="text-start border-bottom pb-2 mb-4 font-poppins-bold">Login</h1>
+                <h1 class="border-bottom pb-2 mb-4 font-poppins-bold">Login</h1>
                 <form action="/login" method="post">
                     @csrf
                     @if (session('error'))
@@ -47,10 +47,17 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <a href="/lupa-password" class="text-decoration-none text-dark font-poppins">Lupa Password?</a>
+                    <div class="mb-2">
+                        <a href="/lupa-password" class="text-decoration-none text-dark font-poppins hover-blue">Lupa Password?</a>
                     </div>
-                    <button type="submit" class="btn btn-blue form-control rounded-pill">Login</button>
+                    <div class="mb-3 border-bottom pb-2 mb-2">
+                        <button type="submit" class="btn btn-blue form-control rounded-pill">Login</button>
+                    </div>
+                    <div class="text-end">
+                        <a href="/" class="text-decoration-none text-dark font-poppins hover-blue">Kembali ke Halaman
+                            Utama</a>
+                    </div>
+
                 </form>
             </div>
         </div>

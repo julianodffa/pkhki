@@ -12,8 +12,8 @@
     <title>{{ $title }}</title>
 
     {{-- Favicon --}}
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/icons/sinnar-favicon.png') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/icons/sinnar-favicon.png') }}" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/icons/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/icons/favicon.png') }}" type="image/x-icon">
 
     {{-- CSS --}}
     {{-- Important --}}

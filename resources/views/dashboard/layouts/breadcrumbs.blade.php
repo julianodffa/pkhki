@@ -7,7 +7,7 @@
                     <li class="breadcrumb-item active" aria-current="page">{{ $breadcrumb['label'] }}</li>
                 @else
                     <li class="breadcrumb-item">
-                        <a class="text-decoration-none text-dark" href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['label'] }}</a>
+                        <a class="text-decoration-none text-dark hover-blue" href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['label'] }}</a>
                     </li>
                 @endif
             @endforeach

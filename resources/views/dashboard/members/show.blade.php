@@ -53,7 +53,9 @@
                 @endif
                 <tr>
                     <th class="table-light" scope="row" style="width: 1%; white-space: nowrap;">Register On</th>
-                    <td class="align-middle">{{ $registrant->created_at->isToday() ? $registrant->created_at->format('H:i') : $registrant->created_at->format('d M Y') }}</td>
+                    <td class="align-middle">
+                        {{ $registrant->created_at->isToday() ? $registrant->created_at->format('H:i') : $registrant->created_at->format('d M Y') }}
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -102,18 +104,17 @@
         </div>
         <div class="accordion-item rounded-0">
             <h2 class="accordion-header">
-                <button class="accordion-button rounded-0 collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                <button class="accordion-button rounded-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true"
                     aria-controls="panelsStayOpen-collapseThree">
                     <b>Immigration Law Consultant Certificate</b>
                 </button>
             </h2>
-            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
                 <div class="accordion-body">
                     @if ($registrant->immigration_law_consultant_certificate)
                         <iframe
-                            src="{{ route('member.file', ['folder' => 'ilc_certificate', 'filename' => basename($registrant->immigration_law_consultant_certificate)]) }}"
-                            width="100%" height="800px"></iframe>
+                            src="{{ asset('assets/js/pdfjs/web/viewer.html') }}?file={{ route('member.file', ['folder' => 'ilc_certificate', 'filename' => basename($registrant->immigration_law_consultant_certificate)]) }}" class="pdf-frame"></iframe>
                     @else
                         <p>No Immigration Law Consultant Certificate uploaded.</p>
                     @endif
@@ -122,20 +123,19 @@
         </div>
         <div class="accordion-item rounded-0">
             <h2 class="accordion-header">
-                <button class="accordion-button rounded-0 collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseFourth" aria-expanded="false"
+                <button class="accordion-button rounded-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFourth" aria-expanded="true"
                     aria-controls="panelsStayOpen-collapseFourth">
                     <b>Other Certificates</b>
                 </button>
             </h2>
-            <div id="panelsStayOpen-collapseFourth" class="accordion-collapse collapse">
+            <div id="panelsStayOpen-collapseFourth" class="accordion-collapse collapse show">
                 <div class="accordion-body">
                     @if ($registrant->other_certificates)
                         @foreach ($registrant->other_certificates as $certificate)
                             <div class="mb-2">
                                 <iframe
-                                    src="{{ route('member.file', ['folder' => 'other_certificate', 'filename' => basename($certificate)]) }}"
-                                    width="100%" height="800px"></iframe>
+                                    src="{{ asset('assets/js/pdfjs/web/viewer.html') }}?file={{ route('member.file', ['folder' => 'other_certificate', 'filename' => basename($certificate)]) }}" class="pdf-frame"></iframe>
                             </div>
                         @endforeach
                     @else

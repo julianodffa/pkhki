@@ -20,7 +20,6 @@
                 <table class="table table-bordered text-center">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Nama Instansi/Firma Hukum/Perusahaan</th>
                             <th scope="col">Jabatan</th>
@@ -34,7 +33,6 @@
                         @else
                             @foreach ($members as $member)
                                 <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $member->name }}</td>
                                     <td>{{ $member->institution }}</td>
                                     <td>{{ $member->position }}</td>
